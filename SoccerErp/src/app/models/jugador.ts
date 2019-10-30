@@ -8,5 +8,6 @@ export class Jugador {
     Edad?: number;
     Numero?: number;
     Suspendido?: boolean;
+    Posicion?: string;
     Equipo?: Equipo;
 }
