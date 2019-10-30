@@ -11,12 +11,12 @@ import { LigaFormaComponent } from './liga/liga-forma/liga-forma.component';
 
 const routes: Routes = [
   {path : '', pathMatch : 'full', redirectTo: ''},
-  {path : 'liga',component: LigaComponent} , 
-  {path : 'equipo', component : EquipoComponent}, 
-  {path : 'jornada', component : JornadaComponent}, 
-  {path : 'jugador', component : JugadorComponent}, 
+  {path : 'liga', component: LigaComponent} ,
+  {path : 'equipo', component : EquipoComponent},
+  {path : 'jornada', component : JornadaComponent},
+  {path : 'jugador', component : JugadorComponent},
   {path : 'partido', component : PartidoComponent},
-  {path : 'jugador/jugador-forma', component :JugadorFormaComponent},
+  {path : 'jugador/jugador-forma', component : JugadorFormaComponent},
   {path : 'liga/liga-forma', component : LigaFormaComponent}
 ];
 
