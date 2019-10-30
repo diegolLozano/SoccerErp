@@ -1,1 +1,73 @@
-<p>liga works!</p>
+<div class="main-container">
+  <div class="header-container">
+    <p class="h1">SoccerLife Bajio</p>
+  </div>
+  <div
+    class="btn-toolbar justify-content-between filters-container"
+    role="toolbar"
+    aria-label="Toolbar with button groups"
+  >
+    <div class="btn-group" role="group" aria-label="First group"></div>
+    <div class="input-group">
+      <a href="" [routerLink]="['liga-forma']">
+        <button type="button" class="btn btn-primary">Crear Liga</button>
+      </a>
+    </div>
+  </div>
+  <div id="ligas-container" class="table-responsive">
+    <table class="table table-hover table-bordered">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Costo</th>
+          <th scope="col">Dias de Semana</th>
+          <th scope="col">Ubicacion</th>
+          <th scope="col">Equipos</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>Sabatina</td>
+          <td>500 $</td>
+          <td>Sabados</td>
+          <td>SoccerLife Bajio</td>
+          <td><a href="#" [routerLink]="['/equipo']">Equipos</a></td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Masculina Semanal</td>
+          <td>450 $</td>
+          <td>Lunes,Martes,Miercoles</td>
+          <td>SoccerLife Bajio</td>
+          <td><a href="#" [routerLink]="['/equipo']">Equipos</a></td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td>Femenina Semanal</td>
+          <td>450 $</td>
+          <td>Lunes,Martes,Miercoles</td>
+          <td>SoccerLife Bajio</td>
+          <td><a href="#" [routerLink]="['/equipo']">Equipos</a></td>
+        </tr>
+        <tr>
+          <th scope="row">4</th>
+          <td>Femenina Fin de Semana</td>
+          <td>400 $</td>
+          <td>Sabado, Domingo</td>
+          <td>SoccerLife Bajio</td>
+          <td><a href="#" [routerLink]="['/equipo']">Equipos</a></td>
+        </tr>
+        <tr>
+          <th scope="row">5</th>
+          <td>Masculina Semanal 2</td>
+          <td>600 $</td>
+          <td>Jueves, Viernes</td>
+          <td>SoccerLife Bajio</td>
+          <td><a href="#" [routerLink]="['/equipo']">Equipos</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

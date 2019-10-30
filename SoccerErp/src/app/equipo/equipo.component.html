@@ -1,1 +1,75 @@
-<p>equipo works!</p>
+<div class="main-container">
+    <div class="header-container">
+        <p class="h1">Equipos por Liga</p>
+    </div>
+    <div class="btn-group filters-container">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Ligas
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="">Sabatina</a>
+              <a class="dropdown-item" href="">Masculina Semanal</a>
+              <a class="dropdown-item" href="">Femenina Semanal</a>
+              <a class="dropdown-item" href="">Femenina Fin de Semana</a>
+              <a class="dropdown-item" href="">Masculina Semanal</a>
+            </div>
+          </div>
+    </div>
+    <div class="equipos-container table-responsive">
+        <table class="table table-hover table-bordered">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Capitan</th>
+                <th scope="col">Telefono Contacto</th>
+                <th scope="col">Comentarios</th>
+                <th scope="col">Jugadores</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>Juventus</td>
+                <td>Luis Miramontes</td>
+                <td>3345367890</td>
+                <td>Sin Adeudos</td>
+                <td><a href="#" [routerLink]="['/jugador']">Jugadores</a></td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>Barcelona</td>
+                <td>Juan Perez</td>
+                <td>3342567890</td>
+                <td>No se presento jornada 4</td>
+                <td><a href="#" [routerLink]="['/jugador']">Jugadores</a></td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td>Real Madrid</td>
+                <td>Rodrigo Mendoza</td>
+                <td>3367896543</td>
+                <td>Cuenta con jugador suspendido</td>
+                <td><a href="#" [routerLink]="['/jugador']">Jugadores</a></td>
+              </tr>
+              <tr>
+                <th scope="row">4</th>
+                <td>Manchester United</td>
+                <td>Ricardo Gonzalez</td>
+                <td>3333212567</td>
+                <td></td>
+                <td><a href="#" [routerLink]="['/jugador']">Jugadores</a></td>
+              </tr>
+              <tr>
+                <th scope="row">5</th>
+                <td>Bayern Munich</td>
+                <td>Marcos Gonzalez</td>
+                <td>3367658900</td>
+                <td>Juego Pendiente</td>
+                <td><a href="#" [routerLink]="['/jugador']">Jugadores</a></td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+</div>
