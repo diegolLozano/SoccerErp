@@ -9,4 +9,6 @@ export class Equipo {
     Comentarios?: string;
     Liga?: Liga;
     Jugadores?: Jugador[];
+    GolesFavor?: number;
+    GolesContra?: number;
 }
