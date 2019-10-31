@@ -11,6 +11,8 @@ import { JornadaComponent } from './jornada/jornada.component';
 import { PartidoComponent } from './partido/partido.component';
 import { LigaFormaComponent } from './liga/liga-forma/liga-forma.component';
 import { JugadorFormaComponent } from './jugador/jugador-forma/jugador-forma.component';
+import { TablaGeneralComponent } from './tabla-general/tabla-general.component';
+import { PartidoFormaComponent } from './partido/partido-forma/partido-forma.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { JugadorFormaComponent } from './jugador/jugador-forma/jugador-forma.com
     JornadaComponent,
     PartidoComponent,
     LigaFormaComponent,
-    JugadorFormaComponent
+    JugadorFormaComponent,
+    TablaGeneralComponent,
+    PartidoFormaComponent
   ],
   imports: [
     BrowserModule,

@@ -15,5 +15,6 @@ export class Partido {
     Anotadores?: Anotador[];
     Amonestados?: Amonestado[];
     Explulsados?: Expulsado[];
+    Fecha?: Date;
 }
 
