@@ -1,14 +1,15 @@
 <div class="main-container">
   <div class="header-container">
     <p class="h1">Crear/Editar Partido</p>
+    <i class="far fa-plus-square"></i>
   </div>
   <div class="form-container">
     <form>
       <div class="form-row">
-        <div class="offset-md-3 col-md-2 mb-3 text-center">
+        <div class="offset-md-1 col-md-4 mb-3 text-center">
           <label for="Equipo1">Equipo 1</label>
           <select class="form-control" id="Equipo1">
-            <option value="">Selecciona Equipo1</option>
+            <option value="">Equipo1</option>
             <option>Juventus</option>
             <option>Manchester United</option>
             <option>Barcelona</option>
@@ -16,13 +17,13 @@
             <option>Bayern Munich</option>
           </select>
         </div>
-        <div class="col-md-1 mb-3 text-center">
+        <div class="col-md-2 mb-3 text-center">
           <label for="vs">vs</label>
         </div>
-        <div class="col-md-2 mb-3 text-center">
+        <div class="col-md-4 mb-3 text-center">
           <label for="Equipo2">Equipo 2</label>
           <select class="form-control" id="Equipo2">
-            <option value="">Selecciona Equipo2</option>
+            <option value="">Equipo2</option>
             <option>Juventus</option>
             <option>Manchester United</option>
             <option>Barcelona</option>
@@ -31,9 +32,8 @@
           </select>
         </div>
       </div>
-
       <div class="form-row">
-        <div class="offset-md-3 col-md-2 mb-3 text-center">
+        <div class="offset-md-1 col-md-4 mb-3 text-center">
           <div class="form-check form-check-inline">
             <input
               class="form-check-input"
@@ -44,7 +44,7 @@
             <label class="form-check-label" for="EquipoGanador1">Ganador</label>
           </div>
         </div>
-        <div class="col-md-1 mb-3 text-center">
+        <div class="col-md-2 mb-3 text-center">
           <div class="form-check form-check-inline">
             <input
               class="form-check-input"
@@ -55,7 +55,7 @@
             <label class="form-check-label" for="Empate">Empate</label>
           </div>
         </div>
-        <div class="col-md-2 mb-3 text-center">
+        <div class="col-md-4 mb-3 text-center">
           <div class="form-check form-check-inline">
             <input
               class="form-check-input"
@@ -69,57 +69,108 @@
           </div>
         </div>
       </div>
-      <div class="form-group row">
-        <div class="offset-md-3 col-md-1 text-center">
-          <div class="form-check form-check-inline">
-            <input class="form-control" type="text" id="GolesEquipo1" /> 
-            <label class="form-check-label" for="GolesEquipo1">Goles</label>
-          </div>
-        </div>
-        <div class="offset-md-2 col-md-1 mb-3 text-center">
-          <div class="form-check form-check-inline">
-            <input class="form-control" type="text" id="GolesEquipo1" />
-            <label class="form-check-label" for="GolesEquipo1">Goles</label>
-          </div>
-        </div>
-      </div>
-      <div class="form-group row">
-        <label for="Edad" class="offset-md-3 col-2 col-form-label">Edad</label>
-        <div class="col-3">
+      <div class="form-row">
+        <div class="offset-md-1 col-md-4 mb-3 text-center">
+          <label for="GolesEquipo1">Goles</label>
           <input
             type="text"
             class="form-control"
-            id="Edad"
-            placeholder="Edad"
+            id="GolesEquipo1"
+            placeholder="Goles Equipo 1"
+          />
+        </div>
+        <div class="col-md-2 mb-3 text-center"></div>
+        <div class="col-md-4 mb-3 text-center">
+          <label for="GolesEquipo2">Goles</label>
+          <input
+            type="text"
+            class="form-control"
+            id="GolesEquipo2"
+            placeholder="Goles Equipo 2"
           />
         </div>
       </div>
       <div class="form-group row">
-        <label for="Numero" class="offset-md-3 col-2 col-form-label"
-          >Numero</label
-        >
-        <div class="col-3">
-          <input
-            type="text"
-            class="form-control"
-            id="Numero"
-            placeholder="Numero"
-          />
+        <div class="offset-md-1 col-md-5 mb-3 text-center">
+          <table class="table">
+            <thead class="thead-ligth">
+              <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Goles</th>
+                <th scope="col">Amon</th>
+                <th scope="col">Exp</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row">Jorge Treviño</td>
+                <td>
+                  <input
+                    type="text"
+                    class="form-control form-control-sm"
+                    id="GolesJugador"
+                    placeholder="Gol"
+                  />
+                </td>
+                <td class="text-right">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="gridCheck"
+                  />
+                </td>
+                <td class=" text-right">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="gridCheck"
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-md-5">
+          <table class="table  text-center">
+            <thead class="thead-ligth">
+              <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Goles</th>
+                <th scope="col">Amon</th>
+                <th scope="col">Exp</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row">Luis Miramontes</td>
+                <td>
+                  <input
+                    type="text"
+                    class="form-control form-control-sm"
+                    id="GolesJugador"
+                    placeholder="Gol"
+                  />
+                </td>
+                <td class=" text-right">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="gridCheck"
+                  />
+                </td>
+                <td class="text-right">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="gridCheck"
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
-      <div class="form-group row">
-        <label for="Posicion" class="offset-md-3 col-2 col-form-label"
-          >Posicion</label
-        >
-        <div class="col-3">
-          <input
-            type="text"
-            class="form-control"
-            id="Posicion"
-            placeholder="Posicion"
-          />
-        </div>
-      </div>
+
       <div class="form-group row">
         <div class="offset-md-5 col-3">
           <div class="btn-group mr-2" role="group" aria-label="First group">
