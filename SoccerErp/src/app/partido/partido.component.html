@@ -1,1 +1,170 @@
-<p>partido works!</p>
+<div class="main-container">
+  <div class="header-container">
+    <p class="h1">Partido</p>
+  </div>
+  <div
+    class="btn-toolbar justify-content-between filters-container"
+    role="toolbar"
+    aria-label="Toolbar with button groups"
+  >
+    <div class="btn-group" role="group" aria-label="First group">
+      <div class="dropdown">
+        <button
+          class="btn btn-secondary dropdown-toggle"
+          type="button"
+          id="dropdownMenuButton"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          Ligas
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="">Sabatina</a>
+          <a class="dropdown-item" href="">Masculina Semanal</a>
+          <a class="dropdown-item" href="">Femenina Semanal</a>
+          <a class="dropdown-item" href="">Femenina Fin de Semana</a>
+          <a class="dropdown-item" href="">Masculina Semanal</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button
+          class="btn btn-secondary dropdown-toggle"
+          type="button"
+          id="dropdownMenuButton"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          Jornadas
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="">Jornada 1</a>
+          <a class="dropdown-item" href="">Jornada 2</a>
+          <a class="dropdown-item" href="">Jornada 3</a>
+          <a class="dropdown-item" href="">Jornada 4</a>
+          <a class="dropdown-item" href="">Jornada 5</a>
+        </div>
+      </div>
+    </div>
+    <div class="input-group">
+      <a href="" [routerLink]="['partido-forma']">
+        <button type="button" class="btn btn-primary">Crear Partido</button>
+      </a>
+    </div>
+  </div>
+  <div class="partido-container">
+    <div class="card border-dark mb-3">
+      <h5 class="card-header border-dark text-center">Equipo 1 vs Equipo 2</h5>
+      <div class="card-body">
+        <h5 class="card-title">Jornada Numero X</h5>
+        <div class="container text-center">
+          <div class="row">
+            <div class="col-sm">
+              <h6>Juventus</h6>
+            </div>
+            <div class="col-sm">
+              <h6>vs</h6>
+            </div>
+            <div class="col-sm">
+              <h6>Manchester</h6>
+            </div>
+          </div>
+        </div>
+        <div class="container text-center">
+          <div class="row">
+            <div class="col-sm">
+              4
+            </div>
+            <div class="col-sm"></div>
+            <div class="col-sm">
+              2
+            </div>
+          </div>
+        </div>
+        <div class="container text-center estadisticas">
+          <div class="row">
+            <div class="col-md">
+              <h6>Anotadores</h6>
+            </div>
+            <div class="col-md">
+              <h6>Sancionados</h6>
+            </div>
+            <div class="col-md">
+              <h6>Anotadores</h6>
+            </div>
+          </div>
+          <div class="container text-center">
+            <div class="row">
+              <div class="col-md">
+                <ul class="list-group">
+                  <li
+                    class="list-group-item d-flex justify-content-between align-items-center"
+                  >
+                    Juan Perez
+                    <span class="badge badge-primary badge-pill">2</span>
+                  </li>
+                  <li
+                    class="list-group-item d-flex justify-content-between align-items-center"
+                  >
+                    Marcos Gonzalez
+                    <span class="badge badge-primary badge-pill">1</span>
+                  </li>
+                  <li
+                    class="list-group-item d-flex justify-content-between align-items-center"
+                  >
+                    Pedro Torres
+                    <span class="badge badge-primary badge-pill">1</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-md">
+                <div class="list-group">
+                  <ul class="list-group">
+                    <a
+                      class="list-group-item d-flex justify-content-between align-items-center"
+                    >
+                      Juan Perez
+                      <span class="badge badge-danger badge-pill tarjetas"
+                        ><i class="fas fa-rectangle-wide fa-3x"></i
+                      ></span>
+                    </a>
+                    <li
+                      class="list-group-item d-flex justify-content-between align-items-center"
+                    >
+                      Marcos Gonzalez
+                      <span class="badge badge-warning badge-pill tarjetas"
+                        ><i class="fas fa-rectangle-wide"></i
+                      ></span>
+                    </li>
+                    <li
+                      class="list-group-item d-flex justify-content-between align-items-center"
+                    >
+                      Pedro Torres
+                      <span class="badge badge-warning badge-pill tarjetas"
+                        ><i class="fas fa-rectangle-wide"></i
+                      ></span>
+                      <span class="badge badge-warning badge-pill tarjetas"
+                        ><i class="fas fa-rectangle-wide"></i
+                      ></span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-md">
+                <ul class="list-group">
+                  <li
+                    class="list-group-item d-flex justify-content-between align-items-center"
+                  >
+                    Carlos Garibay
+                    <span class="badge badge-primary badge-pill">2</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

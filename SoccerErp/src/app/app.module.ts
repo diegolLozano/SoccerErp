@@ -9,6 +9,10 @@ import { EquipoComponent } from './equipo/equipo.component';
 import { JugadorComponent } from './jugador/jugador.component';
 import { JornadaComponent } from './jornada/jornada.component';
 import { PartidoComponent } from './partido/partido.component';
+import { LigaFormaComponent } from './liga/liga-forma/liga-forma.component';
+import { JugadorFormaComponent } from './jugador/jugador-forma/jugador-forma.component';
+import { TablaGeneralComponent } from './tabla-general/tabla-general.component';
+import { PartidoFormaComponent } from './partido/partido-forma/partido-forma.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +22,11 @@ import { PartidoComponent } from './partido/partido.component';
     EquipoComponent,
     JugadorComponent,
     JornadaComponent,
-    PartidoComponent
+    PartidoComponent,
+    LigaFormaComponent,
+    JugadorFormaComponent,
+    TablaGeneralComponent,
+    PartidoFormaComponent
   ],
   imports: [
     BrowserModule,
