@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-liga-forma',
@@ -6,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./liga-forma.component.scss']
 })
 export class LigaFormaComponent implements OnInit {
-
-  constructor() { }
+  sub: any;
+  id: string;
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
-  }
+    this.id = this.route.snapshot.paramMap.get('id');
+   }
 
 }

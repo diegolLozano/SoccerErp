@@ -29,52 +29,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td><a href="" [routerLink]="['liga-forma']">Sabatina</a></td>
-          <td>500 $</td>
-          <td>Sabados</td>
-          <td>SoccerLife Bajio</td>
-          <td><a href="#" [routerLink]="['/equipo']">Equipos</a></td>
-          <td><a href="#" [routerLink]="['/tabla-general']">Tabla</a></td>
-          <td><a href="" [routerLink]="['/jornada']">Jornadas</a></td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td><a href="" [routerLink]="['liga-forma']">Masculina Semanal</a></td>
-          <td>450 $</td>
-          <td>Lunes,Martes,Miercoles</td>
-          <td>SoccerLife Bajio</td>
-          <td><a href="#" [routerLink]="['/equipo']">Equipos</a></td>
-          <td><a href="#" [routerLink]="['/tabla-general']">Tabla</a></td>
-          <td><a href="" [routerLink]="['/jornada']">Jornadas</a></td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td><a href="" [routerLink]="['liga-forma']">Femenina Semanal</a></td>
-          <td>450 $</td>
-          <td>Lunes,Martes,Miercoles</td>
-          <td>SoccerLife Bajio</td>
-          <td><a href="#" [routerLink]="['/equipo']">Equipos</a></td>
-          <td><a href="#" [routerLink]="['/tabla-general']">Tabla</a></td>
-          <td><a href="" [routerLink]="['/jornada']">Jornadas</a></td>
-        </tr>
-        <tr>
-          <th scope="row">4</th>
-          <td><a href="" [routerLink]="['liga-forma']">Femenina Fin de Semana</a></td>
-          <td>400 $</td>
-          <td>Sabado, Domingo</td>
-          <td>SoccerLife Bajio</td>
-          <td><a href="#" [routerLink]="['/equipo']">Equipos</a></td>
-          <td><a href="#" [routerLink]="['/tabla-general']">Tabla</a></td>
-          <td><a href="" [routerLink]="['/jornada']">Jornadas</a></td>
-        </tr>
-        <tr>
-          <th scope="row">5</th>
-          <td><a href="" [routerLink]="['liga-forma']">Masculina Semanal 2</a></td>
-          <td>600 $</td>
-          <td>Jueves, Viernes</td>
-          <td>SoccerLife Bajio</td>
+        <tr *ngFor="let liga of ligas; let i = index">
+          <th scope="row">{{liga.Id}}</th>
+          <td><a href="" [routerLink]="['liga-forma',liga.Id]">{{liga.Nombre}}</a></td>
+          <td>{{liga.Costo}} $</td>
+          <td>{{liga.DiasDeSemana}}</td>
+          <td>{{liga.Ubicacion.Nombre}}</td>
           <td><a href="#" [routerLink]="['/equipo']">Equipos</a></td>
           <td><a href="#" [routerLink]="['/tabla-general']">Tabla</a></td>
           <td><a href="" [routerLink]="['/jornada']">Jornadas</a></td>

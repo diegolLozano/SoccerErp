@@ -20,8 +20,11 @@ const routes: Routes = [
   {path : 'partido', component : PartidoComponent},
   {path : 'jugador/jugador-forma', component : JugadorFormaComponent},
   {path : 'liga/liga-forma', component : LigaFormaComponent},
+  {path : 'liga/liga-forma/:id', component : LigaFormaComponent},
   {path : 'tabla-general', component : TablaGeneralComponent},
-  {path : 'partido/partido-forma', component: PartidoFormaComponent}
+  {path : 'partido/partido-forma', component: PartidoFormaComponent},
+  {path : 'jornada/partido/:id', component: PartidoFormaComponent},
+  {path : 'jornada/jugador-forma', component: PartidoFormaComponent}
 ];
 
 @NgModule({
