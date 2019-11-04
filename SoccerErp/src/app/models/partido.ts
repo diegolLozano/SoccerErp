@@ -14,7 +14,7 @@ export class Partido {
     GolesEquipo2?: number;
     Anotadores?: Anotador[];
     Amonestados?: Amonestado[];
-    Explulsados?: Expulsado[];
+    Expulsados?: Expulsado[];
     Fecha?: Date;
 }
 

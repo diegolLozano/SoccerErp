@@ -42,12 +42,44 @@
         </div> -->
     </div>
     <div class="input-group">
-      <a href="" [routerLink]="['jugador-forma']">
+      <a href="#">
         <button type="button" class="btn btn-primary">Crear Jornada</button>
       </a>
     </div>
   </div>
   <div class="jornadas-container">
+    <div
+      class="card border-dark mb-3"
+      *ngFor="let jornada of jornadas; let i = index"
+    >
+      <h5 class="card-header border-dark">{{jornada.Descripcion}}</h5>
+      <div class="card-body">
+        <h5 class="card-title">Jornada del {{jornada.FechaInicio | date: 'dd/MM/yyyy'}} al {{jornada.FechaFinal | date: 'dd/MM/yyyy'}}</h5>
+        
+        <div class="container text-center" *ngFor="let partido of jornada.Partidos; let i= index">
+            <div class="row">
+                <div class="col-sm">
+                  {{partido.Equipo1}}
+                </div>
+                <div class="col-sm">
+                  {{partido.GolesEquipo1}}
+                </div>
+                <div class="col-sm">
+                  vs
+                </div>
+                <div class="col-sm">
+                  {{partido.GolesEquipo2}}
+                </div>
+                <div class="col-sm">
+                  {{partido.Equipo2}}
+                </div>
+                <div class="col-sm">
+                  <a href="" [routerLink]="['partido',partido.Id]">Ver Partido</a>
+                </div>
+              </div>
+        </div>
+      </div>
+    </div>
     <div class="card border-dark mb-3">
       <h5 class="card-header border-dark">Jornada 1</h5>
       <div class="card-body">
@@ -68,6 +100,9 @@
             </div>
             <div class="col-sm">
               Manchester
+            </div>
+            <div class="col-sm">
+              <a href="" [routerLink]="['partido']">Ver Partido</a>
             </div>
           </div>
         </div>

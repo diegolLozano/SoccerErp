@@ -6,7 +6,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./partido-forma.component.scss']
 })
 export class PartidoFormaComponent implements OnInit {
-
   constructor() { }
 
   ngOnInit() {
