@@ -1,33 +1,40 @@
 <div class="main-container">
   <div class="header-container">
-    <p class="h1">Equipos por Liga</p>
+    <p class="h2">Equipos por Liga</p>
   </div>
-  <div class="btn-group filters-container">
-    <div class="dropdown">
-      <button
-        class="btn btn-secondary dropdown-toggle"
-        type="button"
-        id="dropdownMenuButton"
-        data-toggle="dropdown"
-        aria-haspopup="true"
-        aria-expanded="false"
-      >
-        Ligas
-      </button>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="">Sabatina</a>
-        <a class="dropdown-item" href="">Masculina Semanal</a>
-        <a class="dropdown-item" href="">Femenina Semanal</a>
-        <a class="dropdown-item" href="">Femenina Fin de Semana</a>
-        <a class="dropdown-item" href="">Masculina Semanal</a>
+  <div class="btn-toolbar justify-content-between filters-container">
+    <div class="btn-group">
+      <div class="dropdown">
+        <button
+          class="btn btn-secondary dropdown-toggle"
+          type="button"
+          id="dropdownMenuButton"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          Ligas
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="">Sabatina</a>
+          <a class="dropdown-item" href="">Masculina Semanal</a>
+          <a class="dropdown-item" href="">Femenina Semanal</a>
+          <a class="dropdown-item" href="">Femenina Fin de Semana</a>
+          <a class="dropdown-item" href="">Masculina Semanal</a>
+        </div>
       </div>
     </div>
+    <div class="input-group">
+      <a href="" [routerLink]="['/equipo-forma']">
+        <button type="button" class="btn btn-primary">Crear Equipo</button>
+      </a>
+    </div>
   </div>
-  <div class="equipos-container table-responsive">
-    <table class="table table-hover table-bordered">
+
+  <div class="equipos-container table-responsive text-center">
+    <table class="table table-hover table-bordered table-sm">
       <thead class="thead-dark">
         <tr>
-          <th scope="col">#</th>
           <th scope="col">Nombre</th>
           <th scope="col">Capitan</th>
           <th scope="col">Telefono Contacto</th>
@@ -39,13 +46,12 @@
       </thead>
       <tbody>
         <tr *ngFor="let equipo of equipos; let i = index">
-          <th scope="row">{{equipo.Id}}</th>
-          <td>{{equipo.Nombre}}</td>
-          <td>{{equipo.Capitan}}</td>
-          <td>{{equipo.TelefonoContacto}}</td>
-          <td>{{equipo.Comentarios}}</td>
-          <td>{{equipo.GolesFavor}}</td>
-          <td>{{equipo.GolesContra}}</td>
+          <td><a href="" [routerLink]="['/equipo-forma',equipo.Id]">{{ equipo.Nombre }}</a></td>
+          <td>{{ equipo.Capitan }}</td>
+          <td>{{ equipo.TelefonoContacto }}</td>
+          <td>{{ equipo.Comentarios }}</td>
+          <td>{{ equipo.GolesFavor }}</td>
+          <td>{{ equipo.GolesContra }}</td>
           <td><a href="#" [routerLink]="['/jugador']">Jugadores</a></td>
         </tr>
       </tbody>

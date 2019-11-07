@@ -1,6 +1,6 @@
 <div class="main-container">
   <div class="header-container">
-    <p class="h1">Jornadas por Liga</p>
+    <p class="h2">Jornadas por Liga</p>
   </div>
   <div
     class="btn-toolbar justify-content-between filters-container"
@@ -27,22 +27,28 @@
           <a class="dropdown-item" href="">Masculina Semanal</a>
         </div>
       </div>
-      <!--         <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Equipos
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="">Juventus</a>
-                <a class="dropdown-item" href="">Barcelona</a>
-                <a class="dropdown-item" href="">Real Madrid</a>
-                <a class="dropdown-item" href="">Manchester United</a>
-                <a class="dropdown-item" href="">Bayern Munich</a>
-            </div>
-        </div> -->
+      <div class="dropdown">
+        <button
+          class="btn btn-secondary dropdown-toggle"
+          type="button"
+          id="dropdownMenuButton"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          Jornadas
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="">Jornada 1</a>
+          <a class="dropdown-item" href="">Jornada 2</a>
+          <a class="dropdown-item" href="">Jornada 3</a>
+          <a class="dropdown-item" href="">Jornada 4</a>
+          <a class="dropdown-item" href="">Jornada 5</a>
+        </div>
+      </div>
     </div>
     <div class="input-group">
-      <a href="#">
+      <a href="" [routerLink]="['/jornada-forma']">
         <button type="button" class="btn btn-primary">Crear Jornada</button>
       </a>
     </div>
@@ -52,137 +58,38 @@
       class="card border-dark mb-3"
       *ngFor="let jornada of jornadas; let i = index"
     >
-      <h5 class="card-header border-dark">{{jornada.Descripcion}}</h5>
+      <a href="" [routerLink]="['/jornada-forma',jornada.Id]"><h5 class="card-header border-dark">{{ jornada.Descripcion }}</h5></a>
       <div class="card-body">
-        <h5 class="card-title">Jornada del {{jornada.FechaInicio | date: 'dd/MM/yyyy'}} al {{jornada.FechaFinal | date: 'dd/MM/yyyy'}}</h5>
-        
-        <div class="container text-center" *ngFor="let partido of jornada.Partidos; let i= index">
-            <div class="row">
-                <div class="col-sm">
-                  {{partido.Equipo1}}
-                </div>
-                <div class="col-sm">
-                  {{partido.GolesEquipo1}}
-                </div>
-                <div class="col-sm">
-                  vs
-                </div>
-                <div class="col-sm">
-                  {{partido.GolesEquipo2}}
-                </div>
-                <div class="col-sm">
-                  {{partido.Equipo2}}
-                </div>
-                <div class="col-sm">
-                  <a href="" [routerLink]="['partido',partido.Id]">Ver Partido</a>
-                </div>
-              </div>
-        </div>
-      </div>
-    </div>
-    <div class="card border-dark mb-3">
-      <h5 class="card-header border-dark">Jornada 1</h5>
-      <div class="card-body">
-        <h5 class="card-title">Jornada del 30/10/2019 al 5/11/2019</h5>
-        <div class="container text-center">
+        <h5 class="card-title">
+          Jornada del {{ jornada.FechaInicio | date: "dd/MM/yyyy" }} al
+          {{ jornada.FechaFinal | date: "dd/MM/yyyy" }}
+        </h5>
+
+        <div
+          class="container text-center"
+          *ngFor="let partido of jornada.Partidos; let i = index"
+        >
           <div class="row">
             <div class="col-sm">
-              Juventus
+              {{ partido.Equipo1 }}
             </div>
             <div class="col-sm">
-              2
+              {{ partido.GolesEquipo1 }}
             </div>
             <div class="col-sm">
               vs
             </div>
             <div class="col-sm">
-              0
+              {{ partido.GolesEquipo2 }}
             </div>
             <div class="col-sm">
-              Manchester
+              {{ partido.Equipo2 }}
             </div>
             <div class="col-sm">
-              <a href="" [routerLink]="['partido']">Ver Partido</a>
+              <a href="" [routerLink]="['partido', partido.Id]">Ver Partido</a>
             </div>
           </div>
         </div>
-        <div class="container text-center">
-          <div class="row">
-            <div class="col-sm">
-              Barcelona
-            </div>
-            <div class="col-sm">
-              1
-            </div>
-            <div class="col-sm">
-              vs
-            </div>
-            <div class="col-sm">
-              0
-            </div>
-            <div class="col-sm">
-              Real Madrid
-            </div>
-          </div>
-        </div>
-        <div class="container text-center">
-          <div class="row">
-            <div class="col-sm">
-              Porto
-            </div>
-            <div class="col-sm">
-              2
-            </div>
-            <div class="col-sm">
-              vs
-            </div>
-            <div class="col-sm">
-              4
-            </div>
-            <div class="col-sm">
-              Manchester City
-            </div>
-          </div>
-        </div>
-        <div class="container text-center">
-          <div class="row">
-            <div class="col-sm">
-              Manchester
-            </div>
-            <div class="col-sm">
-              1
-            </div>
-            <div class="col-sm">
-              vs
-            </div>
-            <div class="col-sm">
-              1
-            </div>
-            <div class="col-sm">
-              PSG
-            </div>
-          </div>
-        </div>
-        <div class="container text-center">
-          <div class="row">
-            <div class="col-sm">
-              Tigres
-            </div>
-            <div class="col-sm">
-              1
-            </div>
-            <div class="col-sm">
-              vs
-            </div>
-            <div class="col-sm">
-              1
-            </div>
-            <div class="col-sm">
-              Boca Juniors
-            </div>
-          </div>
-        </div>
-        <p class="card-text"></p>
       </div>
     </div>
   </div>
