@@ -1,6 +1,6 @@
 <div class="main-container">
   <div class="header-container">
-    <p class="h1">SoccerLife Bajio</p>
+    <p class="h2">SoccerLife Bajio</p>
   </div>
   <div
     class="btn-toolbar justify-content-between filters-container"
@@ -14,11 +14,10 @@
       </a>
     </div>
   </div>
-  <div id="ligas-container" class="table-responsive">
-    <table class="table table-hover table-bordered">
+  <div id="ligas-container" class="table-responsive text-center">
+    <table class="table table-hover table-bordered table-sm">
       <thead class="thead-dark">
         <tr>
-          <th scope="col">#</th>
           <th scope="col">Nombre</th>
           <th scope="col">Costo</th>
           <th scope="col">Dias de Semana</th>
@@ -30,7 +29,6 @@
       </thead>
       <tbody>
         <tr *ngFor="let liga of ligas; let i = index">
-          <th scope="row">{{liga.Id}}</th>
           <td><a href="" [routerLink]="['liga-forma',liga.Id]">{{liga.Nombre}}</a></td>
           <td>{{liga.Costo}} $</td>
           <td>{{liga.DiasDeSemana}}</td>

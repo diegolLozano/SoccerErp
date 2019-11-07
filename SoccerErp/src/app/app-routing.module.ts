@@ -9,6 +9,8 @@ import { JugadorFormaComponent } from './jugador/jugador-forma/jugador-forma.com
 import { LigaFormaComponent } from './liga/liga-forma/liga-forma.component';
 import { TablaGeneralComponent } from './tabla-general/tabla-general.component';
 import { PartidoFormaComponent } from './partido/partido-forma/partido-forma.component';
+import { JornadaFormaComponent } from './jornada/jornada-forma/jornada-forma.component';
+import { EquipoFormaComponent } from './equipo/equipo-forma/equipo-forma.component';
 
 
 const routes: Routes = [
@@ -23,8 +25,16 @@ const routes: Routes = [
   {path : 'liga/liga-forma/:id', component : LigaFormaComponent},
   {path : 'tabla-general', component : TablaGeneralComponent},
   {path : 'partido/partido-forma', component: PartidoFormaComponent},
-  {path : 'jornada/partido/:id', component: PartidoFormaComponent},
-  {path : 'jornada/jugador-forma', component: PartidoFormaComponent}
+  {path : 'jornada/partido/:id', component: PartidoComponent},
+  {path : 'jornada/partido', component: PartidoFormaComponent},
+  {path : 'partido-forma', component: PartidoFormaComponent},
+  {path : 'jornada-forma', component: JornadaFormaComponent},
+  {path : 'jornada-forma/:id', component: JornadaFormaComponent},
+  {path : 'partido-forma/:id', component: PartidoFormaComponent},
+  {path : 'equipo-forma', component: EquipoFormaComponent},
+  {path : 'equipo-forma/:id', component: EquipoFormaComponent},
+  {path : 'jugador/:id', component: JugadorComponent},
+  {path : 'jugador-forma', component: JugadorFormaComponent}
 ];
 
 @NgModule({
