@@ -10,7 +10,7 @@
     <div class="btn-group" role="group" aria-label="First group">
       <div class="dropdown">
         <button
-          class="btn btn-secondary dropdown-toggle"
+          class="btn btn-primary dropdown-toggle"
           type="button"
           id="dropdownMenuButton"
           data-toggle="dropdown"
@@ -29,7 +29,7 @@
       </div>
       <div class="dropdown">
         <button
-          class="btn btn-secondary dropdown-toggle"
+          class="btn btn-primary dropdown-toggle"
           type="button"
           id="dropdownMenuButton"
           data-toggle="dropdown"
@@ -49,7 +49,7 @@
     </div>
     <div class="input-group">
       <a href="" [routerLink]="['/jornada-forma']">
-        <button type="button" class="btn btn-primary">Crear Jornada</button>
+        <button type="button" class="btn btn-primary"><i class="far fa-plus-square"></i> Crear Jornada</button>
       </a>
     </div>
   </div>
@@ -58,7 +58,13 @@
       class="card border-dark mb-3"
       *ngFor="let jornada of jornadas; let i = index"
     >
-      <a href="" [routerLink]="['/jornada-forma',jornada.Id]"><h5 class="card-header border-dark">{{ jornada.Descripcion }}</h5></a>
+      <h5 class="card-header border-dark">
+        {{ jornada.Descripcion }}
+        <a href="" [routerLink]="['/jornada-forma', jornada.Id]"
+          ><i class="fa fa-edit"></i
+        ></a>
+      </h5>
+
       <div class="card-body">
         <h5 class="card-title">
           Jornada del {{ jornada.FechaInicio | date: "dd/MM/yyyy" }} al
@@ -86,7 +92,9 @@
               {{ partido.Equipo2 }}
             </div>
             <div class="col-sm">
-              <a href="" [routerLink]="['partido', partido.Id]">Ver Partido</a>
+              <a href="" [routerLink]="['partido', partido.Id]"
+                ><i class="fa fa-eye"></i
+              ></a>
             </div>
           </div>
         </div>

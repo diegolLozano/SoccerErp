@@ -6,7 +6,7 @@
     <div class="btn-group">
       <div class="dropdown">
         <button
-          class="btn btn-secondary dropdown-toggle"
+          class="btn btn-primary dropdown-toggle"
           type="button"
           id="dropdownMenuButton"
           data-toggle="dropdown"
@@ -26,7 +26,7 @@
     </div>
     <div class="input-group">
       <a href="" [routerLink]="['/equipo-forma']">
-        <button type="button" class="btn btn-primary">Crear Equipo</button>
+        <button type="button" class="btn btn-primary"><i class="far fa-plus-square"></i> Crear Equipo</button>
       </a>
     </div>
   </div>
@@ -35,6 +35,7 @@
     <table class="table table-hover table-bordered table-sm">
       <thead class="thead-dark">
         <tr>
+          <th></th>
           <th scope="col">Nombre</th>
           <th scope="col">Capitan</th>
           <th scope="col">Telefono Contacto</th>
@@ -46,13 +47,22 @@
       </thead>
       <tbody>
         <tr *ngFor="let equipo of equipos; let i = index">
-          <td><a href="" [routerLink]="['/equipo-forma',equipo.Id]">{{ equipo.Nombre }}</a></td>
+          <td>
+            <a href="" [routerLink]="['/equipo-forma', equipo.Id]"
+              ><i class="fa fa-edit"></i
+            ></a>
+          </td>
+          <td>{{ equipo.Nombre }}</td>
           <td>{{ equipo.Capitan }}</td>
           <td>{{ equipo.TelefonoContacto }}</td>
           <td>{{ equipo.Comentarios }}</td>
           <td>{{ equipo.GolesFavor }}</td>
           <td>{{ equipo.GolesContra }}</td>
-          <td><a href="#" [routerLink]="['/jugador']">Jugadores</a></td>
+          <td>
+            <a href="#" [routerLink]="['/jugador']"
+              ><i class="fa fa-male"></i
+            ></a>
+          </td>
         </tr>
       </tbody>
     </table>

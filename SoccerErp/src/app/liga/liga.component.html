@@ -10,7 +10,7 @@
     <div class="btn-group" role="group" aria-label="First group"></div>
     <div class="input-group">
       <a href="" [routerLink]="['liga-forma']">
-        <button type="button" class="btn btn-primary">Crear Liga</button>
+        <button type="button" class="btn btn-primary"><i class="far fa-plus-square"></i> Crear Liga</button>
       </a>
     </div>
   </div>
@@ -18,6 +18,7 @@
     <table class="table table-hover table-bordered table-sm">
       <thead class="thead-dark">
         <tr>
+          <th></th>
           <th scope="col">Nombre</th>
           <th scope="col">Costo</th>
           <th scope="col">Dias de Semana</th>
@@ -29,13 +30,18 @@
       </thead>
       <tbody>
         <tr *ngFor="let liga of ligas; let i = index">
-          <td><a href="" [routerLink]="['liga-forma',liga.Id]">{{liga.Nombre}}</a></td>
+            <td>
+                <a href="" [routerLink]="['liga-forma',liga.Id]"
+                  ><i class="fa fa-edit"></i
+                ></a>
+              </td>
+          <td>{{liga.Nombre}}</td>
           <td>{{liga.Costo}} $</td>
           <td>{{liga.DiasDeSemana}}</td>
           <td>{{liga.Ubicacion.Nombre}}</td>
-          <td><a href="#" [routerLink]="['/equipo']">Equipos</a></td>
-          <td><a href="#" [routerLink]="['/tabla-general']">Tabla</a></td>
-          <td><a href="" [routerLink]="['/jornada']">Jornadas</a></td>
+          <td><a href="#" [routerLink]="['/equipo']"><i class="fa fa-users"></i></a></td>
+          <td><a href="#" [routerLink]="['/tabla-general']"><i class="fa fa-table"></i></a></td>
+          <td><a href="" [routerLink]="['/jornada']"><i class="fa fa-calendar" aria-hidden="true"></i></a></td>
         </tr>
       </tbody>
     </table>
