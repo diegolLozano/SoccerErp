@@ -2,7 +2,7 @@ import { Ubicacion } from './ubicacion';
 import { Equipo } from './equipo';
 
 export class Liga {
-    Id?: number;
+    Id?: any;
     Nombre?: string;
     Costo?: string;
     DiasDeSemana?: string;

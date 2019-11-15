@@ -1,59 +1,105 @@
 <div class="main-container">
-        <div class="header-container">
-          <p class="h1">Crear/Editar "Liga"</p>
-        </div>
-        <div class="form-container">
-          <form>
-            <div class="form-group row">
-              <label for="Nombre" class="offset-md-3 col-2 col-form-label"
-                >Nombre</label
-              >
-              <div class="col-3">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="Nombre"
-                  placeholder="Nombre"
-                />
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="Costo" class="offset-md-3 col-2 col-form-label"
-                >Costo</label
-              >
-              <div class="col-3">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="Costo"
-                  placeholder="Costo"
-                />
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="DiasSemana" class="offset-md-3 col-2 col-form-label"
-                >Dias de la Semana</label
-              >
-              <div class="col-3">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="DiasSemana"
-                  placeholder="Dias de la Semana"
-                />
-              </div>
-            </div>
-            <div class="form-group row">
-              <div class="offset-md-5 col-3">
-                <div class="btn-group mr-2" role="group" aria-label="First group">
-                  <button type="submit" class="btn btn-primary">Guardar</button>
-                </div>
-                <div class="btn-group mr-2" role="group" aria-label="First group">
-                  <button type="submit" class="btn btn-danger">Borrar</button>
-                </div>
-              </div>
-            </div>
-          </form>
+  <div class="header-container">
+    <p class="h1">{{ title }}</p>
+  </div>
+  <div class="form-container">
+    <form
+      #ligaForm="ngForm"
+      novalidate
+      (ngSubmit)="saveLiga(liga)"
+      class="needs-validation"
+    >
+      <div class="form-group row">
+        <label for="nombre" class="offset-md-3 col-2 col-form-label"
+          >Nombre</label
+        >
+        <div class="col-3">
+          <input
+            type="text"
+            #nombre="ngModel"
+            [(ngModel)]="liga.Nombre"
+            name="nombre"
+            class="form-control"
+            id="nombre"
+            placeholder="Nombre"
+            required
+            minlength="3"
+            [ngClass]="nombre.invalid && nombre.touched ? 'invalid-input' : ''"
+          />
+          <div *ngIf="nombre.invalid && nombre.touched" class="invalid-value">
+            Nombre es Obligatorio, Minimo 3 Caracteres
+          </div>
         </div>
       </div>
-      
+      <div class="form-group row">
+        <label for="Costo" class="offset-md-3 col-2 col-form-label"
+          >Costo</label
+        >
+        <div class="col-3">
+          <input
+            type="text"
+            #costo="ngModel"
+            [(ngModel)]="liga.Costo"
+            name="costo"
+            class="form-control"
+            id="Costo"
+            placeholder="Costo"
+            required
+            minlength="3"
+            [ngClass]="costo.invalid && costo.touched ? 'invalid-input' : ''"
+          />
+          <div *ngIf="costo.invalid && costo.touched" class="invalid-value">
+            Costo es Obligatorio, Minimo 3 Caracteres
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="DiasSemana" class="offset-md-3 col-2 col-form-label"
+          >Dias de la Semana</label
+        >
+        <div class="col-3">
+          <input
+            type="text"
+            #diasDeSemana="ngModel"
+            [(ngModel)]="liga.DiasDeSemana"
+            name="diasDeSemana"
+            class="form-control"
+            id="DiasSemana"
+            placeholder="Dias de la Semana"
+            required
+            minlength="5"
+            [ngClass]="
+              diasDeSemana.invalid && diasDeSemana.touched
+                ? 'invalid-input'
+                : ''
+            "
+          />
+          <div
+            *ngIf="diasDeSemana.invalid && diasDeSemana.touched"
+            class="invalid-value"
+          >
+            Dias De la Semana es Obligatorio, Minimo 5 Caracteres
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="offset-md-5 col-3">
+          <div class="btn-group mr-2" role="group" aria-label="First group">
+            <button
+              type="submit"
+              class="btn btn-primary"
+              [disabled]="!ligaForm.form.valid"
+            >
+              <i class="far fa-save"></i> Guardar
+            </button>
+          </div>
+          <div *ngIf="id != 0" class="btn-group mr-2" role="group" aria-label="First group">
+            <button type="submit" class="btn btn-danger">
+              <i class="far fa-trash-alt"></i> Borrar
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
