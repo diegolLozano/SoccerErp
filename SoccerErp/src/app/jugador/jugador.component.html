@@ -1,6 +1,6 @@
 <div class="main-container">
   <div class="header-container">
-    <p class="h2">Jugadores de "Equipo Seleccionado"</p>
+    <p class="h2">{{ title }}</p>
   </div>
   <div
     class="btn-toolbar justify-content-between filters-container"
@@ -17,17 +17,20 @@
           aria-haspopup="true"
           aria-expanded="false"
         >
-          Ligas
+          {{nombreLiga}}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="">Sabatina</a>
-          <a class="dropdown-item" href="">Masculina Semanal</a>
-          <a class="dropdown-item" href="">Femenina Semanal</a>
-          <a class="dropdown-item" href="">Femenina Fin de Semana</a>
-          <a class="dropdown-item" href="">Masculina Semanal</a>
+          <button
+            *ngFor="let liga of ligas; let i = index"
+            class="dropdown-item"
+            type="button"
+            (click)="getEquiposByLiga(liga.Id, liga.Nombre)"
+          >
+            {{ liga.Nombre }}
+          </button>
         </div>
       </div>
-      <div class="dropdown">
+      <div *ngIf="equiposByLiga?.length > 0" class="dropdown">
         <button
           class="btn btn-primary dropdown-toggle"
           type="button"
@@ -36,20 +39,25 @@
           aria-haspopup="true"
           aria-expanded="false"
         >
-          Equipos
+          {{nombreEquipo}}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="">Juventus</a>
-          <a class="dropdown-item" href="">Barcelona</a>
-          <a class="dropdown-item" href="">Real Madrid</a>
-          <a class="dropdown-item" href="">Manchester United</a>
-          <a class="dropdown-item" href="">Bayern Munich</a>
+            <button
+            *ngFor="let equipo of equiposByLiga; let i = index"
+            class="dropdown-item"
+            type="button"
+            (click)="getJugadoresByEquipo(equipo.Id)"
+          >
+            {{ equipo.Nombre }}
+          </button>
         </div>
       </div>
     </div>
     <div class="input-group">
-      <a href="" [routerLink]="['jugador-forma']">
-        <button type="button" class="btn btn-primary"><i class="far fa-plus-square"></i> Crear Jugador</button>
+      <a href="" [routerLink]="['/jugador-forma']">
+        <button type="button" class="btn btn-primary">
+          <i class="far fa-plus-square"></i> Crear Jugador
+        </button>
       </a>
     </div>
   </div>
@@ -67,109 +75,18 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr *ngFor="let jugador of jugadoresByEquipo; let i = index">
           <td>
-            <a href="" [routerLink]="['/jugador-forma']"
+            <a href="" [routerLink]="['/jugador-forma', jugador.Id]"
               ><i class="fa fa-edit"></i
             ></a>
           </td>
-          <td>Alan</td>
-          <td>Frias</td>
-          <td>32 años</td>
-          <td>1</td>
-          <td>Portero</td>
-          <td>No</td>
-        </tr>
-        <tr>
-          <td>
-            <a href="" [routerLink]="['/jugador-forma']"
-              ><i class="fa fa-edit"></i
-            ></a>
-          </td>
-          <td>Jorge</td>
-          <td>Treviño</td>
-          <td>33 años</td>
-          <td>11</td>
-          <td>Medio</td>
-          <td>No</td>
-        </tr>
-        <tr>
-          <td>
-            <a href="" [routerLink]="['/jugador-forma']"
-              ><i class="fa fa-edit"></i
-            ></a>
-          </td>
-          <td>Luis</td>
-          <td>Miramontes</td>
-          <td>300 años</td>
-          <td>7</td>
-          <td>Defensa</td>
-          <td>No</td>
-        </tr>
-        <tr>
-          <td>
-            <a href="" [routerLink]="['/jugador-forma']"
-              ><i class="fa fa-edit"></i
-            ></a>
-          </td>
-          <td>Abraham</td>
-          <td>Contreras</td>
-          <td>33 años</td>
-          <td>4</td>
-          <td>Defensa</td>
-          <td>No</td>
-        </tr>
-        <tr>
-          <td>
-            <a href="" [routerLink]="['/jugador-forma']"
-              ><i class="fa fa-edit"></i
-            ></a>
-          </td>
-          <td>Hugo</td>
-          <td>Gonzalez</td>
-          <td>29 años</td>
-          <td>13</td>
-          <td>Defensa</td>
-          <td>No</td>
-        </tr>
-        <tr>
-          <td>
-            <a href="" [routerLink]="['/jugador-forma']"
-              ><i class="fa fa-edit"></i
-            ></a>
-          </td>
-          <td>Alexis</td>
-          <td>Juarez</td>
-          <td>27 años</td>
-          <td>21</td>
-          <td>Medio</td>
-          <td>Si</td>
-        </tr>
-        <tr>
-          <td>
-            <a href="" [routerLink]="['/jugador-forma']"
-              ><i class="fa fa-edit"></i
-            ></a>
-          </td>
-          <td>Trino</td>
-          <td>Fajardo</td>
-          <td>32 años</td>
-          <td>2</td>
-          <td>Defensa</td>
-          <td>No</td>
-        </tr>
-        <tr>
-          <td>
-            <a href="" [routerLink]="['/jugador-forma']"
-              ><i class="fa fa-edit"></i
-            ></a>
-          </td>
-          <td>Victor</td>
-          <td>Espiritu</td>
-          <td>29 años</td>
-          <td>10</td>
-          <td>Medio</td>
-          <td>No</td>
+          <td>{{ jugador.Nombre }}</td>
+          <td>{{ jugador.ApellidoPaterno }} {{ jugador.ApellidoMaterno }}</td>
+          <td>{{ jugador.Edad }}</td>
+          <td>{{ jugador.Numero }}</td>
+          <td>{{ jugador.Posicion }}</td>
+          <td>{{ jugador.Suspendido ? "Si" : "No" }}</td>
         </tr>
       </tbody>
     </table>

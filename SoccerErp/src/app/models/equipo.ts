@@ -2,7 +2,7 @@ import { Liga } from './liga';
 import { Jugador } from './jugador';
 
 export class Equipo {
-    Id?: number;
+    Id?: any;
     Nombre: string;
     Capitan: string;
     TelefonoContacto?: string;

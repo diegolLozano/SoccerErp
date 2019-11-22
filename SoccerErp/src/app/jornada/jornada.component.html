@@ -1,6 +1,6 @@
 <div class="main-container">
   <div class="header-container">
-    <p class="h2">Jornadas por Liga</p>
+    <p class="h2">{{title}}</p>
   </div>
   <div
     class="btn-toolbar justify-content-between filters-container"
@@ -17,14 +17,17 @@
           aria-haspopup="true"
           aria-expanded="false"
         >
-          Ligas
+          {{titleDrpLiga}}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="">Sabatina</a>
-          <a class="dropdown-item" href="">Masculina Semanal</a>
-          <a class="dropdown-item" href="">Femenina Semanal</a>
-          <a class="dropdown-item" href="">Femenina Fin de Semana</a>
-          <a class="dropdown-item" href="">Masculina Semanal</a>
+          <button
+            *ngFor="let liga of ligas; let i = index"
+            class="dropdown-item"
+            type="button"
+            (click)="getJornadasByLiga(liga.Id, liga.Nombre)"
+          >
+            {{ liga.Nombre }}
+          </button>
         </div>
       </div>
       <div class="dropdown">
@@ -36,14 +39,17 @@
           aria-haspopup="true"
           aria-expanded="false"
         >
-          Jornadas
+          {{titleDrpJornada}}
         </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="">Jornada 1</a>
-          <a class="dropdown-item" href="">Jornada 2</a>
-          <a class="dropdown-item" href="">Jornada 3</a>
-          <a class="dropdown-item" href="">Jornada 4</a>
-          <a class="dropdown-item" href="">Jornada 5</a>
+        <div *ngIf="jornadasDropdown?.length > 0" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <button
+            *ngFor="let jornada of jornadasDropdown; let i = index"
+            class="dropdown-item"
+            type="button"
+            (click)="getJornadaById(jornada.Id)"
+          >
+            {{ jornada.Descripcion }}
+          </button>
         </div>
       </div>
     </div>
@@ -56,7 +62,7 @@
   <div class="jornadas-container">
     <div
       class="card border-dark mb-3"
-      *ngFor="let jornada of jornadas; let i = index"
+      *ngFor="let jornada of jornadasByLiga; let i = index"
     >
       <h5 class="card-header border-dark">
         {{ jornada.Descripcion }}
@@ -67,8 +73,8 @@
 
       <div class="card-body">
         <h5 class="card-title">
-          Jornada del {{ jornada.FechaInicio | date: "dd/MM/yyyy" }} al
-          {{ jornada.FechaFinal | date: "dd/MM/yyyy" }}
+          Jornada del {{ jornada.FechaInicio.day }}/{{ jornada.FechaInicio.month }}/{{ jornada.FechaInicio.year }} al
+          {{ jornada.FechaFinal.day}}/{{ jornada.FechaFinal.month}}/{{ jornada.FechaFinal.year}}
         </h5>
 
         <div
@@ -77,7 +83,7 @@
         >
           <div class="row">
             <div class="col-sm">
-              {{ partido.Equipo1 }}
+              {{ partido.Equipo1Nombre }}
             </div>
             <div class="col-sm">
               {{ partido.GolesEquipo1 }}
@@ -89,10 +95,10 @@
               {{ partido.GolesEquipo2 }}
             </div>
             <div class="col-sm">
-              {{ partido.Equipo2 }}
+              {{ partido.Equipo2Nombre }}
             </div>
             <div class="col-sm">
-              <a href="" [routerLink]="['partido', partido.Id]"
+              <a href="" [routerLink]="['/partido', partido.Id]"
                 ><i class="fa fa-eye"></i
               ></a>
             </div>
