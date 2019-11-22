@@ -3,7 +3,7 @@
     <p class="h1">Crear/Editar "Jornada"</p>
   </div>
   <div class="form-container">
-    <form>
+    <form #jornadaForm="ngForm" novalidate>
       <div class="form-row">
         <div class="form-group col-md-6">
           <label for="Descripcion">Descripcion</label>
@@ -12,44 +12,80 @@
             class="form-control"
             id="Descripcion"
             placeholder="Descripcion"
+            #descripcion="ngModel"
+            [(ngModel)]="jornada.Descripcion"
+            name="descripcion"
+            required
+            minlength="5"
+            [ngClass]="descripcion.invalid && descripcion.touched ? 'invalid-input' : ''"
           />
+          <div *ngIf="descripcion.invalid && descripcion.touched" class="invalid-value">
+            Descripcion es Obligatoria, Minimo 5 Caracteres
+          </div>
         </div>
 
         <div class="form-group col-md-6">
           <label for="Liga">Liga</label>
-          <select id="ligas" class="form-control">
-            <option selected>Selecciona Liga...</option>
-            <option>Sabatina</option>
-            <option>Masculina Semanal</option>
-            <option>Femenina Semanal</option>
-            <option>Femenina Fin de Semana</option>
-            <option>Masculina Semanal</option>
+          <select
+            id="ligas"
+            class="form-control"
+            #liga="ngModel"
+            [(ngModel)]="jornada.Liga.Id"
+            name="liga"
+            required
+            [ngClass]="liga.invalid && liga.touched ? 'invalid-input' : ''"
+          >
+            <option value="" selected>Selecciona Liga...</option>
+            <option
+              *ngFor="let liga of ligas; let i = index"
+              value="{{ liga.Id }}"
+            >
+              {{ liga.Nombre }}
+            </option>
           </select>
+          <div *ngIf="liga.invalid && liga.touched" class="invalid-value">
+            Liga es Obligatoria
+          </div>
         </div>
       </div>
       <div class="form-row">
-            <div class="form-group offset-md-1 col-md-3">
-              <label for="FechaInicio">Fecha Inicio</label>
-            </div>
-            <div class="form-group offset-md-3 col-md-3">
-              <label for="FechaInicio">Fecha Inicio</label>
-            </div>
-    </div>
+        <div class="form-group offset-md-1 col-md-3">
+          <label for="FechaInicio">Fecha Inicio</label>
+        </div>
+        <div class="form-group offset-md-3 col-md-3">
+          <label for="FechaInicio">Fecha Final</label>
+        </div>
+      </div>
       <div class="form-row">
         <div class="form-group offset-md-1 col-md-3">
-          <ngb-datepicker #d></ngb-datepicker>
+          <ngb-datepicker
+            #fechaInicio
+            [(ngModel)]="jornada.FechaInicio"
+            name="fechaInicio"
+            required
+          ></ngb-datepicker>
         </div>
         <div class="form-group  offset-md-3 col-md-3">
-          <ngb-datepicker #d></ngb-datepicker>
+          <ngb-datepicker
+            #fechaFinal
+            [(ngModel)]="jornada.FechaFinal"
+            name="fechaFinal"
+            required
+          ></ngb-datepicker>
         </div>
       </div>
       <div class="form-group row">
         <div class="offset-md-5 col-3">
           <div class="btn-group mr-2" role="group" aria-label="First group">
-            <button type="submit" class="btn btn-primary"><i class="far fa-save"></i> Guardar</button>
+            <button type="submit" class="btn btn-primary"
+            [disabled]="!jornadaForm.form.valid">
+              <i class="far fa-save"></i> Guardar
+            </button>
           </div>
           <div class="btn-group mr-2" role="group" aria-label="First group">
-            <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt"></i> Borrar</button>
+            <button type="submit" class="btn btn-danger">
+              <i class="far fa-trash-alt"></i> Borrar
+            </button>
           </div>
         </div>
       </div>

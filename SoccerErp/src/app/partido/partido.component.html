@@ -1,40 +1,47 @@
 <div class="main-container">
-  <div class="header-container">
+<!--   <div class="header-container">
     <p class="h2">Partido</p>
-  </div>
+  </div> -->
   <div
     class="btn-toolbar justify-content-between filters-container"
     role="toolbar"
     aria-label="Toolbar with button groups"
   >
     <div class="btn-group" role="group" aria-label="First group"></div>
+    <div class="input-group">
+        <a href="" [routerLink]="['/partido-forma', partido.Id]">
+          <button type="button" class="btn btn-primary"><i class="fa fa-edit"></i> Editar Partido</button>
+        </a>
+      </div>
   </div>
   <div class="partido-container">
     <div class="card border-dark mb-3">
-      <a href="" [routerLink]="['/partido-forma',1]"><h5 class="card-header border-dark text-center">Equipo 1 vs Equipo 2</h5></a>
+        <h5 class="card-header border-dark text-center">
+          {{ partido.Equipo1Nombre }} vs {{ partido.Equipo2Nombre }}
+        </h5>
       <div class="card-body">
-        <h5 class="card-title">Jornada 1</h5>
+        <h5 class="card-title">{{ partido.Jornada.Descripcion }}</h5>
         <div class="container text-center">
           <div class="row">
             <div class="col-sm">
-              <h6>Juventus</h6>
+              <h6>{{ partido.Equipo1Nombre }}</h6>
             </div>
             <div class="col-sm">
               <h6>vs</h6>
             </div>
             <div class="col-sm">
-              <h6>Manchester</h6>
+              <h6>{{ partido.Equipo2Nombre }}</h6>
             </div>
           </div>
         </div>
         <div class="container text-center">
           <div class="row">
             <div class="col-sm">
-              <p class="h5">4</p>
+              <p class="h5">{{ partido.GolesEquipo1 }}</p>
             </div>
             <div class="col-sm"></div>
             <div class="col-sm">
-              <p class="h5">2</p>
+              <p class="h5">{{ partido.GolesEquipo2 }}</p>
             </div>
           </div>
         </div>
@@ -55,23 +62,14 @@
               <div class="col-md">
                 <ul class="list-group">
                   <li
+                    *ngFor="let anotador of anotadoresEquipo1; let i = index"
                     class="list-group-item d-flex justify-content-between align-items-center"
                   >
-                    Juan Perez
-                    <span class="text-rigth">2 <i class="fas fa-futbol"></i></span>
-                    
-                  </li>
-                  <li
-                    class="list-group-item d-flex justify-content-between align-items-center"
-                  >
-                    Marcos Gonzalez
-                    <span class="text-rigth">1 <i class="fas fa-futbol"></i></span>
-                  </li>
-                  <li
-                    class="list-group-item d-flex justify-content-between align-items-center"
-                  >
-                    Pedro Torres
-                    <span class="text-rigth">1 <i class="fas fa-futbol"></i></span>
+                    {{ anotador.Jugador.Nombre }}
+                    {{ anotador.Jugador.ApellidoPaterno }}
+                    <span class="text-rigth"
+                      >{{ anotador.NumeroDeGoles }} <i class="fas fa-futbol"></i
+                    ></span>
                   </li>
                 </ul>
               </div>
@@ -79,27 +77,29 @@
                 <div class="list-group">
                   <ul class="list-group">
                     <li
+                      *ngFor="let expulsado of partido.Expulsados"
                       class="list-group-item d-flex justify-content-between align-items-center"
                     >
-                      Juan Perez
-                      <span class="badge badge-pill"
-                        ><i class="fa fa-square fa-2x tarjeta-roja"></i></span>
-                  </li>
-                    <li
-                      class="list-group-item d-flex justify-content-between align-items-center"
-                    >
-                      Marcos Gonzalez
-                      <span class="badge badge-pill"
-                        ><i class="fa fa-square fa-2x tarjeta-amarilla"></i></span>
+                      {{ expulsado.Jugador.Nombre }}
+                      {{ expulsado.Jugador.ApellidoPaterno }}
+
+                      <span *ngIf="expulsado.DobleAmarilla" class="badge badge-pill"
+                        ><i class="fa fa-square fa-2x tarjeta-amarilla"></i
+                      ></span>
+                      <span *ngIf="expulsado.DobleAmarilla" class="badge badge-pill"
+                        ><i class="fa fa-square fa-2x tarjeta-amarilla"></i
+                      ></span>
+                      <span *ngIf="!expulsado.DobleAmarilla" class="badge badge-pill"
+                        ><i class="fa fa-square fa-2x tarjeta-roja"></i
+                      ></span>
                     </li>
-                    <li
+                    <li *ngFor="let amonestado of partido.Amonestados; let i = index;"
                       class="list-group-item d-flex justify-content-between align-items-center"
                     >
-                      Pedro Torres
+                      {{amonestado.Jugador.Nombre}} {{amonestado.Jugador.ApellidoPaterno}}
                       <span class="badge badge-pill"
-                        ><i class="fa fa-square fa-2x tarjeta-amarilla"></i></span>
-                      <span class="badge badge-pill"
-                        ><i class="fa fa-square fa-2x tarjeta-amarilla"></i></span>
+                        ><i class="fa fa-square fa-2x tarjeta-amarilla"></i
+                      ></span>
                     </li>
                   </ul>
                 </div>
@@ -107,10 +107,14 @@
               <div class="col-md">
                 <ul class="list-group">
                   <li
+                    *ngFor="let anotador of anotadoresEquipo2; let i = index"
                     class="list-group-item d-flex justify-content-between align-items-center"
                   >
-                    Carlos Garibay
-                    <span class="text-rigth">2 <i class="fas fa-futbol"></i></span>
+                    {{ anotador.Jugador.Nombre }}
+                    {{ anotador.Jugador.ApellidoPaterno }}
+                    <span class="text-rigth"
+                      >{{ anotador.NumeroDeGoles }} <i class="fas fa-futbol"></i
+                    ></span>
                   </li>
                 </ul>
               </div>
