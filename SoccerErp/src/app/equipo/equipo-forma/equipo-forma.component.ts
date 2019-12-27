@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Equipo } from 'src/app/models/equipo';
 import { Liga } from 'src/app/models/liga';
+import { EquipoService } from 'src/app/services/equipo.service';
+import { LigaService } from 'src/app/services/liga.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-equipo-forma',
@@ -13,239 +16,85 @@ export class EquipoFormaComponent implements OnInit {
   equipos: Equipo[];
   title: string;
   equipo: Equipo;
-  constructor(private route: ActivatedRoute) {}
+  isSuccess = false;
+  successMsg: string;
+  isError = false;
+  errorMsg: string;
+  errors: any;
+  ligas: Liga[];
+  constructor(
+    private route: ActivatedRoute,
+    private equipoService: EquipoService,
+    private ligaService: LigaService
+  ) {}
 
   ngOnInit() {
     this.equipo = new Equipo();
-    this.equipo.Liga = {
-      Id: ''
-    };
-    this.equipos = [
-      {
-        Id: 1,
-        Nombre: 'Juventus',
-        Capitan: 'Luis Miramontes',
-        TelefonoContacto: '3345367890',
-        Comentarios: 'Sin Adeudos',
-        GolesFavor: 30,
-        GolesContra: 8,
-        Liga: {
-          Id: 1,
-          Nombre: 'Sabatina',
-          Costo: '500',
-          DiasDeSemana: 'Sabado',
-          Ubicacion: {
-            Id: 1,
-            Nombre: 'SoccerLifeBajio',
-            Calle: '',
-            Numero: ''
-          }
-        }
-      },
-      {
-        Id: 2,
-        Nombre: 'Barcelona',
-        Capitan: 'Juan Perez',
-        TelefonoContacto: '3342567890',
-        Comentarios: 'No se presento jornada 4',
-        GolesFavor: 28,
-        GolesContra: 10,
-        Liga: {
-          Id: 1,
-          Nombre: 'Sabatina',
-          Costo: '500',
-          DiasDeSemana: 'Sabado',
-          Ubicacion: {
-            Id: 1,
-            Nombre: 'SoccerLifeBajio',
-            Calle: '',
-            Numero: ''
-          }
-        }
-      },
-      {
-        Id: 3,
-        Nombre: 'Real Madrid',
-        Capitan: 'Rodrigo Mendoza',
-        TelefonoContacto: '3367896543',
-        Comentarios: 'Cuenta con jugador suspendido',
-        GolesFavor: 36,
-        GolesContra: 18,
-        Liga: {
-          Id: 1,
-          Nombre: 'Sabatina',
-          Costo: '500',
-          DiasDeSemana: 'Sabado',
-          Ubicacion: {
-            Id: 1,
-            Nombre: 'SoccerLifeBajio',
-            Calle: '',
-            Numero: ''
-          }
-        }
-      },
-      {
-        Id: 4,
-        Nombre: 'Manchester United',
-        Capitan: 'Ricardo Gonzalez',
-        TelefonoContacto: '3333212567',
-        Comentarios: '',
-        GolesFavor: 40,
-        GolesContra: 28,
-        Liga: {
-          Id: 1,
-          Nombre: 'Sabatina',
-          Costo: '500',
-          DiasDeSemana: 'Sabado',
-          Ubicacion: {
-            Id: 1,
-            Nombre: 'SoccerLifeBajio',
-            Calle: '',
-            Numero: ''
-          }
-        }
-      },
-      {
-        Id: 5,
-        Nombre: 'Bayern Munich',
-        Capitan: 'Marcos Gonzalez',
-        TelefonoContacto: '3367658900',
-        Comentarios: 'Juego Pendiente',
-        GolesFavor: 30,
-        GolesContra: 48,
-        Liga: {
-          Id: 1,
-          Nombre: 'Sabatina',
-          Costo: '500',
-          DiasDeSemana: 'Sabado',
-          Ubicacion: {
-            Id: 1,
-            Nombre: 'SoccerLifeBajio',
-            Calle: '',
-            Numero: ''
-          }
-        }
-      },
-      {
-        Id: 5,
-        Nombre: 'Manchester City',
-        Capitan: 'Felix Alba',
-        TelefonoContacto: '3367658900',
-        Comentarios: 'Juego Pendiente',
-        GolesFavor: 50,
-        GolesContra: 48,
-        Liga: {
-          Id: 1,
-          Nombre: 'Sabatina',
-          Costo: '500',
-          DiasDeSemana: 'Sabado',
-          Ubicacion: {
-            Id: 1,
-            Nombre: 'SoccerLifeBajio',
-            Calle: '',
-            Numero: ''
-          }
-        }
-      },
-      {
-        Id: 6,
-        Nombre: 'Porto',
-        Capitan: 'Felix Alba',
-        TelefonoContacto: '3367658900',
-        Comentarios: 'Adeudos',
-        GolesFavor: 20,
-        GolesContra: 48,
-        Liga: {
-          Id: 1,
-          Nombre: 'Sabatina',
-          Costo: '500',
-          DiasDeSemana: 'Sabado',
-          Ubicacion: {
-            Id: 1,
-            Nombre: 'SoccerLifeBajio',
-            Calle: '',
-            Numero: ''
-          }
-        }
-      },
-      {
-        Id: 7,
-        Nombre: 'PSG',
-        Capitan: 'Alexis Juarez',
-        TelefonoContacto: '3367658900',
-        Comentarios: '',
-        GolesFavor: 25,
-        GolesContra: 25,
-        Liga: {
-          Id: 1,
-          Nombre: 'Sabatina',
-          Costo: '500',
-          DiasDeSemana: 'Sabado',
-          Ubicacion: {
-            Id: 1,
-            Nombre: 'SoccerLifeBajio',
-            Calle: '',
-            Numero: ''
-          }
-        }
-      },
-      {
-        Id: 8,
-        Nombre: 'Tigres',
-        Capitan: 'Jorge Treviño',
-        TelefonoContacto: '3367658900',
-        Comentarios: 'Sin Comentarios',
-        GolesFavor: 25,
-        GolesContra: 25,
-        Liga: {
-          Id: 1,
-          Nombre: 'Sabatina',
-          Costo: '500',
-          DiasDeSemana: 'Sabado',
-          Ubicacion: {
-            Id: 1,
-            Nombre: 'SoccerLifeBajio',
-            Calle: '',
-            Numero: ''
-          }
-        }
-      },
-      {
-        Id: 9,
-        Nombre: 'Boca Juniors',
-        Capitan: 'Oscar Sanchez',
-        TelefonoContacto: '3367658900',
-        Comentarios: 'Documentos pendientes',
-        GolesFavor: 25,
-        GolesContra: 25,
-        Liga: {
-          Id: 1,
-          Nombre: 'Sabatina',
-          Costo: '500',
-          DiasDeSemana: 'Sabado',
-          Ubicacion: {
-            Id: 1,
-            Nombre: 'SoccerLifeBajio',
-            Calle: '',
-            Numero: ''
-          }
-        }
-      }
-    ];
+    this.equipo.ligaId = '';
     this.equipoId = +this.route.snapshot.paramMap.get('id');
-
+    this.getLigas();
     if (this.equipoId !== 0) {
       this.getEquipo(this.equipoId);
-      this.title = this.equipo.Nombre;
     } else {
       this.title = 'Nuevo Equipo';
     }
   }
 
   getEquipo(id: number) {
-    this.equipo = this.equipos.find(x => x.Id === id);
+    this.equipoService.getEquipo(id).subscribe(res => {
+      this.equipo = res;
+      this.title = this.equipo.nombre;
+    });
   }
-  saveEquipo(equipo: Equipo) {
+  saveEquipo() {
     console.log('Saving Equipo');
+    if (this.equipoId) {
+      this.equipoService.updateEquipo(this.equipoId, this.equipo).subscribe(
+        res => {
+          this.successMsg = 'Equipo a sido editado exitosamente';
+          this.isSuccess = true;
+          this.equipo = new Equipo();
+          this.equipo.ligaId = '';
+        },
+        error => {
+          this.errorMsg = error.message;
+          this.errors = error.error;
+          this.isError = true;
+        }
+      );
+    } else {
+      this.equipoService.createEquipo(this.equipo).subscribe(
+        res => {
+          this.successMsg = 'Equipo a sido guardado exitosamente';
+          this.isSuccess = true;
+          this.equipo = new Equipo();
+          this.equipo.ligaId = '';
+        },
+        error => {
+          this.errorMsg = error.message;
+          this.errors = error.error;
+          this.isError = true;
+        }
+      );
+    }
+  }
+  getLigas() {
+    this.ligaService.getligas().subscribe(res => {
+      this.ligas = res;
+    });
+  }
+  deleteEquipo() {
+    if (this.equipo.id) {
+      this.equipoService.deleteEquipo(this.equipo.id).subscribe(
+        res => {
+          this.successMsg = 'Equipo a sido borrado exitosamente';
+          this.isSuccess = true;
+          this.equipo = new Equipo();
+          this.equipo.ligaId = '';
+      }, error => {
+          this.errors = error;
+          this.isError = true;
+      });
+    }
   }
 }

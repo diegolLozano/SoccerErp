@@ -3,10 +3,24 @@
     <p class="h1">{{ title }}</p>
   </div>
   <div class="form-container">
+    <div *ngIf="isSuccess" class="alert alert-success offset-md-3 col-5" role="alert">
+      {{successMsg}}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div *ngIf="isError" class="alert alert-danger offset-md-3 col-5" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <li *ngFor="let error of errors | keyvalue">
+        {{ error.key }} - {{error.value}}
+      </li>
+    </div>
     <form
       #ligaForm="ngForm"
       novalidate
-      (ngSubmit)="saveLiga(liga)"
+      (ngSubmit)="saveLiga(liga); ligaForm.reset()"
       class="needs-validation"
     >
       <div class="form-group row">
@@ -17,7 +31,7 @@
           <input
             type="text"
             #nombre="ngModel"
-            [(ngModel)]="liga.Nombre"
+            [(ngModel)]="liga.nombre"
             name="nombre"
             class="form-control"
             id="nombre"
@@ -37,19 +51,18 @@
         >
         <div class="col-3">
           <input
-            type="text"
+            type="number"
             #costo="ngModel"
-            [(ngModel)]="liga.Costo"
+            [(ngModel)]="liga.costo"
             name="costo"
             class="form-control"
             id="Costo"
             placeholder="Costo"
             required
-            minlength="3"
             [ngClass]="costo.invalid && costo.touched ? 'invalid-input' : ''"
           />
           <div *ngIf="costo.invalid && costo.touched" class="invalid-value">
-            Costo es Obligatorio, Minimo 3 Caracteres
+            Costo es Obligatorio, Debe de ser un numero valido
           </div>
         </div>
       </div>
@@ -61,7 +74,7 @@
           <input
             type="text"
             #diasDeSemana="ngModel"
-            [(ngModel)]="liga.DiasDeSemana"
+            [(ngModel)]="liga.diasDeSemana"
             name="diasDeSemana"
             class="form-control"
             id="DiasSemana"
@@ -94,7 +107,7 @@
             </button>
           </div>
           <div *ngIf="id != 0" class="btn-group mr-2" role="group" aria-label="First group">
-            <button type="submit" class="btn btn-danger">
+            <button type="button" (click)="deleteLiga()" class="btn btn-danger">
               <i class="far fa-trash-alt"></i> Borrar
             </button>
           </div>

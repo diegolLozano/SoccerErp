@@ -5,17 +5,19 @@ import { Expulsado } from './expulsado';
 import { Jornada } from './jornada';
 
 export class Partido {
-    Id?: number;
-    Equipo1Nombre?: string;
-    Equipo2Nombre?: string;
-    Equipo1?: Equipo;
-    Equipo2?: Equipo;
-    Empate?: boolean;
-    GolesEquipo1?: number;
-    GolesEquipo2?: number;
-    Anotadores?: Anotador[];
-    Amonestados?: Amonestado[];
-    Expulsados?: Expulsado[];
-    Jornada?: Jornada;
+    id?: number;
+    equipo1Nombre?: string;
+    equipo2Nombre?: string;
+    equipo1?: Equipo;
+    equipo2?: Equipo;
+    empate?: boolean;
+    golesEquipo1?: number;
+    golesEquipo2?: number;
+    anotadores?: Anotador[];
+    amonestados?: Amonestado[];
+    expulsados?: Expulsado[];
+    jornada?: Jornada;
+    pendiente?: boolean;
+    jugado?: boolean;
 }
 

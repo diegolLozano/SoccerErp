@@ -1,13 +1,15 @@
 import { Equipo } from './equipo';
 
 export class Jugador {
-    Id?: number;
-    Nombre?: string;
-    ApellidoPaterno?: string;
-    ApellidoMaterno?: string;
-    Edad?: number;
-    Numero?: number;
-    Suspendido?: boolean;
-    Posicion?: string;
-    Equipo?: Equipo;
+    id?: number;
+    nombre?: string;
+    apellidoPaterno?: string;
+    apellidoMaterno?: string;
+    edad?: number;
+    numero?: number;
+    suspendido?: boolean;
+    posicion?: string;
+    equipo?: Equipo;
+    equipoId?: any;
+    isCapitan?: boolean;
 }

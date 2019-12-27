@@ -3,7 +3,42 @@
     <p class="h1">{{ title }}</p>
   </div>
   <div class="form-container">
-    <form #equipoForm="ngForm" novalidate class="needs-validation" (ngSubmit)="saveEquipo(equipo)">
+    <div
+      *ngIf="isSuccess"
+      class="alert alert-success offset-md-3 col-5"
+      role="alert"
+    >
+      {{ successMsg }}
+      <button
+        type="button"
+        class="close"
+        data-dismiss="alert"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div
+      *ngIf="isError"
+      class="alert alert-danger offset-md-3 col-5"
+      role="alert"
+    >
+      <button
+        type="button"
+        class="close"
+        data-dismiss="alert"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+      {{errors}}
+    </div>
+    <form
+      #equipoForm="ngForm"
+      novalidate
+      class="needs-validation"
+      (ngSubmit)="saveEquipo(equipo); equipoForm.reset()"
+    >
       <div class="form-group row">
         <label for="nombre" class="offset-md-3 col-2 col-form-label"
           >Nombre</label
@@ -15,7 +50,7 @@
             id="Nombre"
             placeholder="Nombre"
             #nombre="ngModel"
-            [(ngModel)]="equipo.Nombre"
+            [(ngModel)]="equipo.nombre"
             name="nombre"
             required
             minlength="3"
@@ -26,7 +61,7 @@
           </div>
         </div>
       </div>
-      <div class="form-group row">
+      <!--       <div class="form-group row">
         <label for="capitan" class="offset-md-3 col-2 col-form-label"
           >Capitan</label
         >
@@ -37,7 +72,7 @@
             id="capitan"
             placeholder="Capitan"
             #capitan="ngModel"
-            [(ngModel)]="equipo.Capitan"
+            [(ngModel)]="equipo.capitan"
             name="capitan"
             required
             minlength="3"
@@ -49,7 +84,7 @@
             Capitan es Obligatorio, Minimo 3 Caracteres
           </div>
         </div>
-      </div>
+      </div> -->
       <div class="form-group row">
         <label for="telefonoContacto" class="offset-md-3 col-2 col-form-label"
           >Telefono Contacto</label
@@ -61,7 +96,7 @@
             id="telefonoContacto"
             placeholder="TelefonoContacto"
             #telefono="ngModel"
-            [(ngModel)] ="equipo.TelefonoContacto"
+            [(ngModel)]="equipo.telefonoContacto"
             name="telefono"
             required
             minlength="10"
@@ -70,9 +105,12 @@
               telefono.invalid && telefono.touched ? 'invalid-input' : ''
             "
           />
-          <div *ngIf="telefono.invalid && telefono.touched" class="invalid-value">
-              Telefono es Obligatorio, 10 Digitos son requeridos
-            </div>
+          <div
+            *ngIf="telefono.invalid && telefono.touched"
+            class="invalid-value"
+          >
+            Telefono es Obligatorio, 10 Digitos son requeridos
+          </div>
         </div>
       </div>
       <div class="form-group row">
@@ -86,7 +124,7 @@
             id="comentarios"
             placeholder="Comentarios"
             #comentarios="ngModel"
-            [(ngModel)]= "equipo.Comentarios"
+            [(ngModel)]="equipo.comentarios"
             name="comentarios"
           />
         </div>
@@ -94,38 +132,44 @@
       <div class="form-group row">
         <label for="Liga" class="offset-md-3 col-2 col-form-label">Liga</label>
         <div class="col-3">
-          <select id="ligas" 
-          class="form-control"
-          #liga="ngModel"
-          [(ngModel)]="equipo.Liga.Id"
-          name="liga"
-          required
-          [ngClass]="
-              liga.invalid && liga.touched ? 'invalid-input' : ''
-            "
+          <select
+            id="ligas"
+            class="form-control"
+            #liga="ngModel"
+            [(ngModel)]="equipo.ligaId"
+            name="liga"
+            required
+            [ngClass]="liga.invalid && liga.touched ? 'invalid-input' : ''"
           >
+          
             <option value="" selected>Selecciona Liga...</option>
-            <option value="1">Sabatina</option>
-            <option value="2">Masculina Semanal</option>
-            <option value="3">Femenina Semanal</option>
-            <option value="4">Femenina Fin de Semana</option>
-            <option value="5">Masculina Semanal</option>
+            <option *ngFor="let liga of ligas; let i = index" value="{{liga.id}}">
+              {{ liga.nombre }}
+            </option>
           </select>
           <div *ngIf="liga.invalid && liga.touched" class="invalid-value">
-              Liga es Obligatoria
-            </div>
+            Liga es Obligatoria
+          </div>
         </div>
       </div>
       <div class="form-group row">
         <div class="offset-md-5 col-3">
           <div class="btn-group mr-2" role="group" aria-label="First group">
-            <button type="submit" class="btn btn-primary"
-            [disabled]="!equipoForm.form.valid">
+            <button
+              type="submit"
+              class="btn btn-primary"
+              [disabled]="!equipoForm.form.valid"
+            >
               <i class="far fa-save"></i> Guardar
             </button>
           </div>
-          <div *ngIf="equipoId != 0" class="btn-group mr-2" role="group" aria-label="First group">
-            <button type="submit" class="btn btn-danger">
+          <div
+            *ngIf="equipoId != 0"
+            class="btn-group mr-2"
+            role="group"
+            aria-label="First group"
+          >
+            <button type="button" (click)="deleteEquipo()" class="btn btn-danger">
               <i class="far fa-trash-alt"></i> Borrar
             </button>
           </div>

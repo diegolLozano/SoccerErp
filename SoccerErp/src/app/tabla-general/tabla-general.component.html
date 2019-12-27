@@ -36,21 +36,21 @@
       </thead>
       <tbody>
         <tr *ngFor="let equipo of tablaGeneral; let i = index">
-          <th scope="row">{{ equipo.Id }}</th>
+          <th scope="row">{{ equipo.id }}</th>
           <td>
-            <a href="" [routerLink]="['/jugador', equipo.Id]">{{
-              equipo.Equipo
+            <a href="" [routerLink]="['/partido-equipo', equipo.id]">{{
+              equipo.equipo
             }}</a>
           </td>
-          <td>{{ equipo.JuegosJugados }}</td>
-          <td>{{ equipo.JuegosGanados }}</td>
-          <td>{{ equipo.JuegosEmpatados }}</td>
-          <td>{{ equipo.JuegosPerdidos }}</td>
-          <td>{{ equipo.GolesAFavor }}</td>
-          <td>{{ equipo.GolesEnContra }}</td>
-          <td>{{ equipo.DiferenciaGoles }}</td>
-          <td>{{ equipo.Extra }}</td>
-          <td>{{ equipo.Puntos }}</td>
+          <td>{{ equipo.juegosJugados }}</td>
+          <td>{{ equipo.juegosGanados }}</td>
+          <td>{{ equipo.juegosEmpatados }}</td>
+          <td>{{ equipo.juegosPerdidos }}</td>
+          <td>{{ equipo.golesAFavor }}</td>
+          <td>{{ equipo.golesEnContra }}</td>
+          <td>{{ equipo.diferenciaGoles }}</td>
+          <td>{{ equipo.extra }}</td>
+          <td>{{ equipo.puntos }}</td>
         </tr>
       </tbody>
     </table>

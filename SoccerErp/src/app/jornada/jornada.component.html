@@ -24,13 +24,13 @@
             *ngFor="let liga of ligas; let i = index"
             class="dropdown-item"
             type="button"
-            (click)="getJornadasByLiga(liga.Id, liga.Nombre)"
+            (click)="getJornadasByLiga(liga.id, liga.nombre)"
           >
-            {{ liga.Nombre }}
+            {{ liga.nombre }}
           </button>
         </div>
       </div>
-      <div class="dropdown">
+      <div  *ngIf="jornadasDropdown?.length > 0" class="dropdown">
         <button
           class="btn btn-primary dropdown-toggle"
           type="button"
@@ -41,14 +41,14 @@
         >
           {{titleDrpJornada}}
         </button>
-        <div *ngIf="jornadasDropdown?.length > 0" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <button
             *ngFor="let jornada of jornadasDropdown; let i = index"
             class="dropdown-item"
             type="button"
-            (click)="getJornadaById(jornada.Id)"
+            (click)="getJornadaById(jornada.id)"
           >
-            {{ jornada.Descripcion }}
+            {{ jornada.descripcion }}
           </button>
         </div>
       </div>
@@ -65,40 +65,38 @@
       *ngFor="let jornada of jornadasByLiga; let i = index"
     >
       <h5 class="card-header border-dark">
-        {{ jornada.Descripcion }}
-        <a href="" [routerLink]="['/jornada-forma', jornada.Id]"
+        {{ jornada.descripcion }}
+        <a href="" [routerLink]="['/jornada-forma', jornada.id]"
           ><i class="fa fa-edit"></i
         ></a>
       </h5>
-
       <div class="card-body">
         <h5 class="card-title">
-          Jornada del {{ jornada.FechaInicio.day }}/{{ jornada.FechaInicio.month }}/{{ jornada.FechaInicio.year }} al
-          {{ jornada.FechaFinal.day}}/{{ jornada.FechaFinal.month}}/{{ jornada.FechaFinal.year}}
+          Jornada del {{ jornada.fechaInicio | date: 'mediumDate'}} al {{ jornada.fechaFinal | date: 'mediumDate'}}
         </h5>
 
         <div
           class="container text-center"
-          *ngFor="let partido of jornada.Partidos; let i = index"
+          *ngFor="let partido of jornada.partidos; let i = index"
         >
           <div class="row">
             <div class="col-sm">
-              {{ partido.Equipo1Nombre }}
+              {{ partido.equipo1.nombre }}
             </div>
             <div class="col-sm">
-              {{ partido.GolesEquipo1 }}
+              {{ partido.golesEquipo1 }}
             </div>
             <div class="col-sm">
               vs
             </div>
             <div class="col-sm">
-              {{ partido.GolesEquipo2 }}
+              {{ partido.golesEquipo2 }}
             </div>
             <div class="col-sm">
-              {{ partido.Equipo2Nombre }}
+              {{ partido.equipo2.nombre }}
             </div>
             <div class="col-sm">
-              <a href="" [routerLink]="['/partido', partido.Id]"
+              <a href="" [routerLink]="['/partido', partido.id]"
                 ><i class="fa fa-eye"></i
               ></a>
             </div>

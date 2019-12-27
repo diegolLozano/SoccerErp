@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Liga } from 'src/app/models/liga';
+import { LigaService } from 'src/app/services/liga.service';
+import { NgForm } from '@angular/forms';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-liga-forma',
@@ -13,84 +16,76 @@ export class LigaFormaComponent implements OnInit {
   ligas: Liga[];
   liga: Liga = new Liga();
   title: string;
-  constructor(private route: ActivatedRoute) {}
+  errors: any;
+  isSuccess = false;
+  successMsg: string;
+  isError = false;
+  errorMsg: string;
+  constructor(
+    private route: ActivatedRoute,
+    private ligaService: LigaService
+  ) {}
 
   ngOnInit() {
-    this.ligas = [
-      {
-        Id: 1,
-        Nombre: 'Sabatina',
-        Costo: '500',
-        DiasDeSemana: 'Sabado',
-        Ubicacion: {
-          Id: 1,
-          Nombre: 'SoccerLifeBajio',
-          Calle: '',
-          Numero: ''
-        }
-      },
-      {
-        Id: 2,
-        Nombre: 'Maculina Semanal',
-        Costo: '450',
-        DiasDeSemana: 'Lunes, Martes, Miercoles',
-        Ubicacion: {
-          Id: 1,
-          Nombre: 'SoccerLifeBajio',
-          Calle: '',
-          Numero: ''
-        }
-      },
-      {
-        Id: 3,
-        Nombre: 'Femenina Semanal',
-        Costo: '450',
-        DiasDeSemana: 'Sabado',
-        Ubicacion: {
-          Id: 1,
-          Nombre: 'SoccerLifeBajio',
-          Calle: '',
-          Numero: ''
-        }
-      },
-      {
-        Id: 4,
-        Nombre: 'Femenina Fin de Semana',
-        Costo: '400',
-        DiasDeSemana: 'Sabado, Domingo',
-        Ubicacion: {
-          Id: 1,
-          Nombre: 'SoccerLifeBajio',
-          Calle: '',
-          Numero: ''
-        }
-      },
-      {
-        Id: 5,
-        Nombre: 'Masculina Semanal 2',
-        Costo: '600',
-        DiasDeSemana: 'Jueves, Viernes',
-        Ubicacion: {
-          Id: 1,
-          Nombre: 'SoccerLifeBajio',
-          Calle: '',
-          Numero: ''
-        }
-      }
-    ];
+    this.ligas = [];
     this.id = +this.route.snapshot.paramMap.get('id');
 
     if (this.id !== 0) {
-      this.getLiga();
-      this.title = this.liga.Nombre;
+      this.getLiga(this.id);
     } else {
       this.title = 'Nueva Liga';
     }
   }
-  getLiga() {
-    this.liga = this.ligas.find(x => x.Id === this.id);
+  getLiga(id: number) {
+    this.ligaService.getLiga(id).subscribe(res => {
+      this.liga = res;
+      this.title = this.liga.nombre;
+    });
   }
-  saveLiga() {
-    console.log('saving liga');
+  saveLiga(form: NgForm) {
+    this.isSuccess = false;
+    this.isError = false;
+    if (this.liga.id) {
+      this.ligaService.updateLiga(this.liga.id, this.liga).subscribe(
+        res => {
+          this.successMsg = 'Liga a sido editada exitosamente';
+          this.isSuccess = true;
+          this.liga = new Liga();
+        },
+        (error: HttpErrorResponse) => {
+          this.errorMsg = error.message;
+          this.errors = error.error;
+          this.isError = true;
+        }
+      );
+    } else {
+      this.ligaService.createLiga(this.liga).subscribe(
+        res => {
+          this.successMsg = 'Liga a sido guardada exitosamente';
+          this.isSuccess = true;
+          this.liga = {};
+        },
+        (error: HttpErrorResponse) => {
+          this.errorMsg = error.message;
+          this.errors = error.error;
+          this.isError = true;
+        }
+      );
+    }
+  }
+  deleteLiga() {
+    if (this.liga.id) {
+      this.ligaService.deleteLiga(this.liga.id).subscribe(
+        res => {
+          this.successMsg = 'Liga a sido borrada exitosamente';
+          this.isSuccess = true;
+          this.liga = new Liga();
+        },
+        error => {
+          this.errors = error;
+          this.isError = true;
+        }
+      );
+    }
   }
 }
