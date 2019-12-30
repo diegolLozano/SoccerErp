@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {FormsModule} from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,6 +19,7 @@ import { TablaGeneralComponent } from './tabla-general/tabla-general.component';
 import { PartidoFormaComponent } from './partido/partido-forma/partido-forma.component';
 import { JornadaFormaComponent } from './jornada/jornada-forma/jornada-forma.component';
 import { EquipoFormaComponent } from './equipo/equipo-forma/equipo-forma.component';
+import { PartidoEquipoComponent } from './partido-equipo/partido-equipo.component';
 
 @NgModule({
   declarations: [
@@ -33,14 +35,16 @@ import { EquipoFormaComponent } from './equipo/equipo-forma/equipo-forma.compone
     TablaGeneralComponent,
     PartidoFormaComponent,
     JornadaFormaComponent,
-    EquipoFormaComponent
+    EquipoFormaComponent,
+    PartidoEquipoComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FontAwesomeModule,
     NgbModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

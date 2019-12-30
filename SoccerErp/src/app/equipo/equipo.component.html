@@ -1,6 +1,6 @@
 <div class="main-container">
   <div class="header-container">
-    <p class="h2">Equipos por Liga</p>
+    <p class="h2">{{title}}</p>
   </div>
   <div class="btn-toolbar justify-content-between filters-container">
     <div class="btn-group">
@@ -13,14 +13,17 @@
           aria-haspopup="true"
           aria-expanded="false"
         >
-          Ligas
+          {{titleDrp}}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="">Sabatina</a>
-          <a class="dropdown-item" href="">Masculina Semanal</a>
-          <a class="dropdown-item" href="">Femenina Semanal</a>
-          <a class="dropdown-item" href="">Femenina Fin de Semana</a>
-          <a class="dropdown-item" href="">Masculina Semanal</a>
+          <button
+          *ngFor="let liga of ligas; let i = index"
+          class="dropdown-item"
+          type="button"
+          (click)="getEquiposByLiga(liga.id)"
+        >
+          {{ liga.nombre }}
+        </button>
         </div>
       </div>
     </div>
@@ -46,20 +49,20 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let equipo of equipos; let i = index">
+        <tr *ngFor="let equipo of equiposByLiga; let i = index">
           <td>
-            <a href="" [routerLink]="['/equipo-forma', equipo.Id]"
+            <a href="" [routerLink]="['/equipo-forma', equipo.id]"
               ><i class="fa fa-edit"></i
             ></a>
           </td>
-          <td>{{ equipo.Nombre }}</td>
-          <td>{{ equipo.Capitan }}</td>
-          <td>{{ equipo.TelefonoContacto }}</td>
-          <td>{{ equipo.Comentarios }}</td>
-          <td>{{ equipo.GolesFavor }}</td>
-          <td>{{ equipo.GolesContra }}</td>
+          <td>{{ equipo.nombre }}</td>
+          <td>{{ equipo.capitan }}</td>
+          <td>{{ equipo.telefonoContacto }}</td>
+          <td>{{ equipo.comentarios }}</td>
+          <td>{{ equipo.golesFavor }}</td>
+          <td>{{ equipo.golesContra }}</td>
           <td>
-            <a href="#" [routerLink]="['/jugador',equipo.Id]"
+            <a href="#" [routerLink]="['/jugador',equipo.id]"
               ><i class="fa fa-male"></i
             ></a>
           </td>

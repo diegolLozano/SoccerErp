@@ -1,5 +1,5 @@
 <div class="main-container">
-<!--   <div class="header-container">
+  <!--   <div class="header-container">
     <p class="h2">Partido</p>
   </div> -->
   <div
@@ -9,39 +9,41 @@
   >
     <div class="btn-group" role="group" aria-label="First group"></div>
     <div class="input-group">
-        <a href="" [routerLink]="['/partido-forma', partido.Id]">
-          <button type="button" class="btn btn-primary"><i class="fa fa-edit"></i> Editar Partido</button>
-        </a>
-      </div>
+      <a href="" [routerLink]="['/partido-forma', partido.id]">
+        <button type="button" class="btn btn-primary">
+          <i class="fa fa-edit"></i> Editar Partido
+        </button>
+      </a>
+    </div>
   </div>
   <div class="partido-container">
     <div class="card border-dark mb-3">
-        <h5 class="card-header border-dark text-center">
-          {{ partido.Equipo1Nombre }} vs {{ partido.Equipo2Nombre }}
-        </h5>
+      <h5 class="card-header border-dark text-center">
+        {{ partido.equipo1.nombre }} vs {{ partido.equipo2.nombre }}
+      </h5>
       <div class="card-body">
-        <h5 class="card-title">{{ partido.Jornada.Descripcion }}</h5>
+        <h5 class="card-title">{{ partido.jornada.descripcion }}</h5>
         <div class="container text-center">
           <div class="row">
             <div class="col-sm">
-              <h6>{{ partido.Equipo1Nombre }}</h6>
+              <h6>{{ partido.equipo1.nombre }}</h6>
             </div>
             <div class="col-sm">
               <h6>vs</h6>
             </div>
             <div class="col-sm">
-              <h6>{{ partido.Equipo2Nombre }}</h6>
+              <h6>{{ partido.equipo2.nombre }}</h6>
             </div>
           </div>
         </div>
         <div class="container text-center">
           <div class="row">
             <div class="col-sm">
-              <p class="h5">{{ partido.GolesEquipo1 }}</p>
+              <p class="h5">{{ partido.golesEquipo1 }}</p>
             </div>
             <div class="col-sm"></div>
             <div class="col-sm">
-              <p class="h5">{{ partido.GolesEquipo2 }}</p>
+              <p class="h5">{{ partido.golesEquipo2 }}</p>
             </div>
           </div>
         </div>
@@ -65,10 +67,10 @@
                     *ngFor="let anotador of anotadoresEquipo1; let i = index"
                     class="list-group-item d-flex justify-content-between align-items-center"
                   >
-                    {{ anotador.Jugador.Nombre }}
-                    {{ anotador.Jugador.ApellidoPaterno }}
+                    {{ anotador.jugador.nombre }}
+                    {{ anotador.jugador.apellidoPaterno }}
                     <span class="text-rigth"
-                      >{{ anotador.NumeroDeGoles }} <i class="fas fa-futbol"></i
+                      >{{ anotador.numeroDeGoles }} <i class="fas fa-futbol"></i
                     ></span>
                   </li>
                 </ul>
@@ -77,26 +79,37 @@
                 <div class="list-group">
                   <ul class="list-group">
                     <li
-                      *ngFor="let expulsado of partido.Expulsados"
+                      *ngFor="let expulsado of partido.expulsados"
                       class="list-group-item d-flex justify-content-between align-items-center"
                     >
-                      {{ expulsado.Jugador.Nombre }}
-                      {{ expulsado.Jugador.ApellidoPaterno }}
+                      {{ expulsado.jugador.nombre }}
+                      {{ expulsado.jugador.apellidoPaterno }}
 
-                      <span *ngIf="expulsado.DobleAmarilla" class="badge badge-pill"
+                      <span
+                        *ngIf="expulsado.dobleAmarilla"
+                        class="badge badge-pill"
                         ><i class="fa fa-square fa-2x tarjeta-amarilla"></i
                       ></span>
-                      <span *ngIf="expulsado.DobleAmarilla" class="badge badge-pill"
+                      <span
+                        *ngIf="expulsado.dobleAmarilla"
+                        class="badge badge-pill"
                         ><i class="fa fa-square fa-2x tarjeta-amarilla"></i
                       ></span>
-                      <span *ngIf="!expulsado.DobleAmarilla" class="badge badge-pill"
+                      <span
+                        *ngIf="!expulsado.dobleAmarilla"
+                        class="badge badge-pill"
                         ><i class="fa fa-square fa-2x tarjeta-roja"></i
                       ></span>
                     </li>
-                    <li *ngFor="let amonestado of partido.Amonestados; let i = index;"
+                    <li
+                      *ngFor="
+                        let amonestado of partido.amonestados;
+                        let i = index
+                      "
                       class="list-group-item d-flex justify-content-between align-items-center"
                     >
-                      {{amonestado.Jugador.Nombre}} {{amonestado.Jugador.ApellidoPaterno}}
+                      {{ amonestado.jugador.nombre }}
+                      {{ amonestado.jugador.apellidoPaterno }}
                       <span class="badge badge-pill"
                         ><i class="fa fa-square fa-2x tarjeta-amarilla"></i
                       ></span>
@@ -110,10 +123,10 @@
                     *ngFor="let anotador of anotadoresEquipo2; let i = index"
                     class="list-group-item d-flex justify-content-between align-items-center"
                   >
-                    {{ anotador.Jugador.Nombre }}
-                    {{ anotador.Jugador.ApellidoPaterno }}
+                    {{ anotador.jugador.nombre }}
+                    {{ anotador.jugador.apellidoPaterno }}
                     <span class="text-rigth"
-                      >{{ anotador.NumeroDeGoles }} <i class="fas fa-futbol"></i
+                      >{{ anotador.numeroDeGoles }} <i class="fas fa-futbol"></i
                     ></span>
                   </li>
                 </ul>

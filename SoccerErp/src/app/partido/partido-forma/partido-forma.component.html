@@ -11,7 +11,7 @@
             id="ligas"
             class="form-control"
             #liga="ngModel"
-            [(ngModel)]="partido.Jornada.Liga.Id"
+            [(ngModel)]="partido.jornada.liga.id"
             name="liga"
             required
             [ngClass]="liga.invalid && liga.touched ? 'invalid-input' : ''"
@@ -20,9 +20,9 @@
             <option value="" selected>Selecciona Liga...</option>
             <option
               *ngFor="let liga of ligas; let i = index"
-              value="{{ liga.Id }}"
+              value="{{ liga.id }}"
             >
-              {{ liga.Nombre }}
+              {{ liga.nombre }}
             </option>
           </select>
           <div *ngIf="liga.invalid && liga.touched" class="invalid-value">
@@ -36,7 +36,7 @@
             id="jornadas"
             class="form-control"
             #jornada="ngModel"
-            [(ngModel)]="partido.Jornada.Id"
+            [(ngModel)]="partido.jornada.id"
             name="jornada"
             required
             [ngClass]="
@@ -46,9 +46,9 @@
             <option value="" selected>Selecciona Jornada...</option>
             <option
               *ngFor="let jornada of jornadasByLiga; let i = index"
-              value="{{ jornada.Id }}"
+              value="{{ jornada.id }}"
             >
-              {{ jornada.Descripcion }}
+              {{ jornada.descripcion }}
             </option>
           </select>
           <div *ngIf="jornada.invalid && jornada.touched" class="invalid-value">
@@ -63,7 +63,7 @@
             class="form-control"
             id="Equipo1"
             #equipo1="ngModel"
-            [(ngModel)]="partido.Equipo1.Id"
+            [(ngModel)]="partido.equipo1.id"
             name="equipo1"
             required
             [ngClass]="
@@ -73,9 +73,9 @@
             <option value="">Selecciona Equipo 1</option>
             <option
               *ngFor="let equipo of equiposByLiga; let i = index"
-              value="{{ equipo.Id }}"
+              value="{{ equipo.id }}"
             >
-              {{ equipo.Nombre }}
+              {{ equipo.nombre }}
             </option>
           </select>
           <div *ngIf="equipo1.invalid && equipo1.touched" class="invalid-value">
@@ -91,7 +91,7 @@
             class="form-control"
             id="Equipo2"
             #equipo2="ngModel"
-            [(ngModel)]="partido.Equipo2.Id"
+            [(ngModel)]="partido.equipo2.id"
             name="equipo2"
             required
             [ngClass]="
@@ -101,9 +101,9 @@
             <option value="">Selecciona Equipo2</option>
             <option
               *ngFor="let equipo of equiposByLiga; let i = index"
-              value="{{ equipo.Id }}"
+              value="{{ equipo.id }}"
             >
-              {{ equipo.Nombre }}
+              {{ equipo.nombre }}
             </option>
           </select>
           <div *ngIf="equipo2.invalid && equipo2.touched" class="invalid-value">
@@ -134,7 +134,7 @@
         </div>
         <div class="col-md-2 text-center"></div>
         <div class="col-md-4 text-center">
-            <label for="Liga">Fecha de Juego</label>
+            <label for="Liga">Hora de Juego</label>
             <input class="form-control" type="time" id="appt" name="appt"
             min="09:00" max="18:00">
         </div>
@@ -185,7 +185,7 @@
             id="GolesEquipo1"
             placeholder="Goles Equipo 1"
             #golesEquipo1="ngModel"
-            [(ngModel)]="partido.GolesEquipo1"
+            [(ngModel)]="partido.golesEquipo1"
             name="golesEquipo1"
           />
         </div>
@@ -198,7 +198,7 @@
             id="GolesEquipo2"
             placeholder="Goles Equipo 2"
             #golesEquipo2="ngModel"
-            [(ngModel)]="partido.GolesEquipo2"
+            [(ngModel)]="partido.golesEquipo2"
             name="golesEquipo2"
           />
         </div>
@@ -219,7 +219,7 @@
             <tbody>
               <tr *ngFor="let jugador of jugadoresEquipo1; let i = index">
                 <td scope="row">
-                  {{ jugador.Nombre }} {{ jugador.ApellidoPaterno }}
+                  {{ jugador.nombre }} {{ jugador.apellidoPaterno }}
                 </td>
                 <td>
                   <input
@@ -262,7 +262,7 @@
             <tbody>
               <tr *ngFor="let jugador of jugadoresEquipo2; let i = index">
                 <td scope="row">
-                  {{ jugador.Nombre }} {{ jugador.ApellidoPaterno }}
+                  {{ jugador.nombre }} {{ jugador.apellidoPaterno }}
                 </td>
                 <td>
                   <input

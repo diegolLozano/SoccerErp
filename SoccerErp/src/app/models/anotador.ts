@@ -1,9 +1,9 @@
 import { Jugador } from './jugador';
 
 export class Anotador {
-    Id?: number;
-    EquipoGanador: boolean;
-    NumeroDeGoles?: number;
-    Comentarios?: string;
-    Jugador?: Jugador;
+    id?: number;
+    equipoGanador: boolean;
+    numeroDeGoles?: number;
+    comentarios?: string;
+    jugador?: Jugador;
 }

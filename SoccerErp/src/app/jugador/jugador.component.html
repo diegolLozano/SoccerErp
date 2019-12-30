@@ -24,9 +24,9 @@
             *ngFor="let liga of ligas; let i = index"
             class="dropdown-item"
             type="button"
-            (click)="getEquiposByLiga(liga.Id, liga.Nombre)"
+            (click)="getEquiposByLiga(liga.id, liga.nombre)"
           >
-            {{ liga.Nombre }}
+            {{ liga.nombre }}
           </button>
         </div>
       </div>
@@ -46,9 +46,9 @@
             *ngFor="let equipo of equiposByLiga; let i = index"
             class="dropdown-item"
             type="button"
-            (click)="getJugadoresByEquipo(equipo.Id)"
+            (click)="getJugadoresByEquipo(equipo.id,equipo.nombre)"
           >
-            {{ equipo.Nombre }}
+            {{ equipo.nombre }}
           </button>
         </div>
       </div>
@@ -77,16 +77,16 @@
       <tbody>
         <tr *ngFor="let jugador of jugadoresByEquipo; let i = index">
           <td>
-            <a href="" [routerLink]="['/jugador-forma', jugador.Id]"
+            <a href="" [routerLink]="['/jugador-forma', jugador.id]"
               ><i class="fa fa-edit"></i
             ></a>
           </td>
-          <td>{{ jugador.Nombre }}</td>
-          <td>{{ jugador.ApellidoPaterno }} {{ jugador.ApellidoMaterno }}</td>
-          <td>{{ jugador.Edad }}</td>
-          <td>{{ jugador.Numero }}</td>
-          <td>{{ jugador.Posicion }}</td>
-          <td>{{ jugador.Suspendido ? "Si" : "No" }}</td>
+          <td>{{ jugador.nombre }}</td>
+          <td>{{ jugador.apellidoPaterno }} {{ jugador.apellidoMaterno }}</td>
+          <td>{{ jugador.edad }}</td>
+          <td>{{ jugador.numero }}</td>
+          <td>{{ jugador.posicion }}</td>
+          <td>{{ jugador.suspendido ? "Si" : "No" }}</td>
         </tr>
       </tbody>
     </table>

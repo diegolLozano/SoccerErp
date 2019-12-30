@@ -11,6 +11,7 @@ import { TablaGeneralComponent } from './tabla-general/tabla-general.component';
 import { PartidoFormaComponent } from './partido/partido-forma/partido-forma.component';
 import { JornadaFormaComponent } from './jornada/jornada-forma/jornada-forma.component';
 import { EquipoFormaComponent } from './equipo/equipo-forma/equipo-forma.component';
+import { PartidoEquipoComponent } from './partido-equipo/partido-equipo.component';
 
 
 const routes: Routes = [
@@ -20,6 +21,8 @@ const routes: Routes = [
   {path : 'jornada', component : JornadaComponent},
   {path : 'jugador', component : JugadorComponent},
   {path : 'partido', component : PartidoComponent},
+  {path : 'partido-equipo', component: PartidoEquipoComponent},
+  {path : 'partido-equipo/:id', component: PartidoEquipoComponent},
   {path : 'jugador/jugador-forma', component : JugadorFormaComponent},
   {path : 'liga/liga-forma', component : LigaFormaComponent},
   {path : 'liga/liga-forma/:id', component : LigaFormaComponent},
@@ -33,6 +36,7 @@ const routes: Routes = [
   {path : 'partido-forma/:id', component: PartidoFormaComponent},
   {path : 'equipo-forma', component: EquipoFormaComponent},
   {path : 'equipo-forma/:id', component: EquipoFormaComponent},
+  {path : 'equipo/:id', component: EquipoComponent},
   {path : 'jugador/:id', component: JugadorComponent},
   {path : 'jugador-forma', component: JugadorFormaComponent},
   {path : 'jugador-forma/:id', component: JugadorFormaComponent},

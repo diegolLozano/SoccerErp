@@ -31,17 +31,17 @@
       <tbody>
         <tr *ngFor="let liga of ligas; let i = index">
             <td>
-                <a href="" [routerLink]="['liga-forma',liga.Id]"
+                <a href="" [routerLink]="['liga-forma',liga.id]"
                   ><i class="fa fa-edit"></i
                 ></a>
               </td>
-          <td>{{liga.Nombre}}</td>
-          <td>{{liga.Costo}} $</td>
-          <td>{{liga.DiasDeSemana}}</td>
-          <td>{{liga.Ubicacion.Nombre}}</td>
-          <td><a href="#" [routerLink]="['/equipo']"><i class="fa fa-users"></i></a></td>
+          <td>{{liga.nombre}}</td>
+          <td>{{liga.costo}} $</td>
+          <td>{{liga.diasDeSemana}}</td>
+          <td>{{liga.ubicacion}}</td>
+          <td><a href="#" [routerLink]="['/equipo',liga.id]"><i class="fa fa-users"></i></a></td>
           <td><a href="#" [routerLink]="['/tabla-general']"><i class="fa fa-table"></i></a></td>
-          <td><a href="" [routerLink]="['/jornada/liga',liga.Id]"><i class="fa fa-calendar" aria-hidden="true"></i></a></td>
+          <td><a href="" [routerLink]="['/jornada/liga',liga.id]"><i class="fa fa-calendar" aria-hidden="true"></i></a></td>
         </tr>
       </tbody>
     </table>
