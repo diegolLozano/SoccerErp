@@ -1,8 +1,8 @@
 import { Jugador } from './jugador';
 
 export class Expulsado {
-    Id?: number;
-    DobleAmarilla?: boolean;
-    Comentarios?: string;
-    Jugador?: Jugador;
+    id?: number;
+    dobleAmarilla?: boolean;
+    comentarios?: string;
+    jugador?: Jugador;
 }

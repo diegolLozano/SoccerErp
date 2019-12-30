@@ -1,87 +1,73 @@
 <div class="main-container">
-    <div class="header-container">
-        <p class="h1">Equipos por Liga</p>
+  <div class="header-container">
+    <p class="h2">{{title}}</p>
+  </div>
+  <div class="btn-toolbar justify-content-between filters-container">
+    <div class="btn-group">
+      <div class="dropdown">
+        <button
+          class="btn btn-primary dropdown-toggle"
+          type="button"
+          id="dropdownMenuButton"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          {{titleDrp}}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <button
+          *ngFor="let liga of ligas; let i = index"
+          class="dropdown-item"
+          type="button"
+          (click)="getEquiposByLiga(liga.id)"
+        >
+          {{ liga.nombre }}
+        </button>
+        </div>
+      </div>
     </div>
-    <div class="btn-group filters-container">
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Ligas
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="">Sabatina</a>
-              <a class="dropdown-item" href="">Masculina Semanal</a>
-              <a class="dropdown-item" href="">Femenina Semanal</a>
-              <a class="dropdown-item" href="">Femenina Fin de Semana</a>
-              <a class="dropdown-item" href="">Masculina Semanal</a>
-            </div>
-          </div>
+    <div class="input-group">
+      <a href="" [routerLink]="['/equipo-forma']">
+        <button type="button" class="btn btn-primary"><i class="far fa-plus-square"></i> Crear Equipo</button>
+      </a>
     </div>
-    <div class="equipos-container table-responsive">
-        <table class="table table-hover table-bordered">
-            <thead class="thead-dark">
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Capitan</th>
-                <th scope="col">Telefono Contacto</th>
-                <th scope="col">Comentarios</th>
-                <th scope="col">Goles a Favor</th>
-                <th scope="col">Goles en Contra</th>
-                <th scope="col">Jugadores</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Juventus</td>
-                <td>Luis Miramontes</td>
-                <td>3345367890</td>
-                <td>Sin Adeudos</td>
-                <td>30</td>
-                <td>8</td>
-                <td><a href="#" [routerLink]="['/jugador']">Jugadores</a></td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Barcelona</td>
-                <td>Juan Perez</td>
-                <td>3342567890</td>
-                <td>No se presento jornada 4</td>
-                <td>28</td>
-                <td>10</td>
-                <td><a href="#" [routerLink]="['/jugador']">Jugadores</a></td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Real Madrid</td>
-                <td>Rodrigo Mendoza</td>
-                <td>3367896543</td>
-                <td>Cuenta con jugador suspendido</td>
-                <td>36</td>
-                <td>18</td>
-                <td><a href="#" [routerLink]="['/jugador']">Jugadores</a></td>
-              </tr>
-              <tr>
-                <th scope="row">4</th>
-                <td>Manchester United</td>
-                <td>Ricardo Gonzalez</td>
-                <td>3333212567</td>
-                <td></td>
-                <td>40</td>
-                <td>28</td>
-                <td><a href="#" [routerLink]="['/jugador']">Jugadores</a></td>
-              </tr>
-              <tr>
-                <th scope="row">5</th>
-                <td>Bayern Munich</td>
-                <td>Marcos Gonzalez</td>
-                <td>3367658900</td>
-                <td>Juego Pendiente</td>
-                <td>30</td>
-                <td>48</td>
-                <td><a href="#" [routerLink]="['/jugador']">Jugadores</a></td>
-              </tr>
-            </tbody>
-          </table>
-    </div>
+  </div>
+
+  <div class="equipos-container table-responsive text-center">
+    <table class="table table-hover table-bordered table-sm">
+      <thead class="thead-dark">
+        <tr>
+          <th></th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Capitan</th>
+          <th scope="col">Telefono Contacto</th>
+          <th scope="col">Comentarios</th>
+          <th scope="col">Goles a Favor</th>
+          <th scope="col">Goles en Contra</th>
+          <th scope="col">Jugadores</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let equipo of equiposByLiga; let i = index">
+          <td>
+            <a href="" [routerLink]="['/equipo-forma', equipo.id]"
+              ><i class="fa fa-edit"></i
+            ></a>
+          </td>
+          <td>{{ equipo.nombre }}</td>
+          <td>{{ equipo.capitan }}</td>
+          <td>{{ equipo.telefonoContacto }}</td>
+          <td>{{ equipo.comentarios }}</td>
+          <td>{{ equipo.golesFavor }}</td>
+          <td>{{ equipo.golesContra }}</td>
+          <td>
+            <a href="#" [routerLink]="['/jugador',equipo.id]"
+              ><i class="fa fa-male"></i
+            ></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

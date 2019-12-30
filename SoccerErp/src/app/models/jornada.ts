@@ -1,11 +1,12 @@
 import { Liga } from './liga';
 import { Partido } from './partido';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 export class Jornada {
-    Id?: number;
-    Descripcion?: string;
-    FechaInicio?: Date;
-    FechaFinal?: Date;
-    Liga?: Liga;
-    Partidos?: Partido[];
+    id?: any;
+    descripcion?: string;
+    fechaInicio?: NgbDateStruct;
+    fechaFinal?: NgbDateStruct;
+    liga?: Liga;
+    partidos?: Partido[];
 }

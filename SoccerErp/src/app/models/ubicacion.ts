@@ -1,13 +1,13 @@
 import { Liga } from './liga';
 
 export class Ubicacion {
-    Id?: number;
-    Nombre?: string;
-    Calle?: string;
-    Numero?: string;
-    NumeroInterior?: string;
-    Colonia?: string;
-    Administrador?: string;
-    Telefono?: string;
-    Ligas?: Liga[];
+    id?: number;
+    nombre?: string;
+    calle?: string;
+    numero?: string;
+    numeroInterior?: string;
+    colonia?: string;
+    administrador?: string;
+    telefono?: string;
+    ligas?: Liga[];
 }

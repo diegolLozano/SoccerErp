@@ -1,6 +1,6 @@
 .main-container{
-    padding-left: 200px;
-    padding-right: 200px;
+    padding-left: 100px;
+    padding-right: 100px;
 }
 .header-container{
     padding-left: 50px;
@@ -25,5 +25,9 @@ div.dropdown{
     width: 20px;
 }
 .estadisticas{
-    padding-top: 30px;
+    padding-top: 15px;
+
+    li{
+        height: 2.5em;
+    }
 }

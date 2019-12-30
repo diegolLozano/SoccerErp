@@ -1,9 +1,39 @@
 <div class="main-container">
   <div class="header-container">
-    <p class="h1">Crear/Editar "Jugador"</p>
+    <p class="h1">{{ title }}</p>
   </div>
   <div class="form-container">
-    <form>
+    <div
+      *ngIf="isSuccess"
+      class="alert alert-success offset-md-3 col-5"
+      role="alert"
+    >
+      {{ successMsg }}
+      <button
+        type="button"
+        class="close"
+        data-dismiss="alert"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div
+      *ngIf="isError"
+      class="alert alert-danger offset-md-3 col-5"
+      role="alert"
+    >
+      <button
+        type="button"
+        class="close"
+        data-dismiss="alert"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+      {{errors}}
+    </div>
+    <form #jugadorForm="ngForm" (ngSubmit)="saveJugador(); jugadorForm.reset()" novalidate>
       <div class="form-group row">
         <label for="Nombre" class="offset-md-3 col-2 col-form-label"
           >Nombre</label
@@ -14,7 +44,16 @@
             class="form-control"
             id="Nombre"
             placeholder="Nombre"
+            #nombre="ngModel"
+            [(ngModel)]="jugador.nombre"
+            name="nombre"
+            required
+            minlength="3"
+            [ngClass]="nombre.invalid && nombre.touched ? 'invalid-input' : ''"
           />
+          <div *ngIf="nombre.invalid && nombre.touched" class="invalid-value">
+            Nombre es Obligatorio, Minimo 3 Caracteres
+          </div>
         </div>
       </div>
       <div class="form-group row">
@@ -26,8 +65,24 @@
             type="text"
             class="form-control"
             id="ApellidoPaterno"
-            placeholder="ApellidoPaterno"
+            placeholder="Apellido Paterno"
+            #apellidoPaterno="ngModel"
+            [(ngModel)]="jugador.apellidoPaterno"
+            name="apellidoPaterno"
+            required
+            minlength="3"
+            [ngClass]="
+              apellidoPaterno.invalid && apellidoPaterno.touched
+                ? 'invalid-input'
+                : ''
+            "
           />
+          <div
+            *ngIf="apellidoPaterno.invalid && apellidoPaterno.touched"
+            class="invalid-value"
+          >
+            Apellido Paterno es Obligatorio, Minimo 3 Caracteres
+          </div>
         </div>
       </div>
       <div class="form-group row">
@@ -39,7 +94,10 @@
             type="text"
             class="form-control"
             id="ApellidoMaterno"
-            placeholder="ApellidoMaterno"
+            placeholder="Apellido Materno"
+            #apellidoMaterno="ngModel"
+            [(ngModel)]="jugador.apellidoMaterno"
+            name="apellidoMaterno"
           />
         </div>
       </div>
@@ -51,7 +109,15 @@
             class="form-control"
             id="Edad"
             placeholder="Edad"
+            #edad="ngModel"
+            [(ngModel)]="jugador.edad"
+            name="edad"
+            required
+            [ngClass]="edad.invalid && edad.touched ? 'invalid-input' : ''"
           />
+          <div *ngIf="edad.invalid && edad.touched" class="invalid-value">
+            Edad es Obligatoria
+          </div>
         </div>
       </div>
       <div class="form-group row">
@@ -64,7 +130,15 @@
             class="form-control"
             id="Numero"
             placeholder="Numero"
+            #numero="ngModel"
+            [(ngModel)]="jugador.numero"
+            name="numero"
+            required
+            [ngClass]="numero.invalid && numero.touched ? 'invalid-input' : ''"
           />
+          <div *ngIf="numero.invalid && numero.touched" class="invalid-value">
+            Numero es Obligatorio
+          </div>
         </div>
       </div>
       <div class="form-group row">
@@ -77,24 +151,115 @@
             class="form-control"
             id="Posicion"
             placeholder="Posicion"
+            #posicion="ngModel"
+            [(ngModel)]="jugador.posicion"
+            name="posicion"
+            required
+            minlength="3"
+            [ngClass]="
+              posicion.invalid && posicion.touched ? 'invalid-input' : ''
+            "
           />
+          <div
+            *ngIf="posicion.invalid && posicion.touched"
+            class="invalid-value"
+          >
+            Posicion es Obligatorio, Minimo 3 Caracteres
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="offset-md-3 col-2">Capitan</div>
+        <div class="col-3">
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="isCapitan"
+              #isCapitan="ngModel"
+              [(ngModel)]="jugador.isCapitan"
+              name="isCapitan"
+            />
+          </div>
         </div>
       </div>
       <div class="form-group row">
         <div class="offset-md-3 col-2">Suspendido</div>
         <div class="col-3">
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="Suspendido" />
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="Suspendido"
+              #suspendido="ngModel"
+              [(ngModel)]="jugador.suspendido"
+              name="suspendido"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="Liga" class="offset-md-3 col-2 col-form-label">Liga</label>
+        <div class="col-3">
+          <select
+            id="ligas"
+            class="form-control"
+            name="liga"
+            [(ngModel)]="selectedLiga"
+            (change)="getEquiposByLiga($event.target.value)"
+          >
+            <option value="" selected>Selecciona Liga...</option>
+            <option
+              *ngFor="let liga of ligas; let i = index"
+              value="{{ liga.id }}"
+            >
+              {{ liga.nombre }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="Equipo" class="offset-md-3 col-2 col-form-label"
+          >Equipo</label
+        >
+        <div class="col-3">
+          <select
+            id="equipo"
+            class="form-control"
+            #equipo="ngModel"
+            [(ngModel)]="jugador.equipoId"
+            name="equipo"
+            required
+            [ngClass]="equipo.invalid && equipo.touched ? 'invalid-input' : ''"
+          >
+            <option value="" selected>Selecciona Equipo...</option>
+            <option
+              *ngFor="let equipo of equiposByLiga; let i = index"
+              value="{{ equipo.id }}"
+            >
+              {{ equipo.nombre }}
+            </option>
+          </select>
+          <div *ngIf="equipo.invalid && equipo.touched" class="invalid-value">
+            Equipo es Obligatorio
           </div>
         </div>
       </div>
       <div class="form-group row">
         <div class="offset-md-5 col-3">
           <div class="btn-group mr-2" role="group" aria-label="First group">
-            <button type="submit" class="btn btn-primary">Guardar</button>
+            <button
+              type="submit"
+              class="btn btn-primary"
+              [disabled]="!jugadorForm.form.valid"
+            >
+              <i class="far fa-save"></i> Guardar
+            </button>
           </div>
           <div class="btn-group mr-2" role="group" aria-label="First group">
-            <button type="submit" class="btn btn-danger">Borrar</button>
+            <button type="button" (click)="deleteJugador()" class="btn btn-danger">
+              <i class="far fa-trash-alt"></i> Borrar
+            </button>
           </div>
         </div>
       </div>

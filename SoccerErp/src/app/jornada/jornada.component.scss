@@ -1,11 +1,11 @@
 .main-container{
-    padding-left: 200px;
-    padding-right: 200px;
+    padding-left: 100px;
+    padding-right: 100px;
 }
 .header-container{
     padding-left: 50px;
-    padding-top: 30px;
-    padding-bottom: 30px;;
+    padding-top: 15px;
+    padding-bottom: 15px;;
 }
 .filters-container{
     padding-left: 50px;
@@ -13,7 +13,11 @@
 }
 .jornadas-container{
     padding: 50px;
-    max-height: 1000px;
+    padding-top: 20px;
+    
+  i.fa-eye{
+    font-size: 1.5em;
+  }
 }
 div.dropdown{
     padding-right: 15px;

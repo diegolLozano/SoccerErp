@@ -1,6 +1,6 @@
 <div class="main-container">
   <div class="header-container">
-    <p class="h1">SoccerLife Bajio</p>
+    <p class="h2">SoccerLife Bajio</p>
   </div>
   <div
     class="btn-toolbar justify-content-between filters-container"
@@ -10,15 +10,15 @@
     <div class="btn-group" role="group" aria-label="First group"></div>
     <div class="input-group">
       <a href="" [routerLink]="['liga-forma']">
-        <button type="button" class="btn btn-primary">Crear Liga</button>
+        <button type="button" class="btn btn-primary"><i class="far fa-plus-square"></i> Crear Liga</button>
       </a>
     </div>
   </div>
-  <div id="ligas-container" class="table-responsive">
-    <table class="table table-hover table-bordered">
+  <div id="ligas-container" class="table-responsive text-center">
+    <table class="table table-hover table-bordered table-sm">
       <thead class="thead-dark">
         <tr>
-          <th scope="col">#</th>
+          <th></th>
           <th scope="col">Nombre</th>
           <th scope="col">Costo</th>
           <th scope="col">Dias de Semana</th>
@@ -29,55 +29,19 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td><a href="" [routerLink]="['liga-forma']">Sabatina</a></td>
-          <td>500 $</td>
-          <td>Sabados</td>
-          <td>SoccerLife Bajio</td>
-          <td><a href="#" [routerLink]="['/equipo']">Equipos</a></td>
-          <td><a href="#" [routerLink]="['/tabla-general']">Tabla</a></td>
-          <td><a href="" [routerLink]="['/jornada']">Jornadas</a></td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td><a href="" [routerLink]="['liga-forma']">Masculina Semanal</a></td>
-          <td>450 $</td>
-          <td>Lunes,Martes,Miercoles</td>
-          <td>SoccerLife Bajio</td>
-          <td><a href="#" [routerLink]="['/equipo']">Equipos</a></td>
-          <td><a href="#" [routerLink]="['/tabla-general']">Tabla</a></td>
-          <td><a href="" [routerLink]="['/jornada']">Jornadas</a></td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td><a href="" [routerLink]="['liga-forma']">Femenina Semanal</a></td>
-          <td>450 $</td>
-          <td>Lunes,Martes,Miercoles</td>
-          <td>SoccerLife Bajio</td>
-          <td><a href="#" [routerLink]="['/equipo']">Equipos</a></td>
-          <td><a href="#" [routerLink]="['/tabla-general']">Tabla</a></td>
-          <td><a href="" [routerLink]="['/jornada']">Jornadas</a></td>
-        </tr>
-        <tr>
-          <th scope="row">4</th>
-          <td><a href="" [routerLink]="['liga-forma']">Femenina Fin de Semana</a></td>
-          <td>400 $</td>
-          <td>Sabado, Domingo</td>
-          <td>SoccerLife Bajio</td>
-          <td><a href="#" [routerLink]="['/equipo']">Equipos</a></td>
-          <td><a href="#" [routerLink]="['/tabla-general']">Tabla</a></td>
-          <td><a href="" [routerLink]="['/jornada']">Jornadas</a></td>
-        </tr>
-        <tr>
-          <th scope="row">5</th>
-          <td><a href="" [routerLink]="['liga-forma']">Masculina Semanal 2</a></td>
-          <td>600 $</td>
-          <td>Jueves, Viernes</td>
-          <td>SoccerLife Bajio</td>
-          <td><a href="#" [routerLink]="['/equipo']">Equipos</a></td>
-          <td><a href="#" [routerLink]="['/tabla-general']">Tabla</a></td>
-          <td><a href="" [routerLink]="['/jornada']">Jornadas</a></td>
+        <tr *ngFor="let liga of ligas; let i = index">
+            <td>
+                <a href="" [routerLink]="['liga-forma',liga.id]"
+                  ><i class="fa fa-edit"></i
+                ></a>
+              </td>
+          <td>{{liga.nombre}}</td>
+          <td>{{liga.costo}} $</td>
+          <td>{{liga.diasDeSemana}}</td>
+          <td>{{liga.ubicacion}}</td>
+          <td><a href="#" [routerLink]="['/equipo',liga.id]"><i class="fa fa-users"></i></a></td>
+          <td><a href="#" [routerLink]="['/tabla-general']"><i class="fa fa-table"></i></a></td>
+          <td><a href="" [routerLink]="['/jornada/liga',liga.id]"><i class="fa fa-calendar" aria-hidden="true"></i></a></td>
         </tr>
       </tbody>
     </table>
