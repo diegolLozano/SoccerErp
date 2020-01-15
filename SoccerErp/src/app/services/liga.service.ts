@@ -26,4 +26,7 @@ export class LigaService {
   public deleteLiga(id: number): Observable<any> {
     return this.httpClient.delete(`${this.baseUrl}/liga/${id}`);
   }
+  public createTorneo(id: number): Observable<any> {
+    return this.httpClient.get(`${this.baseUrl}/liga/torneo/${id}`);
+  }
 }

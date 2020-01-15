@@ -87,14 +87,23 @@ export class EquipoFormaComponent implements OnInit {
     if (this.equipo.id) {
       this.equipoService.deleteEquipo(this.equipo.id).subscribe(
         res => {
-          this.successMsg = 'Equipo a sido borrado exitosamente';
-          this.isSuccess = true;
-          this.equipo = new Equipo();
-          this.equipo.ligaId = '';
-      }, error => {
-          this.errors = error;
+          if (res.status === 'BadRequest') {
+            this.isError = true;
+            this.errorMsg = res.message;
+            this.errors = res.message;
+          } else {
+            this.isSuccess = true;
+            this.successMsg = res.message;
+            this.equipo = new Equipo();
+            this.equipo.ligaId = '';
+          }
+        },
+        error => {
+          this.errorMsg = error.error.message;
+          this.errors = error.error.message;
           this.isError = true;
-      });
+        }
+      );
     }
   }
 }

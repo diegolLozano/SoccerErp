@@ -1,6 +1,9 @@
+import { Equipo } from './equipo';
+
 export class TablaGeneral {
     id?: number;
-    equipo?: string;
+    equipo?: Equipo;
+    equipoId?: any;
     juegosJugados?: number;
     juegosGanados?: number;
     juegosEmpatados?: number;

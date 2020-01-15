@@ -12,4 +12,7 @@ export class Jugador {
     equipo?: Equipo;
     equipoId?: any;
     isCapitan?: boolean;
+    numeroDeGoles?: number;
+    isAmonestado?: boolean;
+    isExpulsado?: boolean;
 }

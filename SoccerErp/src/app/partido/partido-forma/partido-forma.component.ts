@@ -5,6 +5,17 @@ import { Liga } from 'src/app/models/liga';
 import { Jornada } from 'src/app/models/jornada';
 import { Equipo } from 'src/app/models/equipo';
 import { Jugador } from 'src/app/models/jugador';
+import { PartidoService } from 'src/app/services/partido.service';
+import { JornadaService } from 'src/app/services/jornada.service';
+import { EquipoService } from 'src/app/services/equipo.service';
+import { LigaService } from 'src/app/services/liga.service';
+import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
+import { JugadorService } from 'src/app/services/jugador.service';
+import { tap, finalize } from 'rxjs/operators';
+import { Anotador } from 'src/app/models/anotador';
+import { Amonestado } from 'src/app/models/amonestado';
+import { Expulsado } from 'src/app/models/expulsado';
+import { Form } from '@angular/forms';
 
 @Component({
   selector: 'app-partido-forma',
@@ -24,220 +35,316 @@ export class PartidoFormaComponent implements OnInit {
   jugadoresEquipo2: Jugador[];
   jugadores: Jugador[];
   title = 'Nuevo Partido';
-  constructor(private route: ActivatedRoute) {}
+  errors: any;
+  isSuccess = false;
+  successMsg: string;
+  isError = false;
+  errorMsg: string;
+  constructor(
+    private route: ActivatedRoute,
+    private partidoService: PartidoService,
+    private jornadaService: JornadaService,
+    private equipoService: EquipoService,
+    private ligaService: LigaService,
+    private jugadorService: JugadorService
+  ) {}
 
   ngOnInit() {
-    this.partido = {
-      jornada: {
-        id: '',
-        liga: {
-          id: ''
-        }
-      },
-      equipo1: {
-        id: '',
-        nombre: '',
-        capitan: ''
-      },
-      equipo2: {
-        id: '',
-        nombre: '',
-        capitan: ''
-      }
-    };
+    this.partido = {};
     this.partidoId = +this.route.snapshot.paramMap.get('id');
     this.partidos = [];
-
-    this.ligas = [];
     this.jornadas = [];
-/*     this.equipos = [
-      {
-        Id: 1,
-        Nombre: 'Juventus',
-        capitan: 'Luis Miramontes',
-        TelefonoContacto: '3345367890',
-        Comentarios: 'Sin Adeudos',
-        GolesFavor: 30,
-        GolesContra: 8,
-        liga: {
-          id: 1,
-          nombre: 'Sabatina',
-          costo: '500',
-          diasDeSemana: 'Sabado'
-        }
-      },
-      {
-        Id: 2,
-        Nombre: 'Barcelona',
-        Capitan: 'Juan Perez',
-        TelefonoContacto: '3342567890',
-        Comentarios: 'No se presento jornada 4',
-        GolesFavor: 28,
-        GolesContra: 10,
-        liga: {
-          id: 1,
-          nombre: 'Sabatina',
-          costo: '500',
-          diasDeSemana: 'Sabado'
-        }
-      },
-      {
-        Id: 3,
-        Nombre: 'Real Madrid',
-        Capitan: 'Rodrigo Mendoza',
-        TelefonoContacto: '3367896543',
-        Comentarios: 'Cuenta con jugador suspendido',
-        GolesFavor: 36,
-        GolesContra: 18,
-        liga: {
-          id: 2,
-          nombre: 'Maculina Semanal',
-          costo: '450',
-          diasDeSemana: 'Lunes, Martes, Miercoles'
-        }
-      },
-      {
-        Id: 4,
-        Nombre: 'Manchester United',
-        Capitan: 'Ricardo Gonzalez',
-        TelefonoContacto: '3333212567',
-        Comentarios: '',
-        GolesFavor: 40,
-        GolesContra: 28,
-        liga: {
-          id: 2,
-          nombre: 'Maculina Semanal',
-          costo: '450',
-          diasDeSemana: 'Lunes, Martes, Miercoles'
-        }
-      },
-      {
-        Id: 15,
-        Nombre: 'Bayern Munich',
-        Capitan: 'Marcos Gonzalez',
-        TelefonoContacto: '3367658900',
-        Comentarios: 'Juego Pendiente',
-        GolesFavor: 30,
-        GolesContra: 48,
-        liga: {
-          id: 3,
-          nombre: 'Femenina Semanal',
-          costo: '450',
-          diasDeSemana: 'Sabado'
-        }
-      },
-      {
-        Id: 5,
-        Nombre: 'Manchester City',
-        Capitan: 'Felix Alba',
-        TelefonoContacto: '3367658900',
-        Comentarios: 'Juego Pendiente',
-        GolesFavor: 50,
-        GolesContra: 48,
-        liga: {
-          id: 2,
-          nombre: 'Maculina Semanal',
-          costo: '450',
-          diasDeSemana: 'Lunes, Martes, Miercoles',
-          ubicacion: {
-            Id: 1,
-            Nombre: 'SoccerLifeBajio',
-            Calle: '',
-            Numero: ''
-          }
-        }
-      },
-      {
-        Id: 6,
-        Nombre: 'Porto',
-        Capitan: 'Felix Alba',
-        TelefonoContacto: '3367658900',
-        Comentarios: 'Adeudos',
-        GolesFavor: 20,
-        GolesContra: 48,
-        liga: {
-          id: 2,
-          nombre: 'Maculina Semanal',
-          costo: '450',
-          diasDeSemana: 'Lunes, Martes, Miercoles',
-          ubicacion: {
-            Id: 1,
-            Nombre: 'SoccerLifeBajio',
-            Calle: '',
-            Numero: ''
-          }
-        }
-      },
-      {
-        Id: 7,
-        Nombre: 'PSG',
-        Capitan: 'Alexis Juarez',
-        TelefonoContacto: '3367658900',
-        Comentarios: '',
-        GolesFavor: 25,
-        GolesContra: 25,
-        liga: {
-          id: 4,
-          nombre: 'Femenina Fin de Semana',
-          costo: '400',
-          diasDeSemana: 'Sabado, Domingo'
-        }
-      },
-      {
-        Id: 8,
-        Nombre: 'Tigres',
-        Capitan: 'Jorge Treviño',
-        TelefonoContacto: '3367658900',
-        Comentarios: 'Sin Comentarios',
-        GolesFavor: 25,
-        GolesContra: 25,
-        liga: {
-          id: 1,
-          nombre: 'Sabatina',
-          costo: '500',
-          diasDeSemana: 'Sabado'
-        }
-      },
-      {
-        Id: 9,
-        Nombre: 'Boca Juniors',
-        Capitan: 'Oscar Sanchez',
-        TelefonoContacto: '3367658900',
-        Comentarios: 'Documentos pendientes',
-        GolesFavor: 25,
-        GolesContra: 25,
-        liga: {
-          id: 2,
-          nombre: 'Maculina Semanal',
-          costo: '450',
-          diasDeSemana: 'Lunes, Martes, Miercoles'
-        }
-      }
-    ]; */
     this.jugadores = [];
+    this.jugadoresEquipo1 = [];
+    this.jugadoresEquipo2 = [];
+    this.resetValues();
+    this.getLigas();
     if (this.partidoId !== 0) {
       this.getPartidoById(this.partidoId);
-      this.title = this.partido.equipo1Nombre + ' vs ' + this.partido.equipo2Nombre;
     }
   }
   getPartidoById(id: number) {
-    this.partido = this.partidos.find(x => x.id === id);
-    if (this.partido != null) {
-      this.getInfoByLiga(this.partido.jornada.liga.id);
-      this.jugadoresEquipo1 = this.jugadores.filter(
-        x => x.equipo.id === this.partido.equipo1.id
+    this.partidoService
+      .getPartido(id)
+      .pipe(
+        finalize(() => {
+          console.log('test');
+        })
+      )
+      .subscribe(
+        res => {
+          this.partido = res;
+          if (this.partido != null) {
+            this.title =
+              this.partido.equipo1.nombre +
+              ' vs ' +
+              this.partido.equipo2.nombre;
+            this.getInfoByLiga(this.partido.jornada.ligaId);
+            const fechaJuego = new Date(this.partido.fechaJuego.toString());
+            this.partido.fechaJuegoStrc = new NgbDate(
+              fechaJuego.getFullYear(),
+              fechaJuego.getMonth() + 1,
+              fechaJuego.getDate()
+            );
+            this.jugadores = this.partido.jugadores;
+            this.setJugadorValues(this.partido);
+
+            if (this.jugadores != null) {
+              this.jugadoresEquipo1 = this.jugadores.filter(
+                x => x.equipoId === this.partido.equipo1.id
+              );
+              this.jugadoresEquipo2 = this.jugadores.filter(
+                x => x.equipoId === this.partido.equipo2.id
+              );
+            }
+            if (this.partido.ganadorId === this.partido.equipo1.id) {
+              this.partido.isGanador1 = true;
+            }
+            if (this.partido.ganadorId === this.partido.equipo2.id) {
+              this.partido.isGanador2 = true;
+            }
+          }
+        },
+        error => {
+          this.errorMsg = error.message;
+          this.errors = error.error;
+          this.isError = true;
+        }
       );
-      this.jugadoresEquipo2 = this.jugadores.filter(
-        x => x.equipo.id === this.partido.equipo2.id
-      );
-    }
   }
   getInfoByLiga(id: number) {
-    this.jornadasByLiga = this.jornadas.filter(x => x.liga.id === +id);
-    this.equiposByLiga = this.equipos.filter(x => x.liga.id === +id);
+    this.jornadaService.getJornadasByLiga(id).subscribe(
+      res => {
+        this.jornadasByLiga = res;
+        if (this.jornadasByLiga.length > 0) {
+          this.equipoService
+            .getEquiposByLiga(this.jornadasByLiga[0].ligaId)
+            .subscribe(
+              resp => {
+                this.equiposByLiga = resp;
+              },
+              error => {
+                this.errorMsg = error.message;
+                this.errors = error.error;
+                this.isError = true;
+              }
+            );
+        }
+      },
+      error => {
+        this.errorMsg = error.message;
+        this.errors = error.error;
+        this.isError = true;
+      }
+    );
+  }
+  getLigas() {
+    this.ligaService.getligas().subscribe(
+      res => {
+        this.ligas = res;
+      },
+      error => {
+        this.errorMsg = error.message;
+        this.errors = error.error;
+        this.isError = true;
+      }
+    );
   }
   getJornadasByLiga(ligaId: number) {
     this.jornadasByLiga = this.jornadas.filter(x => x.liga.id === +ligaId);
   }
-  getJugadoresByEquipo(id: number) {}
+  savePartido(form: Form) {
+    if (this.partido.isGanador1) {
+      this.partido.ganadorId = this.partido.equipo1.id;
+    }
+    if (this.partido.isGanador2) {
+      this.partido.ganadorId = this.partido.equipo2.id;
+    }
+    if (
+      (this.partido.isGanador2 === false || this.partido.isGanador2 === undefined) &&
+      (this.partido.isGanador1 === false || this.partido.isGanador1 === undefined) &&
+      (this.partido.empate === false || this.partido.empate === undefined)
+    ) {
+      this.errorMsg = '';
+      this.errors = 'Es obligatorio seleccionar un ganador o empate';
+      this.isError = true;
+      return false;
+    }
+
+    if (this.partido.id) {
+      const jugadoresEditados = this.partido.jugadores;
+      const anotadoresPartido = this.partido.anotadores;
+      const amonestadosPartido = this.partido.amonestados;
+      const expulsadosPartido = this.partido.expulsados;
+      const anotadores: Anotador[] = [];
+      const amonestados: Amonestado[] = [];
+      const expulsados: Expulsado[] = [];
+      this.partido.anotadores.forEach(function(anotador) {
+        const temp = jugadoresEditados.find(x => x.id == anotador.jugador.id);
+        if (temp != null) {
+          anotador.numeroDeGoles = +temp.numeroDeGoles;
+          if (temp.numeroDeGoles <= 0) {
+            anotador.numeroDeGoles = null;
+          }
+        }
+      });
+      this.partido.amonestados.forEach(function(amonestado) {
+        const temp = jugadoresEditados.find(x => x.id == amonestado.jugador.id);
+        if (temp != null) {
+          amonestado.comentarios = '';
+        }
+      });
+      this.partido.expulsados.forEach(function(expulsado) {
+        const temp = jugadoresEditados.find(x => x.id == expulsado.jugador.id);
+        if (temp != null) {
+          expulsado.comentarios =
+            temp.isAmonestado && temp.isExpulsado ? 'Doble Amarilla' : '';
+          expulsado.dobleAmarilla =
+            temp.isAmonestado && temp.isExpulsado ? true : false;
+        }
+      });
+      if (jugadoresEditados != null) {
+        jugadoresEditados.forEach(function(jugador) {
+          let result = anotadoresPartido.find(x => x.jugador.id == jugador.id);
+          if (
+            jugador.numeroDeGoles > 0 &&
+            (result == null || result == undefined)
+          ) {
+            const anotador: Anotador = {
+              numeroDeGoles: jugador.numeroDeGoles,
+              jugador
+            };
+            anotadores.push(anotador);
+          }
+          result = amonestadosPartido.find(x => x.jugador.id == jugador.id);
+          if (jugador.isAmonestado && (result == null || result == undefined)) {
+            const amonestado: Amonestado = {
+              jugador
+            };
+            amonestados.push(amonestado);
+          }
+          if (jugador.isExpulsado) {
+            const expulsado: Expulsado = {
+              dobleAmarilla:
+                jugador.isAmonestado && jugador.isExpulsado ? true : false,
+              jugador
+            };
+            expulsados.push(expulsado);
+          }
+        });
+      }
+      this.partido.anotadores = this.partido.anotadores
+        .concat(anotadores)
+        .filter(x => x.numeroDeGoles != null);
+      this.partido.amonestados = this.partido.amonestados.concat(amonestados);
+      this.partido.expulsados = this.partido.expulsados.concat(expulsados);
+      this.partidoService
+        .updatePartido(this.partido.id, this.partido)
+        .subscribe(
+          res => {
+            if (res.status == 'BadRequest') {
+              this.isError = true;
+              this.errorMsg = res.message;
+              this.errors = res.message;
+            } else {
+              this.isSuccess = true;
+              this.successMsg = res.message;
+              this.resetValues();
+            }
+          },
+          error => {
+            this.errorMsg = error.message;
+            this.errors = error.error;
+            this.isError = true;
+          }
+        );
+    } else {
+      this.partido.equipo1 = null;
+      this.partido.equipo2 = null;
+      this.partido.jornada = { ligaId: 0 };
+      this.partidoService.createPartido(this.partido).subscribe(
+        res => {
+          if (res.status == 'BadRequest') {
+            this.isError = true;
+            this.errorMsg = res.message;
+            this.errors = res.message;
+            this.resetValues();
+          } else {
+            this.isSuccess = true;
+            this.successMsg = res.message;
+            this.resetValues();
+          }
+        },
+        error => {
+          this.errorMsg = error.message;
+          this.errors = error.error;
+          this.isError = true;
+        }
+      );
+    }
+  }
+  deletePartido() {
+    if (this.partido.id) {
+      this.partidoService.deletePartido(this.partido.id).subscribe(
+        res => {
+          this.successMsg = 'Partido a sido borrado exitosamente';
+          this.isSuccess = true;
+          this.resetValues();
+        },
+        error => {
+          this.errorMsg = error.message;
+          this.errors = error.error;
+          this.isError = true;
+        }
+      );
+    }
+  }
+  setJugadorValues(partido: Partido) {
+    if (this.jugadores != null) {
+      this.jugadores.forEach(function(jugador) {
+        const anotador = partido.anotadores.find(
+          x => x.jugador.id == jugador.id
+        );
+        if (anotador != null) {
+          jugador.numeroDeGoles = anotador.numeroDeGoles;
+        }
+        const amonestado = partido.amonestados.find(
+          x => x.jugador.id == jugador.id
+        );
+        if (amonestado != null) {
+          jugador.isAmonestado = true;
+        }
+        const expulsado = partido.expulsados.find(
+          x => x.jugador.id == jugador.id
+        );
+        if (expulsado != null) {
+          jugador.isExpulsado;
+        }
+      });
+    }
+  }
+  empateReset() {
+    this.partido.isGanador1 = false;
+    this.partido.isGanador2 = false;
+  }
+  resetValues() {
+    this.partido = {
+      jornada: {
+        ligaId: ''
+      },
+      jornadaId: '',
+      equipo1Id: '',
+      equipo2Id: ''
+    };
+    this.jugadoresEquipo1.forEach(function(jugador) {
+      jugador.numeroDeGoles = null;
+      jugador.isAmonestado = null;
+      jugador.isExpulsado = null;
+    });
+    this.jugadoresEquipo2.forEach(function(jugador) {
+      jugador.numeroDeGoles = null;
+      jugador.isAmonestado = null;
+      jugador.isExpulsado = null;
+    });
+  }
 }

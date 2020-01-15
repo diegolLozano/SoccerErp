@@ -57,7 +57,7 @@ export class JugadorFormaComponent implements OnInit {
       this.equiposByLiga = res;
       if (this.equiposByLiga.length > 0) {
         this.selectedLiga = this.equiposByLiga[0].ligaId;
-      }else { this.selectedLiga = ''; }
+      } else { this.selectedLiga = ''; }
     });
   }
   getLigas() {
