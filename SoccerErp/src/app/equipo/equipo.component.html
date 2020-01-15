@@ -1,6 +1,28 @@
 <div class="main-container">
   <div class="header-container">
-    <p class="h2">{{title}}</p>
+    <p class="h2">{{ title }}</p>
+    <div *ngIf="isSuccess" class="alert alert-success text-center" role="alert">
+      {{ successMsg }}
+      <button
+        type="button"
+        class="close"
+        (click)="isSuccess= false"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div *ngIf="isError" class="alert alert-danger text-center" role="alert">
+      <button
+        type="button"
+        class="close"
+        (click)="isError= false"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+      {{ errors }}
+    </div>
   </div>
   <div class="btn-toolbar justify-content-between filters-container">
     <div class="btn-group">
@@ -13,23 +35,34 @@
           aria-haspopup="true"
           aria-expanded="false"
         >
-          {{titleDrp}}
+          {{ titleDrp }}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <button
-          *ngFor="let liga of ligas; let i = index"
-          class="dropdown-item"
-          type="button"
-          (click)="getEquiposByLiga(liga.id)"
-        >
-          {{ liga.nombre }}
-        </button>
+            *ngFor="let liga of ligas; let i = index"
+            class="dropdown-item"
+            type="button"
+            (click)="getEquiposByLiga(liga.id)"
+          >
+            {{ liga.nombre }}
+          </button>
         </div>
       </div>
     </div>
     <div class="input-group">
+      <button
+        [disabled]="ligaId == 0"
+        type="button"
+        class="partidos-btn btn btn-success"
+        data-toggle="modal"
+        data-target="#modalTorneo"
+      >
+        <i class="fas fa-calendar-alt"></i> Crear Torneo
+      </button>
       <a href="" [routerLink]="['/equipo-forma']">
-        <button type="button" class="btn btn-primary"><i class="far fa-plus-square"></i> Crear Equipo</button>
+        <button type="button" class="btn btn-primary">
+          <i class="far fa-plus-square"></i> Crear Equipo
+        </button>
       </a>
     </div>
   </div>
@@ -62,12 +95,54 @@
           <td>{{ equipo.golesFavor }}</td>
           <td>{{ equipo.golesContra }}</td>
           <td>
-            <a href="#" [routerLink]="['/jugador',equipo.id]"
+            <a href="#" [routerLink]="['/jugador', equipo.id]"
               ><i class="fa fa-male"></i
             ></a>
           </td>
         </tr>
       </tbody>
     </table>
+  </div>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="modalTorneo"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalTorneoTitulo">Crear Torneo</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Se creara el torneo completo para la {{ titleDrp }}, estas de acuerdo?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Cancelar
+        </button>
+        <button
+          type="button"
+          (click)="createTorneo(ligaId)"
+          class="btn btn-primary"
+          data-dismiss="modal"
+        >
+          Crear Torneo
+        </button>
+      </div>
+    </div>
   </div>
 </div>

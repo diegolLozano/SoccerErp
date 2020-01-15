@@ -40,7 +40,8 @@ const routes: Routes = [
   {path : 'jugador/:id', component: JugadorComponent},
   {path : 'jugador-forma', component: JugadorFormaComponent},
   {path : 'jugador-forma/:id', component: JugadorFormaComponent},
-  {path : 'jornada/liga/:id', component: JornadaComponent}
+  {path : 'jornada/liga/:id', component: JornadaComponent},
+  {path : 'tabla-general/:id', component: TablaGeneralComponent}
 ];
 
 @NgModule({

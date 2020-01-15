@@ -1,19 +1,46 @@
 <div class="main-container">
   <div class="header-container">
-    <p class="h2">Liga Sabatina</p>
+    <p class="h2">{{title}}</p>
   </div>
   <div
     class="btn-toolbar justify-content-between filters-container"
     role="toolbar"
     aria-label="Toolbar with button groups"
   >
-    <div class="btn-group" role="group" aria-label="First group"></div>
+    <div class="btn-group">
+      <div class="dropdown">
+        <button
+          class="btn btn-primary dropdown-toggle"
+          type="button"
+          id="dropdownMenuButton"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          {{ titleDrp }}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <button
+            *ngFor="let liga of ligas; let i = index"
+            class="dropdown-item"
+            type="button"
+            (click)="getTablaGeneralByLiga(liga.id)"
+          >
+            {{ liga.nombre }}
+          </button>
+        </div>
+      </div>
+    </div>
     <div class="input-group">
       <a href="" class="download-btn">
-        <button type="button" class="btn btn-success"><i class="fas fa-download"></i> Excel</button>
+        <button type="button" class="btn btn-success">
+          <i class="fas fa-download"></i> Excel
+        </button>
       </a>
       <a href="" class="download-btn">
-        <button type="button" class="btn btn-secondary"><i class="fas fa-download"></i> PDF</button>
+        <button type="button" class="btn btn-secondary">
+          <i class="fas fa-download"></i> PDF
+        </button>
       </a>
     </div>
   </div>
@@ -36,10 +63,10 @@
       </thead>
       <tbody>
         <tr *ngFor="let equipo of tablaGeneral; let i = index">
-          <th scope="row">{{ equipo.id }}</th>
+          <th scope="row">{{ i + 1 }}</th>
           <td>
-            <a href="" [routerLink]="['/partido-equipo', equipo.id]">{{
-              equipo.equipo
+            <a href="" [routerLink]="['/partido-equipo', equipo.equipoId]">{{
+              equipo.equipo.nombre
             }}</a>
           </td>
           <td>{{ equipo.juegosJugados }}</td>

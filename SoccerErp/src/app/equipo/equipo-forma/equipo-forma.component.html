@@ -3,35 +3,27 @@
     <p class="h1">{{ title }}</p>
   </div>
   <div class="form-container">
-    <div
-      *ngIf="isSuccess"
-      class="alert alert-success offset-md-3 col-5"
-      role="alert"
-    >
+    <div *ngIf="isSuccess" class="alert alert-success text-center" role="alert">
       {{ successMsg }}
       <button
         type="button"
         class="close"
-        data-dismiss="alert"
+        (click)="isSuccess= false"
         aria-label="Close"
       >
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
-    <div
-      *ngIf="isError"
-      class="alert alert-danger offset-md-3 col-5"
-      role="alert"
-    >
+    <div *ngIf="isError" class="alert alert-danger text-center" role="alert">
       <button
         type="button"
         class="close"
-        data-dismiss="alert"
+        (click)="isError= false"
         aria-label="Close"
       >
         <span aria-hidden="true">&times;</span>
       </button>
-      {{errors}}
+      {{ errors }}
     </div>
     <form
       #equipoForm="ngForm"

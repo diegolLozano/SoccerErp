@@ -18,6 +18,11 @@ export class EquipoComponent implements OnInit {
   title = 'Equipos';
   titleDrp = 'Ligas';
   equiposApi: Equipo[];
+  errors: any;
+  isSuccess = false;
+  successMsg: string;
+  isError = false;
+  errorMsg: string;
   constructor(
     private route: ActivatedRoute,
     private equipoService: EquipoService,
@@ -33,6 +38,7 @@ export class EquipoComponent implements OnInit {
     }
   }
   getEquiposByLiga(id: number) {
+    this.ligaId = id;
     this.equipoService.getEquiposByLiga(id).subscribe(res => {
       this.equiposByLiga = res;
       this.title = this.equiposByLiga[0].liga.nombre;
@@ -48,5 +54,24 @@ export class EquipoComponent implements OnInit {
     this.ligaService.getligas().subscribe(res => {
       this.ligas = res;
     });
+  }
+  createTorneo(id: number) {
+    this.ligaService.createTorneo(id).subscribe(
+      res => {
+        if (res.status === 'BadRequest') {
+          this.isError = true;
+          this.errorMsg = res.message;
+          this.errors = res.message;
+        } else {
+          this.isSuccess = true;
+          this.successMsg = res.message;
+        }
+      },
+      error => {
+        this.errorMsg = error.error.message;
+        this.errors = error.error.message;
+        this.isError = true;
+      }
+    );
   }
 }

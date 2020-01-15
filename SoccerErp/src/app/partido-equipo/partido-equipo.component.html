@@ -10,7 +10,7 @@
       <div class="card-header border-dark">
         <div class="d-flex justify-content-between">
           <p class="h6">{{ partido.jornada.descripcion }}</p>
-          <a href="" [routerLink]="['/partido', partido.id]"
+          <a [ngClass]="partido.ganadorId || partido.empate ? 'jugado':'pendiente'" href="" [routerLink]="['/partido', partido.id]"
             ><i class="fa fa-eye"></i
           ></a>
         </div>
@@ -20,12 +20,12 @@
           <ul class="list-group list-group-horizontal">
             <li class="list-group-item ">
               <p class="h6">
-                <a href="" [routerLink]="['/jugador', partido.equipo1.id]">{{
+                <a [ngClass]="partido.ganadorId || partido.empate ? 'jugado':'pendiente'" href="" [routerLink]="['/jugador', partido.equipo1.id]">{{
                   partido.equipo1.nombre
                 }}</a>
               </p>
             </li>
-            <li *ngIf="partido.pendiente" class="list-group-item">
+            <li *ngIf="partido.ganadorId || partido.empate" class="list-group-item">
               <p class="h6">
                 {{ partido.golesEquipo1 }}
               </p>
@@ -33,14 +33,14 @@
             <li class="list-group-item">
               <p class="h6">vs</p>
             </li>
-            <li *ngIf="partido.pendiente" class="list-group-item">
+            <li *ngIf="partido.ganadorId || partido.empate" class="list-group-item">
               <p class="h6">
                 {{ partido.golesEquipo2 }}
               </p>
             </li>
             <li class="list-group-item">
               <p class="h6">
-                <a href="" [routerLink]="['/jugador', partido.equipo2.id]">{{
+                <a [ngClass]="partido.ganadorId || partido.empate ? 'jugado':'pendiente'" href="" [routerLink]="['/jugador', partido.equipo2.id]">{{
                   partido.equipo2.nombre
                 }}</a>
               </p>
