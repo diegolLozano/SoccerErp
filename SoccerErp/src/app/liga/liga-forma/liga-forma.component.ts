@@ -51,10 +51,9 @@ export class LigaFormaComponent implements OnInit {
           this.successMsg = 'Liga a sido editada exitosamente';
           this.isSuccess = true;
           this.liga = new Liga();
-        },
-        (error: HttpErrorResponse) => {
-          this.errorMsg = error.message;
-          this.errors = error.error;
+        }, error => {
+          this.errorMsg = error;
+          this.errors = error;
           this.isError = true;
         }
       );
@@ -64,10 +63,9 @@ export class LigaFormaComponent implements OnInit {
           this.successMsg = 'Liga a sido guardada exitosamente';
           this.isSuccess = true;
           this.liga = {};
-        },
-        (error: HttpErrorResponse) => {
-          this.errorMsg = error.message;
-          this.errors = error.error;
+        }, error => {
+          this.errorMsg = error;
+          this.errors = error;
           this.isError = true;
         }
       );

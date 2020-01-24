@@ -14,4 +14,7 @@ export class TablaGeneralService {
   public getTablaGeneral(ligaId: number): Observable<TablaGeneral[]> {
     return this.httpClient.get<TablaGeneral[]>(`${this.baseUrl}/tablageneral/${ligaId}`);
   }
+  public getTablaGeneralPdf(ligaId: number): Observable<any> {
+    return this.httpClient.get(`${this.baseUrl}/tablageneral/pdf/${ligaId}`, { responseType: 'blob' });
+  }
 }

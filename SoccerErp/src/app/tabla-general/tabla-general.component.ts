@@ -31,6 +31,7 @@ export class TablaGeneralComponent implements OnInit {
     }
   }
   getTablaGeneralByLiga(ligaId: number) {
+    this.ligaId = ligaId;
     this.tablaService.getTablaGeneral(ligaId).subscribe(
       res => {
         this.tablaGeneral = res;
@@ -47,5 +48,24 @@ export class TablaGeneralComponent implements OnInit {
     this.ligaService.getligas().subscribe(res => {
       this.ligas = res;
     });
+  }
+  generatePdf() {
+    this.tablaService.getTablaGeneralPdf(this.ligaId).subscribe(
+      res => {
+        this.downLoadFile(res, 'application/pdf');
+      },
+      error => {}
+    );
+  }
+  downLoadFile(data: any, type: string) {
+    const blob = new Blob([data], { type });
+    const url = window.URL.createObjectURL(blob);
+    const pwa = window.open(url);
+    if (!pwa || pwa.closed || typeof pwa.closed == 'undefined') {
+      // Please disable your Pop-up blocker and try again.
+      alert(
+        'Por favor deshabilita el bloqueador de Pop-up en tu navegador e intenta de nuevo'
+      );
+    }
   }
 }

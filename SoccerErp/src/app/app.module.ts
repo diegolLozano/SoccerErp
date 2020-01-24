@@ -3,7 +3,8 @@ import { NgModule } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {FormsModule} from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtModule } from '@auth0/angular-jwt';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,6 +21,14 @@ import { PartidoFormaComponent } from './partido/partido-forma/partido-forma.com
 import { JornadaFormaComponent } from './jornada/jornada-forma/jornada-forma.component';
 import { EquipoFormaComponent } from './equipo/equipo-forma/equipo-forma.component';
 import { PartidoEquipoComponent } from './partido-equipo/partido-equipo.component';
+import { LoginComponent } from './login/login.component';
+import { NavigationComponent } from './navigation/navigation.component';
+import { JwtInterceptor } from './helpers/jwt.interceptor';
+import { ErrorInterceptor } from './helpers/error.interceptor';
+
+export function tokenGetter() {
+  return localStorage.getItem('jwt');
+}
 
 @NgModule({
   declarations: [
@@ -36,7 +45,9 @@ import { PartidoEquipoComponent } from './partido-equipo/partido-equipo.componen
     PartidoFormaComponent,
     JornadaFormaComponent,
     EquipoFormaComponent,
-    PartidoEquipoComponent
+    PartidoEquipoComponent,
+    LoginComponent,
+    NavigationComponent
   ],
   imports: [
     BrowserModule,
@@ -44,9 +55,18 @@ import { PartidoEquipoComponent } from './partido-equipo/partido-equipo.componen
     FontAwesomeModule,
     NgbModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter,
+        blacklistedRoutes: []
+      }
+    })
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

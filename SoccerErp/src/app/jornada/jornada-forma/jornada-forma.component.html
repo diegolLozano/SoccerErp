@@ -1,3 +1,4 @@
+<app-navigation></app-navigation>
 <div class="main-container">
   <div class="header-container">
     <p class="h1">{{ title }}</p>
@@ -123,7 +124,7 @@
             </button>
           </div>
           <div class="btn-group mr-2" role="group" aria-label="First group">
-            <button type="button" (click)="deleteJornada()" class="btn btn-danger">
+            <button type="button" (click)="deleteJornada()" [disabled]="!jornadaForm.form.valid" class="btn btn-danger">
               <i class="far fa-trash-alt"></i> Borrar
             </button>
           </div>
@@ -131,4 +132,5 @@
       </div>
     </form>
   </div>
-</div>
+<<app-navigation></app-navigation>
+  /div>

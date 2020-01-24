@@ -61,7 +61,11 @@ export class JornadaFormaComponent implements OnInit {
           this.title = this.jornada.descripcion;
         }
       },
-      error => {}
+      error => {
+        this.errorMsg = error;
+        this.errors = error;
+        this.isError = true;
+      }
     );
   }
   getLigas() {
@@ -69,18 +73,22 @@ export class JornadaFormaComponent implements OnInit {
       res => {
         this.ligas = res;
       },
-      error => {}
+      error => {
+        this.errorMsg = error;
+        this.errors = error;
+        this.isError = true;
+      }
     );
   }
   saveJornada() {
     this.jornada.fechaInicio = new Date(
       this.jornada.fechaInicioStrc.year,
-      this.jornada.fechaInicioStrc.month,
+      this.jornada.fechaInicioStrc.month - 1,
       this.jornada.fechaInicioStrc.day
     );
     this.jornada.fechaFinal = new Date(
       this.jornada.fechaFinalStrc.year,
-      this.jornada.fechaFinalStrc.month,
+      this.jornada.fechaFinalStrc.month - 1,
       this.jornada.fechaFinalStrc.day
     );
     if (this.jornada.id) {
@@ -93,8 +101,8 @@ export class JornadaFormaComponent implements OnInit {
             this.resetValues();
           },
           error => {
-            this.errorMsg = error.message;
-            this.errors = error.error;
+            this.errorMsg = error;
+            this.errors = error;
             this.isError = true;
           }
         );
@@ -106,8 +114,8 @@ export class JornadaFormaComponent implements OnInit {
           this.resetValues();
         },
         error => {
-          this.errorMsg = error.message;
-          this.errors = error.error;
+          this.errorMsg = error;
+          this.errors = error;
           this.isError = true;
         }
       );
@@ -128,8 +136,8 @@ export class JornadaFormaComponent implements OnInit {
           }
         },
         error => {
-          this.errorMsg = error.message;
-          this.errors = error.error;
+          this.errorMsg = error;
+          this.errors = error;
           this.isError = true;
         }
       );
