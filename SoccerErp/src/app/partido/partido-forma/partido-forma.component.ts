@@ -106,8 +106,8 @@ export class PartidoFormaComponent implements OnInit {
           }
         },
         error => {
-          this.errorMsg = error.message;
-          this.errors = error.error;
+          this.errorMsg = error;
+          this.errors = error;
           this.isError = true;
         }
       );
@@ -124,16 +124,16 @@ export class PartidoFormaComponent implements OnInit {
                 this.equiposByLiga = resp;
               },
               error => {
-                this.errorMsg = error.message;
-                this.errors = error.error;
+                this.errorMsg = error;
+                this.errors = error;
                 this.isError = true;
               }
             );
         }
       },
       error => {
-        this.errorMsg = error.message;
-        this.errors = error.error;
+        this.errorMsg = error;
+        this.errors = error;
         this.isError = true;
       }
     );
@@ -144,8 +144,8 @@ export class PartidoFormaComponent implements OnInit {
         this.ligas = res;
       },
       error => {
-        this.errorMsg = error.message;
-        this.errors = error.error;
+        this.errorMsg = error;
+        this.errors = error;
         this.isError = true;
       }
     );
@@ -161,8 +161,10 @@ export class PartidoFormaComponent implements OnInit {
       this.partido.ganadorId = this.partido.equipo2.id;
     }
     if (
-      (this.partido.isGanador2 === false || this.partido.isGanador2 === undefined) &&
-      (this.partido.isGanador1 === false || this.partido.isGanador1 === undefined) &&
+      (this.partido.isGanador2 === false ||
+        this.partido.isGanador2 === undefined) &&
+      (this.partido.isGanador1 === false ||
+        this.partido.isGanador1 === undefined) &&
       (this.partido.empate === false || this.partido.empate === undefined)
     ) {
       this.errorMsg = '';
@@ -180,7 +182,7 @@ export class PartidoFormaComponent implements OnInit {
       const amonestados: Amonestado[] = [];
       const expulsados: Expulsado[] = [];
       this.partido.anotadores.forEach(function(anotador) {
-        const temp = jugadoresEditados.find(x => x.id == anotador.jugador.id);
+        const temp = jugadoresEditados.find(x => x.id === anotador.jugador.id);
         if (temp != null) {
           anotador.numeroDeGoles = +temp.numeroDeGoles;
           if (temp.numeroDeGoles <= 0) {
@@ -189,13 +191,13 @@ export class PartidoFormaComponent implements OnInit {
         }
       });
       this.partido.amonestados.forEach(function(amonestado) {
-        const temp = jugadoresEditados.find(x => x.id == amonestado.jugador.id);
+        const temp = jugadoresEditados.find(x => x.id === amonestado.jugador.id);
         if (temp != null) {
           amonestado.comentarios = '';
         }
       });
       this.partido.expulsados.forEach(function(expulsado) {
-        const temp = jugadoresEditados.find(x => x.id == expulsado.jugador.id);
+        const temp = jugadoresEditados.find(x => x.id === expulsado.jugador.id);
         if (temp != null) {
           expulsado.comentarios =
             temp.isAmonestado && temp.isExpulsado ? 'Doble Amarilla' : '';
@@ -205,7 +207,7 @@ export class PartidoFormaComponent implements OnInit {
       });
       if (jugadoresEditados != null) {
         jugadoresEditados.forEach(function(jugador) {
-          let result = anotadoresPartido.find(x => x.jugador.id == jugador.id);
+          let result = anotadoresPartido.find(x => x.jugador.id === jugador.id);
           if (
             jugador.numeroDeGoles > 0 &&
             (result == null || result == undefined)
@@ -216,8 +218,8 @@ export class PartidoFormaComponent implements OnInit {
             };
             anotadores.push(anotador);
           }
-          result = amonestadosPartido.find(x => x.jugador.id == jugador.id);
-          if (jugador.isAmonestado && (result == null || result == undefined)) {
+          result = amonestadosPartido.find(x => x.jugador.id === jugador.id);
+          if (jugador.isAmonestado && (result === null || result === undefined)) {
             const amonestado: Amonestado = {
               jugador
             };
@@ -238,6 +240,11 @@ export class PartidoFormaComponent implements OnInit {
         .filter(x => x.numeroDeGoles != null);
       this.partido.amonestados = this.partido.amonestados.concat(amonestados);
       this.partido.expulsados = this.partido.expulsados.concat(expulsados);
+      this.partido.fechaJuego = new Date(
+        this.partido.fechaJuegoStrc.year,
+        this.partido.fechaJuegoStrc.month - 1,
+        this.partido.fechaJuegoStrc.day
+      );
       this.partidoService
         .updatePartido(this.partido.id, this.partido)
         .subscribe(
@@ -253,8 +260,8 @@ export class PartidoFormaComponent implements OnInit {
             }
           },
           error => {
-            this.errorMsg = error.message;
-            this.errors = error.error;
+            this.errorMsg = error;
+            this.errors = error;
             this.isError = true;
           }
         );
@@ -276,8 +283,8 @@ export class PartidoFormaComponent implements OnInit {
           }
         },
         error => {
-          this.errorMsg = error.message;
-          this.errors = error.error;
+          this.errorMsg = error;
+          this.errors = error;
           this.isError = true;
         }
       );
@@ -292,8 +299,8 @@ export class PartidoFormaComponent implements OnInit {
           this.resetValues();
         },
         error => {
-          this.errorMsg = error.message;
-          this.errors = error.error;
+          this.errorMsg = error;
+          this.errors = error;
           this.isError = true;
         }
       );
@@ -318,7 +325,7 @@ export class PartidoFormaComponent implements OnInit {
           x => x.jugador.id == jugador.id
         );
         if (expulsado != null) {
-          jugador.isExpulsado;
+          jugador.isExpulsado = true;
         }
       });
     }

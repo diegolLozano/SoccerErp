@@ -46,24 +46,47 @@ export class JugadorFormaComponent implements OnInit {
     }
   }
   getJugadorById(id: number) {
-    this.jugadorService.getJugador(id).subscribe(res => {
-      this.jugador = res;
-      this.getEquiposByLiga(this.jugador.equipo.ligaId);
-      this.title = this.jugador.nombre + ' ' + this.jugador.apellidoPaterno;
-    });
+    this.jugadorService.getJugador(id).subscribe(
+      res => {
+        this.jugador = res;
+        this.getEquiposByLiga(this.jugador.equipo.ligaId);
+        this.title = this.jugador.nombre + ' ' + this.jugador.apellidoPaterno;
+      },
+      error => {
+        this.errorMsg = error;
+        this.errors = error;
+        this.isError = true;
+      }
+    );
   }
   getEquiposByLiga(id: number) {
-    this.equipoService.getEquiposByLiga(id).subscribe(res => {
-      this.equiposByLiga = res;
-      if (this.equiposByLiga.length > 0) {
-        this.selectedLiga = this.equiposByLiga[0].ligaId;
-      } else { this.selectedLiga = ''; }
-    });
+    this.equipoService.getEquiposByLiga(id).subscribe(
+      res => {
+        this.equiposByLiga = res;
+        if (this.equiposByLiga.length > 0) {
+          this.selectedLiga = this.equiposByLiga[0].ligaId;
+        } else {
+          this.selectedLiga = '';
+        }
+      },
+      error => {
+        this.errorMsg = error;
+        this.errors = error;
+        this.isError = true;
+      }
+    );
   }
   getLigas() {
-    this.ligaService.getligas().subscribe(res => {
-      this.ligas = res;
-    });
+    this.ligaService.getligas().subscribe(
+      res => {
+        this.ligas = res;
+      },
+      error => {
+        this.errorMsg = error;
+        this.errors = error;
+        this.isError = true;
+      }
+    );
   }
   saveJugador() {
     if (this.jugador.id) {
@@ -76,8 +99,8 @@ export class JugadorFormaComponent implements OnInit {
             this.resetValues();
           },
           error => {
-            this.errorMsg = error.message;
-            this.errors = error.error;
+            this.errorMsg = error;
+            this.errors = error;
             this.isError = true;
           }
         );
@@ -89,8 +112,8 @@ export class JugadorFormaComponent implements OnInit {
           this.resetValues();
         },
         error => {
-          this.errorMsg = error.message;
-          this.errors = error.error;
+          this.errorMsg = error;
+          this.errors = error;
           this.isError = true;
         }
       );
@@ -105,8 +128,8 @@ export class JugadorFormaComponent implements OnInit {
           this.resetValues();
         },
         error => {
-          this.errorMsg = error.message;
-          this.errors = error.error;
+          this.errorMsg = error;
+          this.errors = error;
           this.isError = true;
         }
       );

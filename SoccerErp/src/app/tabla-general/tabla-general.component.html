@@ -1,9 +1,10 @@
+<app-navigation></app-navigation>
 <div class="main-container">
   <div class="header-container">
-    <p class="h2">{{title}}</p>
+    <p class="h2">{{ title }}</p>
   </div>
   <div
-    class="btn-toolbar justify-content-between filters-container"
+    class="btn-toolbar justify-content-between filters-container download-btn"
     role="toolbar"
     aria-label="Toolbar with button groups"
   >
@@ -32,16 +33,14 @@
       </div>
     </div>
     <div class="input-group">
-      <a href="" class="download-btn">
+<!--       <a href="" class="download-btn">
         <button type="button" class="btn btn-success">
           <i class="fas fa-download"></i> Excel
         </button>
-      </a>
-      <a href="" class="download-btn">
-        <button type="button" class="btn btn-secondary">
-          <i class="fas fa-download"></i> PDF
-        </button>
-      </a>
+      </a> -->
+      <button type="button" (click)="generatePdf()" [disabled]="ligaId === 0" class="btn btn-secondary">
+        <i class="fas fa-download"></i> PDF
+      </button>
     </div>
   </div>
   <div id="tabla-general-container" class="table-responsive">

@@ -1,3 +1,4 @@
+<app-navigation></app-navigation>
 <div class="main-container">
   <div class="header-container">
     <p class="h1">{{ title }}</p>
@@ -8,22 +9,22 @@
       <button
         type="button"
         class="close"
-        (click)="isSuccess= false"
+        (click)="isSuccess = false"
         aria-label="Close"
       >
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
     <div *ngIf="isError" class="alert alert-danger text-center" role="alert">
+      {{ errorMsg }}
       <button
         type="button"
         class="close"
-        (click)="isError= false"
+        (click)="isError = false"
         aria-label="Close"
       >
         <span aria-hidden="true">&times;</span>
       </button>
-      {{ errors }}
     </div>
     <form
       #equipoForm="ngForm"
@@ -133,9 +134,11 @@
             required
             [ngClass]="liga.invalid && liga.touched ? 'invalid-input' : ''"
           >
-          
             <option value="" selected>Selecciona Liga...</option>
-            <option *ngFor="let liga of ligas; let i = index" value="{{liga.id}}">
+            <option
+              *ngFor="let liga of ligas; let i = index"
+              value="{{ liga.id }}"
+            >
               {{ liga.nombre }}
             </option>
           </select>
@@ -161,7 +164,11 @@
             role="group"
             aria-label="First group"
           >
-            <button type="button" (click)="deleteEquipo()" class="btn btn-danger">
+            <button
+              type="button"
+              (click)="deleteEquipo()"
+              class="btn btn-danger"
+            >
               <i class="far fa-trash-alt"></i> Borrar
             </button>
           </div>

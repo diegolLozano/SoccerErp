@@ -44,6 +44,10 @@ export class EquipoFormaComponent implements OnInit {
     this.equipoService.getEquipo(id).subscribe(res => {
       this.equipo = res;
       this.title = this.equipo.nombre;
+    }, error => {
+      this.errorMsg = error;
+      this.errors = error;
+      this.isError = true;
     });
   }
   saveEquipo() {
@@ -57,8 +61,8 @@ export class EquipoFormaComponent implements OnInit {
           this.equipo.ligaId = '';
         },
         error => {
-          this.errorMsg = error.message;
-          this.errors = error.error;
+          this.errorMsg = error;
+          this.errors = error;
           this.isError = true;
         }
       );
@@ -71,8 +75,8 @@ export class EquipoFormaComponent implements OnInit {
           this.equipo.ligaId = '';
         },
         error => {
-          this.errorMsg = error.message;
-          this.errors = error.error;
+          this.errorMsg = error;
+          this.errors = error;
           this.isError = true;
         }
       );
@@ -99,8 +103,8 @@ export class EquipoFormaComponent implements OnInit {
           }
         },
         error => {
-          this.errorMsg = error.error.message;
-          this.errors = error.error.message;
+          this.errorMsg = error;
+          this.errors = error;
           this.isError = true;
         }
       );

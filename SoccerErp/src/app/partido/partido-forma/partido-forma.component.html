@@ -1,3 +1,4 @@
+<app-navigation></app-navigation>
 <div class="main-container">
   <div class="header-container">
     <p class="h1">{{ title }}</p>
@@ -146,6 +147,7 @@
               placeholder="yyyy-mm-dd"
               name="dp"
               [(ngModel)]="partido.fechaJuegoStrc"
+              [startDate]="partido.fechaJuegoStrc"
               ngbDatepicker
               #d="ngbDatepicker"
             />
