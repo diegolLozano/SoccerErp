@@ -182,7 +182,7 @@ export class PartidoFormaComponent implements OnInit {
       const amonestados: Amonestado[] = [];
       const expulsados: Expulsado[] = [];
       this.partido.anotadores.forEach(function(anotador) {
-        const temp = jugadoresEditados.find(x => x.id == anotador.jugador.id);
+        const temp = jugadoresEditados.find(x => x.id === anotador.jugador.id);
         if (temp != null) {
           anotador.numeroDeGoles = +temp.numeroDeGoles;
           if (temp.numeroDeGoles <= 0) {
@@ -191,13 +191,13 @@ export class PartidoFormaComponent implements OnInit {
         }
       });
       this.partido.amonestados.forEach(function(amonestado) {
-        const temp = jugadoresEditados.find(x => x.id == amonestado.jugador.id);
+        const temp = jugadoresEditados.find(x => x.id === amonestado.jugador.id);
         if (temp != null) {
           amonestado.comentarios = '';
         }
       });
       this.partido.expulsados.forEach(function(expulsado) {
-        const temp = jugadoresEditados.find(x => x.id == expulsado.jugador.id);
+        const temp = jugadoresEditados.find(x => x.id === expulsado.jugador.id);
         if (temp != null) {
           expulsado.comentarios =
             temp.isAmonestado && temp.isExpulsado ? 'Doble Amarilla' : '';
@@ -207,7 +207,7 @@ export class PartidoFormaComponent implements OnInit {
       });
       if (jugadoresEditados != null) {
         jugadoresEditados.forEach(function(jugador) {
-          let result = anotadoresPartido.find(x => x.jugador.id == jugador.id);
+          let result = anotadoresPartido.find(x => x.jugador.id === jugador.id);
           if (
             jugador.numeroDeGoles > 0 &&
             (result == null || result == undefined)
@@ -218,8 +218,8 @@ export class PartidoFormaComponent implements OnInit {
             };
             anotadores.push(anotador);
           }
-          result = amonestadosPartido.find(x => x.jugador.id == jugador.id);
-          if (jugador.isAmonestado && (result == null || result == undefined)) {
+          result = amonestadosPartido.find(x => x.jugador.id === jugador.id);
+          if (jugador.isAmonestado && (result === null || result === undefined)) {
             const amonestado: Amonestado = {
               jugador
             };
@@ -325,7 +325,7 @@ export class PartidoFormaComponent implements OnInit {
           x => x.jugador.id == jugador.id
         );
         if (expulsado != null) {
-          jugador.isExpulsado;
+          jugador.isExpulsado = true;
         }
       });
     }
