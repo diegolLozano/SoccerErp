@@ -1,22 +1,22 @@
-import { Component, OnInit } from '@angular/core';
-import { Equipo } from '../models/equipo';
-import { ActivatedRoute } from '@angular/router';
-import { Liga } from '../models/liga';
-import { EquipoService } from '../services/equipo.service';
-import { LigaService } from '../services/liga.service';
+import { Component, OnInit } from "@angular/core";
+import { Equipo } from "../models/equipo";
+import { ActivatedRoute } from "@angular/router";
+import { Liga } from "../models/liga";
+import { EquipoService } from "../services/equipo.service";
+import { LigaService } from "../services/liga.service";
 
 @Component({
-  selector: 'app-equipo',
-  templateUrl: './equipo.component.html',
-  styleUrls: ['./equipo.component.scss']
+  selector: "app-equipo",
+  templateUrl: "./equipo.component.html",
+  styleUrls: ["./equipo.component.scss"]
 })
 export class EquipoComponent implements OnInit {
   equipos: Equipo[];
   ligaId: number;
   equiposByLiga: Equipo[];
   ligas: Liga[];
-  title = 'Equipos';
-  titleDrp = 'Ligas';
+  title = "Equipos";
+  titleDrp = "Ligas";
   equiposApi: Equipo[];
   errors: any;
   isSuccess = false;
@@ -30,7 +30,8 @@ export class EquipoComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.ligaId = +this.route.snapshot.paramMap.get('id');
+    this.equiposByLiga = [];
+    this.ligaId = +this.route.snapshot.paramMap.get("id");
     this.getEquipos();
     this.getLigas();
     if (this.ligaId !== 0) {
@@ -39,28 +40,50 @@ export class EquipoComponent implements OnInit {
   }
   getEquiposByLiga(id: number) {
     this.ligaId = id;
-    this.equipoService.getEquiposByLiga(id).subscribe(res => {
-      this.equiposByLiga = res;
-      if (this.equiposByLiga.length > 0) {
-        this.title = this.equiposByLiga[0].liga.nombre;
-        this.titleDrp = this.equiposByLiga[0].liga.nombre;
+    this.equipoService.getEquiposByLiga(id).subscribe(
+      res => {
+        this.equiposByLiga = res;
+        if (this.equiposByLiga.length > 0) {
+          this.title = this.equiposByLiga[0].liga.nombre;
+          this.titleDrp = this.equiposByLiga[0].liga.nombre;
+        }
+      },
+      error => {
+        this.errorMsg = error;
+        this.errors = error;
+        this.isError = true;
+        this.equiposByLiga = [];
       }
-    });
+    );
   }
   getEquipos() {
-    this.equipoService.getEquipos().subscribe(res => {
-      this.equipos = res;
-    });
+    this.equipoService.getEquipos().subscribe(
+      res => {
+        this.equipos = res;
+      },
+      error => {
+        this.errorMsg = error;
+        this.errors = error;
+        this.isError = true;
+      }
+    );
   }
   getLigas() {
-    this.ligaService.getligas().subscribe(res => {
-      this.ligas = res;
-    });
+    this.ligaService.getligas().subscribe(
+      res => {
+        this.ligas = res;
+      },
+      error => {
+        this.errorMsg = error;
+        this.errors = error;
+        this.isError = true;
+      }
+    );
   }
   createTorneo(id: number) {
     this.ligaService.createTorneo(id).subscribe(
       res => {
-        if (res.status === 'BadRequest') {
+        if (res.status === "BadRequest") {
           this.isError = true;
           this.errorMsg = res.message;
           this.errors = res.message;

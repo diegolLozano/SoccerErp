@@ -12,16 +12,18 @@ export class ErrorInterceptor implements HttpInterceptor {
             if (err.status === 401) {
                 // auto logout if 401 response returned from api
                 localStorage.removeItem('jwt');
-                location.reload(true);
             }
             if (err.status === 403) {
                 return throwError('Este Usuario no cuenta con los permisos necesarios');
             }
             if (err.status === 400) {
+                if(err.error instanceof Blob)
+                    return throwError('Se genero un error creando el archivo, por favor intente de nuevo o contacte a su proveedor');
+
                 return throwError(err.error.message);
             }
 
-            const error = err.message || err.statusText;
+            const error = "Se genero un error en el servidor, por favor intente de nuevo o contacte a su proveedor";//err.message || err.statusText;
             return throwError(error);
         }));
     }

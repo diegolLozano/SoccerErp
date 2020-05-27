@@ -1,29 +1,41 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
-    <a class="navbar-brand" href="" [routerLink]="['/liga']">SoccerErp</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="" [routerLink]="['/liga']">Ligas</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="" [routerLink]="['/tabla-general']">Tabla General</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="" [routerLink]="['/equipo']">Equipos</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="" [routerLink]="['/jugador']">Jugadores</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="" [routerLink]="['/jornada']">Jornadas</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="" [routerLink]="['/partido-forma']">Partido</a>
-        </li>
-      </ul>
-    </div>
-    <button class="btn btn-outline-light" (click)="logOut()">Logout</button>
-  </nav>
+  <a class="navbar-brand" href="" [routerLink]="['/liga']"><i class="fas fa-running"></i>  SoccerERP</a>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarCollapse"
+    aria-controls="navbarCollapse"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="" [routerLink]="['/liga']">Ligas</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="" [routerLink]="['/jugador']">Jugadores</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="" [routerLink]="['/equipo']">Equipos</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="" [routerLink]="['/partido-forma']"
+          >Partido</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="" [routerLink]="['/jornada']">Jornadas</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="" [routerLink]="['/tabla-general']"
+          >Tabla General</a
+        >
+      </li>
+    </ul>
+  </div>
+  <button class="btn btn-outline-light" (click)="logOut()">Logout</button>
+</nav>

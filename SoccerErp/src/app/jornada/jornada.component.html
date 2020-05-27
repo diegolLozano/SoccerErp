@@ -1,7 +1,18 @@
 <app-navigation></app-navigation>
 <div class="main-container">
   <div class="header-container">
-    <p class="h2">{{title}}</p>
+    <p class="h2">{{ title }}</p>
+    <div *ngIf="isError" class="alert alert-danger text-center" role="alert">
+      {{ errorMsg }}
+      <button
+        type="button"
+        class="close"
+        (click)="isError = false"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
   </div>
   <div
     class="btn-toolbar justify-content-between filters-container"
@@ -18,7 +29,7 @@
           aria-haspopup="true"
           aria-expanded="false"
         >
-          {{titleDrpLiga}}
+          {{ titleDrpLiga }}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <button
@@ -31,7 +42,7 @@
           </button>
         </div>
       </div>
-      <div  *ngIf="jornadasDropdown?.length > 0" class="dropdown">
+      <div *ngIf="jornadasDropdown?.length > 0" class="dropdown">
         <button
           class="btn btn-primary dropdown-toggle"
           type="button"
@@ -40,9 +51,14 @@
           aria-haspopup="true"
           aria-expanded="false"
         >
-          {{titleDrpJornada}}
+          {{ titleDrpJornada }}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <button
+          class="dropdown-item"
+          type="button"
+          (click)="restoreJornadas()"
+          >Jornadas Completas</button>
           <button
             *ngFor="let jornada of jornadasDropdown; let i = index"
             class="dropdown-item"
@@ -56,11 +72,18 @@
     </div>
     <div class="input-group">
       <a href="" [routerLink]="['/jornada-forma']">
-        <button type="button" class="btn btn-primary"><i class="far fa-plus-square"></i> Crear Jornada</button>
+        <button type="button" class="btn btn-primary">
+          <i class="far fa-plus-square"></i> Crear Jornada
+        </button>
       </a>
     </div>
   </div>
-  <div class="jornadas-container">
+  <div class="text-center">
+    <div *ngIf="isLoading" class="spinner-border text-secondary" style="width: 3rem; height: 3rem;" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+  <div *ngIf="!isLoading" class="jornadas-container">
     <div
       class="card border-dark mb-3"
       *ngFor="let jornada of jornadasByLiga; let i = index"
@@ -73,7 +96,8 @@
       </h5>
       <div class="card-body">
         <h5 class="card-title">
-          Jornada del {{ jornada.fechaInicio | date: 'mediumDate'}} al {{ jornada.fechaFinal | date: 'mediumDate'}}
+          Jornada del {{ jornada.fechaInicio | date: "mediumDate" }} al
+          {{ jornada.fechaFinal | date: "mediumDate" }}
         </h5>
 
         <div
@@ -81,22 +105,25 @@
           *ngFor="let partido of jornada.partidos; let i = index"
         >
           <div class="row">
-            <div class="col-sm">
+            <div class="col col-sm-3">
               {{ partido.equipo1.nombre }}
             </div>
-            <div class="col-sm">
+            <div class="col col-sm-1">
               {{ partido.golesEquipo1 }}
             </div>
-            <div class="col-sm">
+            <div class="col col-sm-1">
               vs
             </div>
-            <div class="col-sm">
+            <div class="col col-sm-1">
               {{ partido.golesEquipo2 }}
             </div>
-            <div class="col-sm">
+            <div class="col col-sm-3">
               {{ partido.equipo2.nombre }}
             </div>
-            <div class="col-sm">
+            <div class="col col-sm-2">
+              <span *ngIf="partido.ganadorId || partido.empate">{{ partido.fechaJuego | date: 'dd/MM/yyyy' }}</span>
+            </div>
+            <div class="col col-sm-1">
               <a href="" [routerLink]="['/partido', partido.id]"
                 ><i class="fa fa-eye"></i
               ></a>

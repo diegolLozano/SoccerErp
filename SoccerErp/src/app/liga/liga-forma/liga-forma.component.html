@@ -5,19 +5,26 @@
   </div>
   <div class="form-container">
     <div *ngIf="isSuccess" class="alert alert-success text-center" role="alert">
-      {{successMsg}}
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      {{ successMsg }}
+      <button
+        type="button"
+        class="close"
+        (click)="isSuccess = false"
+        aria-label="Close"
+      >
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
     <div *ngIf="isError" class="alert alert-danger text-center" role="alert">
-      {{errorMsg}}
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      {{ errorMsg }}
+      <button
+        type="button"
+        class="close"
+        (click)="isError = false"
+        aria-label="Close"
+      >
         <span aria-hidden="true">&times;</span>
       </button>
-      <li *ngFor="let error of errors | keyvalue">
-        {{ error.key }} - {{error.value}}
-      </li>
     </div>
     <form
       #ligaForm="ngForm"
@@ -108,7 +115,12 @@
               <i class="far fa-save"></i> Guardar
             </button>
           </div>
-          <div *ngIf="id != 0" class="btn-group mr-2" role="group" aria-label="First group">
+          <div
+            *ngIf="id != 0"
+            class="btn-group mr-2"
+            role="group"
+            aria-label="First group"
+          >
             <button type="button" (click)="deleteLiga()" class="btn btn-danger">
               <i class="far fa-trash-alt"></i> Borrar
             </button>
