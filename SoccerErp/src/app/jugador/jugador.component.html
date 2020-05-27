@@ -2,6 +2,17 @@
 <div class="main-container">
   <div class="header-container">
     <p class="h2">{{ title }}</p>
+    <div *ngIf="isError" class="alert alert-danger text-center" role="alert">
+      {{ errorMsg }}
+      <button
+        type="button"
+        class="close"
+        (click)="isError = false"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
   </div>
   <div
     class="btn-toolbar justify-content-between filters-container"
@@ -18,7 +29,7 @@
           aria-haspopup="true"
           aria-expanded="false"
         >
-          {{nombreLiga}}
+          {{ nombreLiga }}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <button
@@ -40,14 +51,14 @@
           aria-haspopup="true"
           aria-expanded="false"
         >
-          {{nombreEquipo}}
+          {{ nombreEquipo }}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <button
+          <button
             *ngFor="let equipo of equiposByLiga; let i = index"
             class="dropdown-item"
             type="button"
-            (click)="getJugadoresByEquipo(equipo.id,equipo.nombre)"
+            (click)="getJugadoresByEquipo(equipo.id, equipo.nombre)"
           >
             {{ equipo.nombre }}
           </button>
@@ -62,7 +73,7 @@
       </a>
     </div>
   </div>
-  <div id="jugadores-container" class="table-responsive text-center">
+  <div *ngIf="jugadoresByEquipo.length > 0" id="jugadores-container" class="table-responsive text-center">
     <table class="table table-hover table-bordered table-sm">
       <thead class="thead-dark">
         <tr>

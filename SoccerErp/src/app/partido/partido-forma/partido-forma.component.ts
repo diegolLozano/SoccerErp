@@ -1,26 +1,26 @@
-import { Component, OnInit } from '@angular/core';
-import { Partido } from 'src/app/models/partido';
-import { ActivatedRoute } from '@angular/router';
-import { Liga } from 'src/app/models/liga';
-import { Jornada } from 'src/app/models/jornada';
-import { Equipo } from 'src/app/models/equipo';
-import { Jugador } from 'src/app/models/jugador';
-import { PartidoService } from 'src/app/services/partido.service';
-import { JornadaService } from 'src/app/services/jornada.service';
-import { EquipoService } from 'src/app/services/equipo.service';
-import { LigaService } from 'src/app/services/liga.service';
-import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
-import { JugadorService } from 'src/app/services/jugador.service';
-import { tap, finalize } from 'rxjs/operators';
-import { Anotador } from 'src/app/models/anotador';
-import { Amonestado } from 'src/app/models/amonestado';
-import { Expulsado } from 'src/app/models/expulsado';
-import { Form } from '@angular/forms';
+import { Component, OnInit, ElementRef } from "@angular/core";
+import { Partido } from "src/app/models/partido";
+import { ActivatedRoute } from "@angular/router";
+import { Liga } from "src/app/models/liga";
+import { Jornada } from "src/app/models/jornada";
+import { Equipo } from "src/app/models/equipo";
+import { Jugador } from "src/app/models/jugador";
+import { PartidoService } from "src/app/services/partido.service";
+import { JornadaService } from "src/app/services/jornada.service";
+import { EquipoService } from "src/app/services/equipo.service";
+import { LigaService } from "src/app/services/liga.service";
+import { NgbDate } from "@ng-bootstrap/ng-bootstrap";
+import { JugadorService } from "src/app/services/jugador.service";
+import { tap, finalize } from "rxjs/operators";
+import { Anotador } from "src/app/models/anotador";
+import { Amonestado } from "src/app/models/amonestado";
+import { Expulsado } from "src/app/models/expulsado";
+import { Form } from "@angular/forms";
 
 @Component({
-  selector: 'app-partido-forma',
-  templateUrl: './partido-forma.component.html',
-  styleUrls: ['./partido-forma.component.scss']
+  selector: "app-partido-forma",
+  templateUrl: "./partido-forma.component.html",
+  styleUrls: ["./partido-forma.component.scss"]
 })
 export class PartidoFormaComponent implements OnInit {
   partidoId: number;
@@ -34,7 +34,7 @@ export class PartidoFormaComponent implements OnInit {
   jugadoresEquipo1: Jugador[];
   jugadoresEquipo2: Jugador[];
   jugadores: Jugador[];
-  title = 'Nuevo Partido';
+  title = "Nuevo Partido";
   errors: any;
   isSuccess = false;
   successMsg: string;
@@ -51,7 +51,7 @@ export class PartidoFormaComponent implements OnInit {
 
   ngOnInit() {
     this.partido = {};
-    this.partidoId = +this.route.snapshot.paramMap.get('id');
+    this.partidoId = +this.route.snapshot.paramMap.get("id");
     this.partidos = [];
     this.jornadas = [];
     this.jugadores = [];
@@ -68,7 +68,7 @@ export class PartidoFormaComponent implements OnInit {
       .getPartido(id)
       .pipe(
         finalize(() => {
-          console.log('test');
+          console.log("test");
         })
       )
       .subscribe(
@@ -77,7 +77,7 @@ export class PartidoFormaComponent implements OnInit {
           if (this.partido != null) {
             this.title =
               this.partido.equipo1.nombre +
-              ' vs ' +
+              " vs " +
               this.partido.equipo2.nombre;
             this.getInfoByLiga(this.partido.jornada.ligaId);
             const fechaJuego = new Date(this.partido.fechaJuego.toString());
@@ -160,28 +160,25 @@ export class PartidoFormaComponent implements OnInit {
     if (this.partido.isGanador2) {
       this.partido.ganadorId = this.partido.equipo2.id;
     }
-    if (
+/*     if (
       (this.partido.isGanador2 === false ||
         this.partido.isGanador2 === undefined) &&
       (this.partido.isGanador1 === false ||
         this.partido.isGanador1 === undefined) &&
       (this.partido.empate === false || this.partido.empate === undefined)
     ) {
-      this.errorMsg = '';
-      this.errors = 'Es obligatorio seleccionar un ganador o empate';
+      this.errorMsg = "";
+      this.errors = "Es obligatorio seleccionar un ganador o empate";
       this.isError = true;
       return false;
-    }
+    } */
 
     if (this.partido.id) {
       const jugadoresEditados = this.partido.jugadores;
-      const anotadoresPartido = this.partido.anotadores;
-      const amonestadosPartido = this.partido.amonestados;
-      const expulsadosPartido = this.partido.expulsados;
       const anotadores: Anotador[] = [];
       const amonestados: Amonestado[] = [];
       const expulsados: Expulsado[] = [];
-      this.partido.anotadores.forEach(function(anotador) {
+     /* this.partido.anotadores.forEach(function(anotador) {
         const temp = jugadoresEditados.find(x => x.id === anotador.jugador.id);
         if (temp != null) {
           anotador.numeroDeGoles = +temp.numeroDeGoles;
@@ -190,36 +187,35 @@ export class PartidoFormaComponent implements OnInit {
           }
         }
       });
-      this.partido.amonestados.forEach(function(amonestado) {
-        const temp = jugadoresEditados.find(x => x.id === amonestado.jugador.id);
+       this.partido.amonestados.forEach(function(amonestado) {
+        const temp = jugadoresEditados.find(
+          x => x.id === amonestado.jugador.id
+        );
         if (temp != null) {
-          amonestado.comentarios = '';
+          amonestado.comentarios = "";
         }
       });
       this.partido.expulsados.forEach(function(expulsado) {
         const temp = jugadoresEditados.find(x => x.id === expulsado.jugador.id);
         if (temp != null) {
           expulsado.comentarios =
-            temp.isAmonestado && temp.isExpulsado ? 'Doble Amarilla' : '';
+            temp.isAmonestado && temp.isExpulsado ? "Doble Amarilla" : "";
           expulsado.dobleAmarilla =
             temp.isAmonestado && temp.isExpulsado ? true : false;
         }
-      });
+      }); */
       if (jugadoresEditados != null) {
         jugadoresEditados.forEach(function(jugador) {
-          let result = anotadoresPartido.find(x => x.jugador.id === jugador.id);
-          if (
-            jugador.numeroDeGoles > 0 &&
-            (result == null || result == undefined)
-          ) {
+          //let result = anotadoresPartido.find(x => x.jugador.id === jugador.id);
+          if (jugador.numeroDeGoles > 0 && jugador.numeroDeGoles != null) {
             const anotador: Anotador = {
               numeroDeGoles: jugador.numeroDeGoles,
               jugador
             };
             anotadores.push(anotador);
           }
-          result = amonestadosPartido.find(x => x.jugador.id === jugador.id);
-          if (jugador.isAmonestado && (result === null || result === undefined)) {
+          //result = amonestadosPartido.find(x => x.jugador.id === jugador.id);
+          if (jugador.isAmonestado && !jugador.isExpulsado) {
             const amonestado: Amonestado = {
               jugador
             };
@@ -235,11 +231,9 @@ export class PartidoFormaComponent implements OnInit {
           }
         });
       }
-      this.partido.anotadores = this.partido.anotadores
-        .concat(anotadores)
-        .filter(x => x.numeroDeGoles != null);
-      this.partido.amonestados = this.partido.amonestados.concat(amonestados);
-      this.partido.expulsados = this.partido.expulsados.concat(expulsados);
+      this.partido.anotadores = anotadores;
+      this.partido.amonestados = amonestados;
+      this.partido.expulsados = expulsados;
       this.partido.fechaJuego = new Date(
         this.partido.fechaJuegoStrc.year,
         this.partido.fechaJuegoStrc.month - 1,
@@ -249,7 +243,7 @@ export class PartidoFormaComponent implements OnInit {
         .updatePartido(this.partido.id, this.partido)
         .subscribe(
           res => {
-            if (res.status == 'BadRequest') {
+            if (res.status == "BadRequest") {
               this.isError = true;
               this.errorMsg = res.message;
               this.errors = res.message;
@@ -271,7 +265,7 @@ export class PartidoFormaComponent implements OnInit {
       this.partido.jornada = { ligaId: 0 };
       this.partidoService.createPartido(this.partido).subscribe(
         res => {
-          if (res.status == 'BadRequest') {
+          if (res.status == "BadRequest") {
             this.isError = true;
             this.errorMsg = res.message;
             this.errors = res.message;
@@ -289,12 +283,13 @@ export class PartidoFormaComponent implements OnInit {
         }
       );
     }
+    window.scroll(0,0);
   }
   deletePartido() {
     if (this.partido.id) {
       this.partidoService.deletePartido(this.partido.id).subscribe(
         res => {
-          this.successMsg = 'Partido a sido borrado exitosamente';
+          this.successMsg = "Partido a sido borrado exitosamente";
           this.isSuccess = true;
           this.resetValues();
         },
@@ -337,11 +332,11 @@ export class PartidoFormaComponent implements OnInit {
   resetValues() {
     this.partido = {
       jornada: {
-        ligaId: ''
+        ligaId: ""
       },
-      jornadaId: '',
-      equipo1Id: '',
-      equipo2Id: ''
+      jornadaId: "",
+      equipo1Id: "",
+      equipo2Id: ""
     };
     this.jugadoresEquipo1.forEach(function(jugador) {
       jugador.numeroDeGoles = null;

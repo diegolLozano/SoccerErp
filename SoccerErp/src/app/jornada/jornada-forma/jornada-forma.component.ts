@@ -1,23 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { Jornada } from 'src/app/models/jornada';
-import { ActivatedRoute } from '@angular/router';
-import { Liga } from 'src/app/models/liga';
-import { LigaService } from 'src/app/services/liga.service';
-import { JornadaService } from 'src/app/services/jornada.service';
-import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
-import { getLocaleTimeFormat } from '@angular/common';
+import { Component, OnInit } from "@angular/core";
+import { Jornada } from "src/app/models/jornada";
+import { ActivatedRoute } from "@angular/router";
+import { Liga } from "src/app/models/liga";
+import { LigaService } from "src/app/services/liga.service";
+import { JornadaService } from "src/app/services/jornada.service";
+import { NgbDate } from "@ng-bootstrap/ng-bootstrap";
+import { getLocaleTimeFormat } from "@angular/common";
 
 @Component({
-  selector: 'app-jornada-forma',
-  templateUrl: './jornada-forma.component.html',
-  styleUrls: ['./jornada-forma.component.scss']
+  selector: "app-jornada-forma",
+  templateUrl: "./jornada-forma.component.html",
+  styleUrls: ["./jornada-forma.component.scss"]
 })
 export class JornadaFormaComponent implements OnInit {
   jornadaId: number;
   jornada: Jornada;
   jornadas: Jornada[];
   ligas: Liga[];
-  title = 'Nueva Jornada';
+  title = "Nueva Jornada";
   errors: any;
   isSuccess = false;
   successMsg: string;
@@ -30,9 +30,9 @@ export class JornadaFormaComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.jornada = { ligaId: '' };
+    this.jornada = { ligaId: "" };
 
-    this.jornadaId = +this.route.snapshot.paramMap.get('id');
+    this.jornadaId = +this.route.snapshot.paramMap.get("id");
     this.jornadas = [];
     this.getLigas();
     if (this.jornadaId !== 0) {
@@ -96,7 +96,7 @@ export class JornadaFormaComponent implements OnInit {
         .updateJornada(this.jornada.id, this.jornada)
         .subscribe(
           res => {
-            this.successMsg = 'Jornada fue editada correctamente';
+            this.successMsg = "Jornada fue editada correctamente";
             this.isSuccess = true;
             this.resetValues();
           },
@@ -109,7 +109,7 @@ export class JornadaFormaComponent implements OnInit {
     } else {
       this.jornadaService.createJornada(this.jornada).subscribe(
         res => {
-          this.successMsg = 'Jornada fue creada correctamente';
+          this.successMsg = "Jornada fue creada correctamente";
           this.isSuccess = true;
           this.resetValues();
         },
@@ -125,7 +125,7 @@ export class JornadaFormaComponent implements OnInit {
     if (this.jornada.id) {
       this.jornadaService.deleteJornada(this.jornada.id).subscribe(
         res => {
-          if (res.status === 'BadRequest') {
+          if (res.status === "BadRequest") {
             this.isError = true;
             this.errorMsg = res.message;
             this.errors = res.message;
@@ -144,7 +144,7 @@ export class JornadaFormaComponent implements OnInit {
     }
   }
   private resetValues() {
-    this.jornada.ligaId = '';
+    this.jornada.ligaId = "";
     this.jornada = new Jornada();
     const today = new Date();
     this.jornada.fechaInicioStrc = new NgbDate(

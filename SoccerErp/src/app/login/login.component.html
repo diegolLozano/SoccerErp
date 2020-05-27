@@ -1,50 +1,80 @@
-<div class="login-container">
-  <form #loginForm="ngForm" novalidate (ngSubmit)="logIn()" class="form-signin">
+<div class="main-container">
+  <div class="header-container">
     <h1 class="h3 mb-3 font-weight-normal">Iniciar sesion</h1>
-    <div class="form-group row">
-      <label for="usuario" class="sr-only">Usuario</label>
-      <input
-        type="text"
-        id="usuario"
-        class="form-control"
-        placeholder="Usuario"
-        required=""
-        #userName="ngModel"
-        [(ngModel)]="login.userName"
-        name="userName"
-        required
-        minlength="3"
-        [ngClass]="userName.invalid && userName.touched ? 'invalid-input' : ''"
-      />
-      <div *ngIf="userName.invalid && userName.touched" class="invalid-value">
-        Usuario es Obligatorio, Minimo 3 Caracteres
+    <div class="row justify-content-md-center">
+      <div
+        *ngIf="isError"
+        class="alert alert-danger text-center col col-lg-7"
+        role="alert"
+      >
+        {{ errorMsg }}
+        <button
+          type="button"
+          class="close"
+          (click)="isError = false"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
     </div>
-    <div class="form-group row">
-      <label for="inputPassword" class="sr-only">Contraseña</label>
-      <input
-        type="password"
-        id="inputPassword"
-        class="form-control"
-        placeholder="Contraseña"
-        #password="ngModel"
-        [(ngModel)]="login.password"
-        name="password"
-        required
-        minlength="3"
-        [ngClass]="password.invalid && password.touched ? 'invalid-input' : ''"
-      />
-      <div *ngIf="password.invalid && password.touched" class="invalid-value">
-        Password es Obligatorio, Minimo 3 Caracteres
-      </div>
-    </div>
-
-    <button
-      [disabled]="!loginForm.form.valid"
-      class="btn btn-lg btn-primary btn-block"
-      type="submit"
+  </div>
+  <div class="form-container">
+    <form
+      #loginForm="ngForm"
+      novalidate
+      (ngSubmit)="logIn()"
+      class="form-signin"
     >
-      Iniciar
-    </button>
-  </form>
+      <div class="form-group row">
+        <label for="usuario" class="sr-only">Usuario</label>
+        <input
+          type="text"
+          id="usuario"
+          class="form-control"
+          placeholder="Usuario"
+          required=""
+          #userName="ngModel"
+          [(ngModel)]="login.userName"
+          name="userName"
+          required
+          minlength="3"
+          [ngClass]="
+            userName.invalid && userName.touched ? 'invalid-input' : ''
+          "
+        />
+        <div *ngIf="userName.invalid && userName.touched" class="invalid-value">
+          Usuario es Obligatorio, Minimo 3 Caracteres
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputPassword" class="sr-only">Contraseña</label>
+        <input
+          type="password"
+          id="inputPassword"
+          class="form-control"
+          placeholder="Contraseña"
+          #password="ngModel"
+          [(ngModel)]="login.password"
+          name="password"
+          required
+          minlength="3"
+          [ngClass]="
+            password.invalid && password.touched ? 'invalid-input' : ''
+          "
+        />
+        <div *ngIf="password.invalid && password.touched" class="invalid-value">
+          Password es Obligatorio, Minimo 3 Caracteres
+        </div>
+      </div>
+
+      <button
+        [disabled]="!loginForm.form.valid"
+        class="btn btn-lg btn-primary btn-block"
+        type="submit"
+      >
+        Iniciar
+      </button>
+    </form>
+  </div>
 </div>

@@ -11,6 +11,11 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class LigaComponent implements OnInit {
   ligas: Liga[];
+  isSuccess = false;
+  successMsg: string;
+  isError = false;
+  errorMsg: string;
+  errors: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -26,7 +31,9 @@ export class LigaComponent implements OnInit {
     this.ligaService.getligas().subscribe(res => {
       this.ligas = res;
     }, error => {
-      console.log(error);
+      this.errorMsg = error;
+      this.errors = error;
+      this.isError = true;
     });
   }
   isUserAuthenticated() {

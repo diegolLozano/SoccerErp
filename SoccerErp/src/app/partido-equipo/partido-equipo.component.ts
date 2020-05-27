@@ -15,6 +15,11 @@ export class PartidoEquipoComponent implements OnInit {
   partidosByEquipo: Partido[];
   title: string;
   equipos: Equipo[];
+  isSuccess = false;
+  successMsg: string;
+  isError = false;
+  errorMsg: string;
+  errors: any;
   constructor(private route: ActivatedRoute,
               private partidoService: PartidoService) {}
 
@@ -32,6 +37,10 @@ export class PartidoEquipoComponent implements OnInit {
       if (this.partidosByEquipo.length > 0) {
         this.title = this.partidosByEquipo[0].equipo1Nombre;
       }
+    },error => {
+      this.errorMsg = error;
+      this.errors = error;
+      this.isError = true;
     });
     // this.partidosByEquipo = this.partidos.filter(x => x.Equipo1.id === id || x.Equipo2.id === id);
   }
